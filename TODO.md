@@ -16,3 +16,4 @@
 ** how to release/deploy a version on npm
 ** how to build from source section
 ** add more details for contributing (e.g., PR rules)
+* add tests
