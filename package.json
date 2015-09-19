@@ -24,6 +24,7 @@
 	"es2015",
 	"es2016"
   ],
+  "version": "0.0.1",
   "devDependencies": {
 
   },
