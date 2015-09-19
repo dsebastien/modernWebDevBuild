@@ -5,6 +5,7 @@
 * create yeoman generator project
 * link the two projects
 * Q: possible issue w/ different gulp version? both client project and this should be aligned
+* move gulpfile & gulp folders to src + adapt package.json's "main" property
 * add Docker support
 * add Makefile
 * add bower configuration
