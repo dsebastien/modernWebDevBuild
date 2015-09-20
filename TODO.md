@@ -1,4 +1,5 @@
 * remove as much as possible from package.json
+* add shrinkwrap
 * document how to integrate in a project
 * provide a way for client projects to override some parts of the configuration
 * facilitate the usage of gulp tasks (?)
@@ -17,3 +18,4 @@
 ** how to build from source section
 ** add more details for contributing (e.g., PR rules)
 * add tests
+* add npm shrinkwrap

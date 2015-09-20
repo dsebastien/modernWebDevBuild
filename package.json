@@ -1,9 +1,13 @@
 {
   "name": "modern-web-dev-build",
   "description": "Modern Web Development Build.",
-  "author": "Sebastien Dubois <seb@dsebastien.net> (https://www.dsebastien.net/)",
+  "version": "0.0.3",
+  "author": {
+	"name": "Sebastien Dubois",
+	"email": "seb@dsebastien.net",
+	"url": "https://www.dsebastien.net/"
+   },
   "contributors": [
-	"Sebastien Dubois <seb@dsebastien.net> (https://www.dsebastien.net/)"
   ],
   "homepage": "http://www.dsebastien.net",
   "private": false,
@@ -16,15 +20,19 @@
   "keywords": [
 	"web",
 	"frontend",
-	"wordpress",
+	"build",
+	"gulp",
 	"html5",
 	"typescript",
 	"es6",
 	"build",
 	"es2015",
-	"es2016"
+	"es2016",
+	"angular",
+	"angular2",
+	"angular 2",
+	"sass"
   ],
-  "version": "0.0.1",
   "devDependencies": {
 
   },
@@ -75,7 +83,7 @@
 	"gulp-util": "3.0.x",
 	"jshint-stylish": "2.0.x",
 	"jspm": "^0.16.x",
-	"node-sass": "3.2.x",
+	"node-sass": "3.3.x",
 	"nodemon": "1.4.x",
 	"opn": "3.0.x",
 	"psi": "1.0.x",
