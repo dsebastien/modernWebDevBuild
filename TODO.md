@@ -18,4 +18,5 @@
 ** how to build from source section
 ** add more details for contributing (e.g., PR rules)
 * add tests
+* refactor build to concat paths using  path.join()
 * add npm shrinkwrap

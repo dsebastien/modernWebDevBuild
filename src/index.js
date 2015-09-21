@@ -26,14 +26,25 @@ requireDir('./gulp/tasks', {
 // Default task
 gulp.task('default', 'Build production files', [ 'prepare-default' ], (callback) =>{
 	return runSequence('validate-package-json', [
+		'copy',
+		'styles-vendor-dist',
+		'styles-dist',
 		'scripts-javascript-dist',
+		'html',
+		'images'
 	], callback);
 });
 
-gulp.task('prepare-default', 'Do all the necessary preparatory work for the default task', (callback) =>{
-	return runSequence('clean', [
-		'check-js-style',
-		'check-js-quality'
-	], callback);
-});
+gulp.task('prepare-default', 'Do all the necessary preparatory work for the default task', [
+		'clean',
+		'ts-lint',
+		'gen-ts-refs',
+		//'check-js-style',
+		//'check-js-quality'
+	], (callback) =>{
+		return runSequence('scripts-typescript',
+			['scripts-javascript', 'validate-package-json'],
+			callback);
+	}
+);
 

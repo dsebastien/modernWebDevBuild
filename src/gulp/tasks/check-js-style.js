@@ -12,9 +12,8 @@ import config from '../config';
 import utils from '../utils';
 
 gulp.task('check-js-style', 'Enforce JavaScript code style', () =>{
-	return gulp.src(
-	//return utils.plumbedSrc(// handle errors nicely (i.e., without breaking watch)
-		config.javascript.srcPkg
+	return utils.plumbedSrc(// handle errors nicely (i.e., without breaking watch)
+			config.javascript.src
 	)
 
 	// Display the files in the stream
@@ -23,14 +22,10 @@ gulp.task('check-js-style', 'Enforce JavaScript code style', () =>{
 	// Check JS code style (uses .jscsrc)
 	.pipe(
 		jscs({
-			configPath: config.folders.root + '/.jscsrc', // required otherwise the configuration didn't seem to get loaded
 			esnext: true, // seems broken: https://github.com/jscs-dev/gulp-jscs/issues/69
 			fix: false
 		})
 	)
-
-	//.pipe(debug({title: 'Stream contents:', minimal: true}))
-
 
 	.pipe(jscsStylish()) // log style errors
 

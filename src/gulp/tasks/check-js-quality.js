@@ -12,11 +12,17 @@ import utils from '../utils';
 
 gulp.task('check-js-quality', 'Check JavaScript code quality using JSHint', () =>{
 	return utils.plumbedSrc(// handle errors nicely (i.e., without breaking watch)
-		config.javascript.srcPkg
+			config.javascript.src
 	)
 
 	// Display the files in the stream
 	//.pipe(debug({title: 'Stream contents:', minimal: true}))
+
+	// Force BrowserSync reload
+	.pipe(browserSync.reload({
+		stream: true,
+		once: true
+	}))
 
 	// Run JSHint
 	.pipe(jshint())

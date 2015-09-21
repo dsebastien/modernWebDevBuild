@@ -1,5 +1,6 @@
 # Project specific
 *.log
+dist
 
 # NPM
 node_modules

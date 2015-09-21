@@ -16,7 +16,7 @@ let startBrowserSync = () =>{
 		//port: 8000,
 
 		// Customize the BrowserSync console logging prefix
-		logPrefix: 'MDL',
+		logPrefix: 'MWD', // Modern Web Dev
 
 		// Run as an https by uncommenting 'https: true'
 		// Note: this uses an unsigned certificate which on first access

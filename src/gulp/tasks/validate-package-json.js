@@ -3,16 +3,12 @@
 import gulp from 'gulp';
 import help from 'gulp-help';
 help(gulp); // provide help through 'gulp help' -- the help text is the second gulp task argument (https://www.npmjs.com/package/gulp-help/)
-import del from 'del';
+import packageJsonValidator from 'gulp-nice-package';
 
 import config from '../config';
 import utils from '../utils';
 
-gulp.task('clean', 'Clean output directories',
-	del.bind(null, [
-			config.folders.dist + config.globs.any,
-		], {
-			dot: true
-		}
-	)
-);
+gulp.task('validate-package-json', 'Validate the package.json file', () =>{
+	return utils.plumbedSrc(config.files.packageJSON)
+		.pipe(packageJsonValidator());
+});
