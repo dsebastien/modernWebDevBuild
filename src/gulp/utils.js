@@ -10,13 +10,14 @@ let exitOnError = false; // whether we should make the house explode whenever er
 
 // display errors nicely and avoid having errors breaking tasks/watch
 // reference: https://github.com/mikaelbr/gulp-notify/issues/81
-let reportError = function(error) {
-
-	let lineNumber = error.lineNumber ? 'LINE ' + error.lineNumber + ' -- ' : '';
+let reportError = function(error){
+	let lineNumber = error.lineNumber ? `LINE ${error.lineNumber} -- ` : '';
+	let report = '';
+	let chalk = gutil.colors.white.bgRed;
 
 	notify({
-		title: 'Task Failed [' + error.plugin + ']',
-		message: lineNumber + 'See console.',
+		title: `Task Failed [${error.plugin}]`,
+		message: `${lineNumber} See console.`,
 		sound: true
 
 		// the version below probably works on OSX
@@ -32,9 +33,6 @@ let reportError = function(error) {
 	//console.log(error.toString());
 
 	// Pretty error reporting
-	let report = '';
-	let chalk = gutil.colors.white.bgRed;
-
 	report += chalk('TASK:') + ' [' + error.plugin + ']\n';
 	report += chalk('ISSUE:') + ' ' + error.message + '\n';
 
@@ -58,29 +56,29 @@ let reportError = function(error) {
 
 // easily integrate plumber invocation
 // reference: https://gist.github.com/floatdrop/8269868
-let plumbedSrc = function(){
+let plumbedSrc = function (){
 	return gulp.src.apply(gulp, arguments)
-			.pipe(plumber({
-				errorHandler: reportError
-			}));
+		.pipe(plumber({
+			errorHandler: reportError
+		}));
 };
 
 // utility function to exclude files from globs
 let not = '!';
-let exclude = function(providedPath){
+let exclude = function (providedPath){
 	return not + providedPath;
 };
 
 // utility function that filters out empty directories
 // reference: http://stackoverflow.com/questions/23719731/gulp-copying-empty-directories
-let filterEmptyDirectories = function(es){
-	return es.map(function(file, cb){
-	  if(file.stat.isFile()){
-		return cb(null, file);
-	  } else{
-		return cb();
-	  }
-  });
+let filterEmptyDirectories = function (es){
+	return es.map(function (file, cb){
+		if(file.stat.isFile()){
+			return cb(null, file);
+		} else{
+			return cb();
+		}
+	});
 };
 
 module.exports = {

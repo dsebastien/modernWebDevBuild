@@ -1,5 +1,4 @@
-/*
- Rather than manage one giant configuration file responsible
+/* Rather than manage one giant configuration file responsible
  for creating multiple gulp tasks, each task has been broken out into
  its own file. Any files in that directory get automatically required below.
 
@@ -13,8 +12,9 @@
 'use strict';
 
 let gulp = require('gulp');
-let help = require('gulp-help')
+let help = require('gulp-help');
 help(gulp); // provide help through 'gulp help' -- the help text is the second gulp task argument (https://www.npmjs.com/package/gulp-help/)
+
 import requireDir from 'require-dir';
 import runSequence from 'run-sequence';
 
@@ -24,7 +24,7 @@ requireDir('./gulp/tasks', {
 });
 
 // Default task
-gulp.task('default', 'Build production files', [ 'prepare-default' ], (callback) =>{
+gulp.task('default', 'Build production files', [ 'prepare-default' ], (callback) => {
 	return runSequence('validate-package-json', [
 		'copy',
 		'styles-vendor-dist',
@@ -38,10 +38,11 @@ gulp.task('default', 'Build production files', [ 'prepare-default' ], (callback)
 gulp.task('prepare-default', 'Do all the necessary preparatory work for the default task', [
 		'clean',
 		'ts-lint',
-		'gen-ts-refs',
+		'gen-ts-refs'
+
 		//'check-js-style',
 		//'check-js-quality'
-	], (callback) =>{
+	], (callback) => {
 		return runSequence('scripts-typescript',
 			['scripts-javascript', 'validate-package-json'],
 			callback);
