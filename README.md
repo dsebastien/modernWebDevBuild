@@ -123,8 +123,10 @@ The project includes multiple configuration files. Here's some information about
 ## Releasing a version
 * edit the version in package.json
   * respected semver
+* update CHANGELOG.MD
 * git tag <version>
 * git push --tags
+* draft the release on GitHub (add descriptione etc)
 * npm publish
 
 ## Authors
