@@ -120,6 +120,13 @@ The project includes multiple configuration files. Here's some information about
 * Commit your changes & push to GitHub
 * create a pull request :)
 
+## Releasing a version
+* edit the version in package.json
+  * respected semver
+* git tag <version>
+* git push --tags
+* npm publish
+
 ## Authors
 ### Sebastien Dubois
 * [@Blog](http://www.dsebastien.net)
