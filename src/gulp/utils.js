@@ -56,7 +56,7 @@ let reportError = function(error){
 
 // easily integrate plumber invocation
 // reference: https://gist.github.com/floatdrop/8269868
-let plumbedSrc = function (){
+let plumbedSrc = function(){
 	return gulp.src.apply(gulp, arguments)
 		.pipe(plumber({
 			errorHandler: reportError
@@ -65,14 +65,14 @@ let plumbedSrc = function (){
 
 // utility function to exclude files from globs
 let not = '!';
-let exclude = function (providedPath){
+let exclude = function(providedPath){
 	return not + providedPath;
 };
 
 // utility function that filters out empty directories
 // reference: http://stackoverflow.com/questions/23719731/gulp-copying-empty-directories
-let filterEmptyDirectories = function (es){
-	return es.map(function (file, cb){
+let filterEmptyDirectories = function(es){
+	return es.map((file, cb) =>{
 		if(file.stat.isFile()){
 			return cb(null, file);
 		} else{

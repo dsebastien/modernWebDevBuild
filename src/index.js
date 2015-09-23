@@ -13,6 +13,7 @@
 
 let gulp = require('gulp');
 let help = require('gulp-help');
+
 help(gulp); // provide help through 'gulp help' -- the help text is the second gulp task argument (https://www.npmjs.com/package/gulp-help/)
 
 import requireDir from 'require-dir';
@@ -24,7 +25,7 @@ requireDir('./gulp/tasks', {
 });
 
 // Default task
-gulp.task('default', 'Build production files', [ 'prepare-default' ], (callback) => {
+gulp.task('default', 'Build production files', [ 'prepare-default' ], (callback) =>{
 	return runSequence('validate-package-json', [
 		'copy',
 		'styles-vendor-dist',
@@ -42,9 +43,9 @@ gulp.task('prepare-default', 'Do all the necessary preparatory work for the defa
 
 		//'check-js-style',
 		//'check-js-quality'
-	], (callback) => {
+	], (callback) =>{
 		return runSequence('scripts-typescript',
-			['scripts-javascript', 'validate-package-json'],
+			[ 'scripts-javascript', 'validate-package-json' ],
 			callback);
 	}
 );

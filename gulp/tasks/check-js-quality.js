@@ -14,14 +14,14 @@ gulp.task('check-js-quality', 'Check JavaScript code quality using JSHint', () =
 		config.javascript.srcPkg
 	)
 
-	// Display the files in the stream
-	//.pipe(debug({title: 'Stream contents:', minimal: true}))
+		// Display the files in the stream
+		//.pipe(debug({title: 'Stream contents:', minimal: true}))
 
-	// Run JSHint
-	.pipe(jshint())
+		// Run JSHint
+		.pipe(jshint())
 
-	// Generate a stylish report
-	.pipe(jshint.reporter('jshint-stylish'));
+		// Generate a stylish report
+		.pipe(jshint.reporter('jshint-stylish'));
 
 	// Fail the build only if BrowserSync is not active
 	// Actually, failing the build is counter-productive thus evil
