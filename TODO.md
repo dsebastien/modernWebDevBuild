@@ -7,6 +7,7 @@
 * facilitate the usage of gulp tasks (?)
 ** scripts\modernWebDevBuild.js
 *** read input param being the name of the script to run (?)
+*** to pass parameters to a package.json script: npm run task -- --<additional_param>
 * create yeoman generator project
 * link the two projects
 * Q: possible issue w/ different gulp version? both client project and this should be aligned

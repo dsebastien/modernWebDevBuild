@@ -6,14 +6,13 @@ help(gulp); // provide help through 'gulp help' -- the help text is the second g
 import jscs from 'gulp-jscs';
 import jscsStylish from 'gulp-jscs-stylish';
 import size from 'gulp-size';
-import debug from 'gulp-debug';
+//import debug from 'gulp-debug';
 
 import config from '../config';
 import utils from '../utils';
 
 gulp.task('check-js-style', 'Enforce JavaScript code style', () =>{
-	return gulp.src(
-		//return utils.plumbedSrc(// handle errors nicely (i.e., without breaking watch)
+	return utils.plumbedSrc( // handle errors nicely (i.e., without breaking watch)
 		config.javascript.srcPkg
 	)
 
