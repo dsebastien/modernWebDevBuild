@@ -12,7 +12,8 @@ import config from '../config';
 import utils from '../utils';
 
 gulp.task('check-js-style', 'Enforce JavaScript code style', () =>{
-	return utils.plumbedSrc( // handle errors nicely (i.e., without breaking watch)
+	// handle errors nicely (i.e., without breaking watch)
+	return utils.plumbedSrc(
 		config.javascript.srcPkg
 	)
 

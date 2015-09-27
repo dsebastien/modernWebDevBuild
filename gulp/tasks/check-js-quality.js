@@ -4,7 +4,7 @@ import gulp from 'gulp';
 import help from 'gulp-help';
 help(gulp); // provide help through 'gulp help' -- the help text is the second gulp task argument (https://www.npmjs.com/package/gulp-help/)
 import jshint from 'gulp-jshint';
-import debug from 'gulp-debug';
+//import debug from 'gulp-debug';
 
 import config from '../config';
 import utils from '../utils';

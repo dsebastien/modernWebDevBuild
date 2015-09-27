@@ -7,7 +7,7 @@ import htmlReplace from 'gulp-html-replace';
 import iff from 'gulp-if';
 import minifyHtml from 'gulp-minify-html';
 import size from 'gulp-size';
-import debug from 'gulp-debug';
+//import debug from 'gulp-debug';
 
 import config from '../config';
 import utils from '../utils';

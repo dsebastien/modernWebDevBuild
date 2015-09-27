@@ -13,11 +13,10 @@ import config from '../config';
 import utils from '../utils';
 
 gulp.task('scripts-typescript', 'Transpile TypeScript to ES6, include references to library and app .d.ts files and generate sourcemaps', () =>{
-
 	// references:
 	// https://www.npmjs.com/package/gulp-typescript
 	let tsProject = ts.createProject('tsconfig.json', {
-		typescript: require('typescript'), // override the typescript version by that defined in package.json
+		typescript: require('typescript') // override the typescript version by that defined in package.json
 
 		// configuration defined in tsconfig.json
 		// other overrides here if needed
@@ -51,6 +50,7 @@ gulp.task('scripts-typescript', 'Transpile TypeScript to ES6, include references
 
 		// Reload Browser if needed
 		.pipe(iff(browserSync.active, browserSync.reload({
-			stream: true, once: true
+			stream: true,
+			once: true
 		})));
 });

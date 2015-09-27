@@ -12,7 +12,7 @@ import size from 'gulp-size';
 import config from '../config';
 import utils from '../utils';
 
-gulp.task('scripts-javascript', 'Transpile JavaScript (ES6 to ES5 using Babel)', () =>{
+gulp.task('scripts-javascript-dist', 'Transpile JavaScript (ES6 to ES5 using Babel)', () =>{
 	return utils.plumbedSrc(// handle errors nicely (i.e., without breaking watch)
 		config.javascript.src
 	)

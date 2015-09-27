@@ -1,3 +1,4 @@
+* fix "main" in generate package (should point to dist/index.js rather than gulpfile.babel.js)
 * remove as much as possible from package.json
 * ensure correct split between devDependencies and dependencies
 * remove devDependencies if not necessary (duplication with dependencies)
@@ -29,3 +30,5 @@
 * add tests
 * refactor build to concat paths using  path.join()
 * add npm shrinkwrap
+* integrate semantic release (?)
+* switch back to TS 1.6.2+ (stable)
