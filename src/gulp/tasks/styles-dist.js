@@ -23,7 +23,7 @@ gulp.task('styles-dist', 'Optimize and minimize stylesheets for production', () 
 
 	// Process Sass files
 	.pipe(sass({
-		style: "compressed"
+		style: 'compressed'
 		//errLogToConsole: true
 	}))
 

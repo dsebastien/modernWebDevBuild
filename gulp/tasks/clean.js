@@ -6,11 +6,10 @@ help(gulp); // provide help through 'gulp help' -- the help text is the second g
 import del from 'del';
 
 import config from '../config';
-import utils from '../utils';
 
 gulp.task('clean', 'Clean output directories',
 	del.bind(null, [
-			config.folders.dist + config.globs.any,
+			config.folders.dist + config.globs.any
 		], {
 			dot: true
 		}

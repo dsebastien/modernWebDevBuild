@@ -1,6 +1,6 @@
 'use strict';
 
-import utils from './utils';
+//import utils from './utils';
 
 let extensions = {
 	javascript: '.js'

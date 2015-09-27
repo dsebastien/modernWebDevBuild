@@ -29,7 +29,7 @@ let startBrowserSync = () =>{
 			// todo extract common middleware config
 			middleware: [
 				historyApiFallback(), // not necessary if the app uses hash based routing
-				function (req, res, next) {
+				function(req, res, next){
 					res.setHeader('Access-Control-Allow-Origin', '*'); // add CORS to the response headers (for resources served by BrowserSync)
 					next();
 				}
@@ -39,5 +39,5 @@ let startBrowserSync = () =>{
 };
 
 gulp.task('serve-dist', 'Build and serve the production version (i.e., \'dist\' folder contents', () =>{
-	return runSequence(['default'], startBrowserSync); // here we need to ensure that all the other tasks are done before we start BrowserSync
+	return runSequence([ 'default' ], startBrowserSync); // here we need to ensure that all the other tasks are done before we start BrowserSync
 });
