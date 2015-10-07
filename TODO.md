@@ -1,4 +1,4 @@
-* fix "main" in generate package (should point to dist/index.js rather than gulpfile.babel.js)
+* review: https://github.com/areusjs/load-common-gulp-tasks
 * remove as much as possible from package.json
 * ensure correct split between devDependencies and dependencies
 * remove devDependencies if not necessary (duplication with dependencies)
@@ -9,10 +9,7 @@
 ** scripts\modernWebDevBuild.js
 *** read input param being the name of the script to run (?)
 *** to pass parameters to a package.json script: npm run task -- --<additional_param>
-* create yeoman generator project
-* link the two projects
 * Q: possible issue w/ different gulp version? both client project and this should be aligned
-* move gulpfile & gulp folders to src + adapt package.json's "main" property
 * add Docker support
 * add Makefile
 * add bower configuration
@@ -32,3 +29,4 @@
 * add npm shrinkwrap
 * integrate semantic release (?)
 * switch back to TS 1.6.2+ (stable)
+* add shiels: http://shields.io/

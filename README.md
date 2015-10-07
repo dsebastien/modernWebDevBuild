@@ -98,7 +98,6 @@ If you want to build from source, you need to:
 * gulp-jscs-stylish: Stylish reporter for gulp-jscs: https://www.npmjs.com/package/gulp-jscs-stylish
 * jshint-stylish: stylish reporter for JSHint: https://www.npmjs.com/package/jshint-stylish
 * opn: open stuff like websites, files, executables (cross-platform): https://www.npmjs.com/package/opn
-* psi: PageSpeed insights with reporting: https://www.npmjs.com/package/psi
 * require-dir: helper to require() directories: https://www.npmjs.com/package/require-dir
 * run-sequence: run a series of dependent gulp tasks in order: https://www.npmjs.com/package/run-sequence
 * event-stream: construct pipes of streams of events: https://www.npmjs.com/package/event-stream
