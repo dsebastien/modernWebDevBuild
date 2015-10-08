@@ -1,3 +1,6 @@
+* rewrite all gulp tasks as proper modules
+  * accepting (at least gulp as parameter)
+  * returning an object with a 'registerTask' function
 * review: https://github.com/areusjs/load-common-gulp-tasks
 * remove as much as possible from package.json
 * ensure correct split between devDependencies and dependencies
@@ -30,3 +33,4 @@
 * integrate semantic release (?)
 * switch back to TS 1.6.2+ (stable)
 * add shiels: http://shields.io/
+* add debug option and debug statements (detail task loading)

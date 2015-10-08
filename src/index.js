@@ -10,42 +10,52 @@
 
 'use strict';
 
-let gulp = require('gulp');
 let help = require('gulp-help');
-
-help(gulp); // provide help through 'gulp help' -- the help text is the second gulp task argument (https://www.npmjs.com/package/gulp-help/)
 
 import requireDir from 'require-dir';
 import runSequence from 'run-sequence';
 
-// Load all tasks in gulp/tasks, including subfolders
-requireDir('./gulp/tasks', {
-	recurse: true
-});
+module.exports = {
+	registerTasks: function(gulp){
+		gulp = gulp || require('gulp'); // this module should can be imported without a defined gulp instance
+		help(gulp); // provide help through 'gulp help' -- the help text is the second gulp task argument (https://www.npmjs.com/package/gulp-help/)
 
-// Default task
-gulp.task('default', 'Build production files', [ 'prepare-default' ], (callback) =>{
-	return runSequence('validate-package-json', [
-		'copy',
-		'styles-vendor-dist',
-		'styles-dist',
-		'scripts-javascript-dist',
-		'html',
-		'images'
-	], callback);
-});
+		// Load all tasks in gulp/tasks, including subfolders
+		let	loadedModules = requireDir('./gulp/tasks', {
+			recurse: true
+		});
+		
+		for(let loadedModule of loadedModules){
+			if(loadedModule.registerTask){
+				console.log('yeah');
+				loadedModule.clean.registerTask(gulp);
+			}
+		}
 
-gulp.task('prepare-default', 'Do all the necessary preparatory work for the default task', [
-		'clean',
-		'ts-lint',
-		'gen-ts-refs'
+		// Default task
+		gulp.task('default', 'Build production files', [ 'prepare-default' ], (callback) =>{
+			return runSequence('validate-package-json', [
+				'copy',
+				'styles-vendor-dist',
+				'styles-dist',
+				'scripts-javascript-dist',
+				'html',
+				'images'
+			], callback);
+		});
 
-		//'check-js-style',
-		//'check-js-quality'
-	], (callback) =>{
-		return runSequence('scripts-typescript',
-			[ 'scripts-javascript', 'validate-package-json' ],
-			callback);
+		gulp.task('prepare-default', 'Do all the necessary preparatory work for the default task', [
+				'clean',
+				'ts-lint',
+				'gen-ts-refs'
+
+				//'check-js-style',
+				//'check-js-quality'
+			], (callback) =>{
+				return runSequence('scripts-typescript',
+					[ 'scripts-javascript', 'validate-package-json' ],
+					callback);
+			}
+		);
 	}
-);
-
+};

@@ -8,6 +8,13 @@ import del from 'del';
 import config from '../config';
 //import utils from '../utils';
 
+module.exports = {
+	registerTask: function(gulp){
+		console.log(gulp);
+	}
+};
+
+/*
 gulp.task('clean', 'Clean output directories',
 	del.bind(null, [
 			config.folders.app + config.globs.scripts.javascript, // TS emits ES6 code under app but that output is transient
@@ -19,3 +26,4 @@ gulp.task('clean', 'Clean output directories',
 		}
 	)
 );
+*/
