@@ -7,6 +7,7 @@
 * reusable build scripts
 ** implement a solution to make useful scripts reusable
 ** examples: npm run scripts in midnightLightV2
+** look at the 'bin' property in package.json: https://docs.npmjs.com/files/package.json
 ** these could be added as 'facade' tasks to the gulp tasks
 * what to do/recommend regarding the following files?
 ** test behavior if absent:
@@ -35,4 +36,4 @@
   * customize behavior (e.g., logging)
 * refactor own build to mimic the task loading mechanism & reuse code
 * add npm shrinkwrap
-* remove gulp-load-plugins (prefer explicit loading) 
+* remove gulp-load-plugins (prefer explicit loading)
