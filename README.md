@@ -44,7 +44,7 @@ First configure the required dependencies in your package.json file:
 * ensure that you also have gulp in your devDependencies section
 * (optional) also add babel/babel-core
 
-Next, create or edit your gulpfile.babel.js file (or gulpfile.js if you're still using ES5). To leverage the Modern Web Dev Build, you only need the following: 
+Next, create or edit your gulpfile.babel.js file (or gulpfile.js if you're still using ES5). To leverage the Modern Web Dev Build, you only need the following:
 
 ```
 "use strict";
@@ -148,6 +148,7 @@ The project includes multiple configuration files. Here's some information about
 * edit the version in package.json
   * respect semver
 * update CHANGELOG.MD
+* commit
 * git tag <version>
 * git push --tags
 * draft the release on GitHub (add description, etc)
