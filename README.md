@@ -120,12 +120,13 @@ The project includes multiple configuration files. Here's some information about
 * create a pull request :)
 
 ## Releasing a version
+* commit all changes to include in the release
 * edit the version in package.json
-  * respected semver
+  * respect semver
 * update CHANGELOG.MD
 * git tag <version>
 * git push --tags
-* draft the release on GitHub (add descriptione etc)
+* draft the release on GitHub (add description, etc)
 * npm publish
 
 ## Authors
