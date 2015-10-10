@@ -1,24 +1,22 @@
-* rewrite all gulp tasks as proper modules
-  * accepting (at least gulp as parameter)
-  * returning an object with a 'registerTask' function
 * review: https://github.com/areusjs/load-common-gulp-tasks
+  * eval possibility to reuse
 * remove as much as possible from package.json
 * ensure correct split between devDependencies and dependencies
 * remove devDependencies if not necessary (duplication with dependencies)
-* add shrinkwrap
-* document how to integrate in a project
 * provide a way for client projects to override some parts of the configuration
-* facilitate the usage of gulp tasks (?)
+* npm scripts
+** review
+** implement a solution to make them available/reusable where possible
 ** scripts\modernWebDevBuild.js
 *** read input param being the name of the script to run (?)
 *** to pass parameters to a package.json script: npm run task -- --<additional_param>
-* Q: possible issue w/ different gulp version? both client project and this should be aligned
 * add Docker support
 * add Makefile
 * add bower configuration
 * complete the readme
 ** introduction
 ** feature list
+** how to integrate in a project
 ** commands list
 ** how to release/deploy a version on npm & git
 *** npm version patch|minor|major -m 'Bumped to %s' (git commit + git tag)
@@ -29,8 +27,11 @@
 ** add more details for contributing (e.g., PR rules)
 * add tests
 * refactor build to concat paths using  path.join()
-* add npm shrinkwrap
-* integrate semantic release (?)
 * switch back to TS 1.6.2+ (stable)
 * add shiels: http://shields.io/
-* add debug option and debug statements (detail task loading)
+* add support for passing options
+  * override default values
+  * customize behavior (e.g., logging)
+* refactor project build to mimic the task loading mechanism & reuse code
+* add npm shrinkwrap
+* integrate semantic release (?)

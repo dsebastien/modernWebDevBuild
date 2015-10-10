@@ -1,36 +1,42 @@
-'use strict';
+"use strict";
 
-import gulp from 'gulp';
-import help from 'gulp-help';
-help(gulp); // provide help through 'gulp help' -- the help text is the second gulp task argument (https://www.npmjs.com/package/gulp-help/)
-import inject from 'gulp-inject';
-//import debug from 'gulp-debug';
+import AbstractTaskLoader from "../abstractTaskLoader";
+import config from "../config";
+//import utils from "../utils";
 
-import config from '../config';
-import utils from '../utils';
+import inject from "gulp-inject";
+//import debug from "gulp-debug";
 
-gulp.task('gen-ts-refs', 'Generate the app.d.ts references file dynamically from all application *.ts files', () =>{
-	let sources = utils.plumbedSrc(
-		config.typescript.srcAppOnly,
-		{
-			read: false
-		}
-	);
+class GenTsRefsTaskLoader extends AbstractTaskLoader {
+	registerTask(gulp){
+		super.registerTask(gulp);
 
-	// Display the files in the stream
-	//.pipe(debug({title: 'Stream contents:', minimal: true}));
+		gulp.task("gen-ts-refs", "Generate the app.d.ts references file dynamically from all application *.ts files", () =>{
+			let sources = gulp.plumbedSrc(
+				config.typescript.srcAppOnly,
+				{
+					read: false
+				}
+			);
 
-	return utils.plumbedSrc(config.files.appTypeScriptReferences)
-		.pipe(inject(sources, {
-			starttag: '//{',
-			endtag: '//}',
-			transform: function(filepath){
-				return '/// <reference path="..' + filepath + '" />';
-			}
-		}))
+			// Display the files in the stream
+			//.pipe(debug({title: "Stream contents:", minimal: true}));
 
-		// Display the files in the stream
-		//.pipe(debug({title: 'Stream contents:', minimal: true}))
+			return gulp.plumbedSrc(config.files.appTypeScriptReferences)
+				.pipe(inject(sources, {
+					starttag: "//{",
+					endtag: "//}",
+					transform: function(filepath){
+						return '/// <reference path="..' + filepath + '" />';
+					}
+				}))
 
-		.pipe(gulp.dest(config.folders.typings));
-});
+				// Display the files in the stream
+				//.pipe(debug({title: 'Stream contents:', minimal: true}))
+
+				.pipe(gulp.dest(config.folders.typings));
+		});
+	}
+}
+
+module.exports = new GenTsRefsTaskLoader();

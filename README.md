@@ -23,7 +23,7 @@ This project is available as an NPM package: https://www.npmjs.com/package/moder
 Check out the current [TODO list](TODO.md)
 
 ## Features
-* TypeScript > ES6 > ES5 transpilation w/ sourcemaps
+* TypeScript > ES2015 > ES5 transpilation w/ sourcemaps
 * SASS > CSS transformation w/ sourcemaps
 * production build creation with minification & bundling
 * ...
@@ -54,7 +54,7 @@ If you want to build from source, you need to:
 
 ## Build dependencies
 * gulp: build system (https://www.npmjs.com/package/gulp)
-* babel: ES6 to ES5 transpiler; used for the gulp build
+* babel: ES2015 to ES5 transpiler; used for the gulp build
 * typescript: the typescript tools (compiler, ...)
 * systemjs-builder: build tool for systemjs allows to create a single-file build of mixed-dependency module trees: https://www.npmjs.com/package/systemjs-builder
 * browser-sync: live CSS reload & browser syncing: https://www.npmjs.com/package/browser-sync
@@ -93,7 +93,7 @@ If you want to build from source, you need to:
 * gulp-tslint: Linter for TypeScript code: https://www.npmjs.com/package/gulp-tslint
 * gulp-typescript: TypeScript transpiler plugin for gulp: https://www.npmjs.com/package/gulp-typescript
 * tsd: TypeScript Definition manager: https://www.npmjs.com/package/tsd
-* gulp-babel: ES6 to ES5 transpiler plugin for gulp: https://www.npmjs.com/package/gulp-babel
+* gulp-babel: ES2015 to ES5 transpiler plugin for gulp: https://www.npmjs.com/package/gulp-babel
 * gulp-jscs: JavaScript code style checker plugin for gulp: https://www.npmjs.com/package/gulp-jscs
 * gulp-jscs-stylish: Stylish reporter for gulp-jscs: https://www.npmjs.com/package/gulp-jscs-stylish
 * jshint-stylish: stylish reporter for JSHint: https://www.npmjs.com/package/jshint-stylish

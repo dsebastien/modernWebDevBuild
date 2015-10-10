@@ -9,31 +9,31 @@
  Principle taken from gulp-starter: https://github.com/greypants/gulp-starter
  */
 
-'use strict';
+"use strict";
 
-let gulp = require('gulp');
-let help = require('gulp-help');
+let gulp = require("gulp");
+let help = require("gulp-help");
 
-help(gulp); // provide help through 'gulp help' -- the help text is the second gulp task argument (https://www.npmjs.com/package/gulp-help/)
-import requireDir from 'require-dir';
-import runSequence from 'run-sequence';
+help(gulp); // provide help through "gulp help" -- the help text is the second gulp task argument (https://www.npmjs.com/package/gulp-help/)
+import requireDir from "require-dir";
+import runSequence from "run-sequence";
 
 // Load all tasks in gulp/tasks, including subfolders
-requireDir('./gulp/tasks', {
+requireDir("./gulp/tasks", {
 	recurse: true
 });
 
 // Default task
-gulp.task('default', 'Build production files', [ 'prepare-default' ], (callback) =>{
-	return runSequence('validate-package-json', [
-		'scripts-javascript-dist'
+gulp.task("default", "Build production files", [ "prepare-default" ], (callback) =>{
+	return runSequence("validate-package-json", [
+		"scripts-javascript-dist"
 	], callback);
 });
 
-gulp.task('prepare-default', 'Do all the necessary preparatory work for the default task', (callback) =>{
-	return runSequence('clean', [
-		'check-js-style',
-		'check-js-quality'
+gulp.task("prepare-default", "Do all the necessary preparatory work for the default task", (callback) =>{
+	return runSequence("clean", [
+		"check-js-style",
+		"check-js-quality"
 	], callback);
 });
 

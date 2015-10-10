@@ -1,68 +1,74 @@
-'use strict';
+"use strict";
 
-import gulp from 'gulp';
-import help from 'gulp-help';
-help(gulp); // provide help through 'gulp help' -- the help text is the second gulp task argument (https://www.npmjs.com/package/gulp-help/)
-import changed from 'gulp-changed';
-import sourcemaps from 'gulp-sourcemaps';
-import babel from 'gulp-babel';
-import browserSync from'browser-sync';
-import iff from 'gulp-if';
-import size from 'gulp-size';
-//import debug from 'gulp-debug';
+import AbstractTaskLoader from "../abstractTaskLoader";
+import config from "../config";
+//import utils from "../utils";
 
-import config from '../config';
-import utils from '../utils';
+import changed from "gulp-changed";
+import sourcemaps from "gulp-sourcemaps";
+import babel from "gulp-babel";
+import browserSync from"browser-sync";
+import iff from "gulp-if";
+import size from "gulp-size";
+//import debug from "gulp-debug";
 
-gulp.task('scripts-javascript', 'Transpile JavaScript (ES6 to ES5 using Babel) and generate sourcemaps', () =>{
-	return utils.plumbedSrc(// handle errors nicely (i.e., without breaking watch)
-		config.javascript.src
-	)
+class ScriptsJavaScriptTaskLoader extends AbstractTaskLoader {
+	registerTask(gulp){
+		super.registerTask(gulp);
 
-		// Display the files in the stream
-		//.pipe(debug({title: 'Stream contents:', minimal: true}))
+		gulp.task("scripts-javascript", "Transpile JavaScript (ES2015 to ES5 using Babel) and generate sourcemaps", () =>{
+			return gulp.plumbedSrc(// handle errors nicely (i.e., without breaking watch)
+				config.javascript.src
+			)
 
-		// speed things up by ignoring unchanged resources
-		.pipe(changed(config.javascript.dest))
+				// Display the files in the stream
+				//.pipe(debug({title: "Stream contents:", minimal: true}))
 
-		// Initialize sourcemap generation
-		.pipe(sourcemaps.init({
-			loadMaps: true
-			//debug: true
-		}))
+				// speed things up by ignoring unchanged resources
+				.pipe(changed(config.javascript.dest))
 
-		// Transpile ES6 to ES5
-		// options: https://babeljs.io/docs/usage/options/
-		.pipe(babel({
-			modules: 'system', // use the system module format. Useful since load these with SystemJS
-			stage: 1, // enable experimental features (e.g., decorators, etc): http://babeljs.io/docs/usage/experimental/
-			comments: false, // remove comments
-			optional: [
-				'runtime' // necessary to load regenerator (generators/async) & core-js (ES6 static methods) automatically: https://babeljs.io/docs/usage/runtime/
-			]
-		}))
+				// Initialize sourcemap generation
+				.pipe(sourcemaps.init({
+					loadMaps: true
+					//debug: true
+				}))
 
-		// Write sourcemaps: https://www.npmjs.com/package/gulp-sourcemaps
-		//.pipe($.sourcemaps.write()) // use '.' to write the sourcemap to a separate file in the same dir
-		.pipe(sourcemaps.write({ // use '.' to write the sourcemap to a separate file in the same dir
-			includeContent: false, // alternative: include the contents and remove sourceRoot. Avoids issues but prevents from editing the sources directly in the browser
-			sourceRoot: '/' // use an absolute path because we have scripts in different subpaths
-		}))
+				// Transpile ES2015 to ES5
+				// options: https://babeljs.io/docs/usage/options/
+				.pipe(babel({
+					modules: "system", // use the system module format. Useful since load these with SystemJS
+					stage: 1, // enable experimental features (e.g., decorators, etc): http://babeljs.io/docs/usage/experimental/
+					comments: false, // remove comments
+					optional: [
+						"runtime" // necessary to load regenerator (generators/async) & core-js (ES2015 static methods) automatically: https://babeljs.io/docs/usage/runtime/
+					]
+				}))
 
-		// Copy files
-		.pipe(gulp.dest(config.javascript.dest))
+				// Write sourcemaps: https://www.npmjs.com/package/gulp-sourcemaps
+				//.pipe($.sourcemaps.write()) // use "." to write the sourcemap to a separate file in the same dir
+				.pipe(sourcemaps.write({ // use "." to write the sourcemap to a separate file in the same dir
+					includeContent: false, // alternative: include the contents and remove sourceRoot. Avoids issues but prevents from editing the sources directly in the browser
+					sourceRoot: "/" // use an absolute path because we have scripts in different subpaths
+				}))
 
-		// Display the files in the stream
-		//.pipe(debug({title: 'Stream contents:', minimal: true}))
+				// Copy files
+				.pipe(gulp.dest(config.javascript.dest))
 
-		// Task result
-		.pipe(size({
-			title: 'scripts-javascript'
-		}))
+				// Display the files in the stream
+				//.pipe(debug({title: "Stream contents:", minimal: true}))
 
-		// Reload Browser if needed
-		.pipe(iff(browserSync.active, browserSync.reload({
-			stream: true,
-			once: true
-		})));
-});
+				// Task result
+				.pipe(size({
+					title: "scripts-javascript"
+				}))
+
+				// Reload Browser if needed
+				.pipe(iff(browserSync.active, browserSync.reload({
+					stream: true,
+					once: true
+				})));
+		});
+	}
+}
+
+module.exports = new ScriptsJavaScriptTaskLoader();

@@ -1,7 +1,7 @@
 {
   "name": "modern-web-dev-build",
   "description": "Modern Web Development Build.",
-  "version": "0.0.5",
+  "version": "0.0.4",
   "author": {
 	"name": "Sebastien Dubois",
 	"email": "seb@dsebastien.net",
@@ -27,10 +27,6 @@
 	"es6",
 	"build",
 	"es2015",
-	"es2016",
-	"angular",
-	"angular2",
-	"angular 2",
 	"sass"
   ],
   "devDependencies": {
@@ -100,16 +96,16 @@
 	"gulp-uncss": "1.0.x",
 	"gulp-util": "3.0.x",
 	"jshint-stylish": "2.0.x",
-	"jspm": "^0.16.x",
+	"jspm": "0.16.x",
 	"node-sass": "3.3.x",
-	"nodemon": "1.4.x",
+	"nodemon": "1.7.x",
 	"opn": "3.0.x",
 	"require-dir": "0.3.x",
 	"run-sequence": "1.1.x",
 	"connect-history-api-fallback": "1.1.0",
-	"systemjs-builder": "0.13.x",
-	"typescript": "1.7.0-dev.20150830",
-	"tsd": "0.6.5-beta"
+	"systemjs-builder": "0.14.x",
+	"typescript": "1.7.0-dev.20151010",
+	"tsd": "0.6.5"
   },
   "engines": {
 	"node": ">=0.12.0",

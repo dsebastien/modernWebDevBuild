@@ -1,30 +1,30 @@
-'use strict';
+"use strict";
 
-//import utils from './utils';
+//import utils from "./utils";
 
 let extensions = {
-	javascript: '.js'
+	javascript: ".js"
 };
 
 let folders = {
-	root: '.',
-	dist: './dist',
-	src: './src',
-	srcPkg: './gulp',
-	nodeModules: './node_modules'
+	root: ".",
+	dist: "./dist",
+	src: "./src",
+	srcPkg: "./gulp",
+	nodeModules: "./node_modules"
 };
 
 let globs = {
-	any: '/**/*',
+	any: "/**/*",
 	scripts: {
-		javascript: '/**/*' + extensions.javascript
+		javascript: "/**/*" + extensions.javascript
 	}
 };
 
 let files = {
-	any: '*',
-	packageJSON: folders.root + '/package.json',
-	gulpfile: folders.root + '/gulpfile.babel.js'
+	any: "*",
+	packageJSON: folders.root + "/package.json",
+	gulpfile: folders.root + "/gulpfile.babel.js"
 };
 
 let javascript = {

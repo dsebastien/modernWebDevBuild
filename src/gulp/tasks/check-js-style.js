@@ -1,36 +1,43 @@
-'use strict';
+"use strict";
 
-import gulp from 'gulp';
-import help from 'gulp-help';
-help(gulp); // provide help through 'gulp help' -- the help text is the second gulp task argument (https://www.npmjs.com/package/gulp-help/)
-import jscs from 'gulp-jscs';
-import jscsStylish from 'gulp-jscs-stylish';
-import size from 'gulp-size';
-//import debug from 'gulp-debug';
+import AbstractTaskLoader from "../abstractTaskLoader";
+import config from "../config";
+//import utils from "../utils";
 
-import config from '../config';
-import utils from '../utils';
+import jscs from "gulp-jscs";
+import jscsStylish from "gulp-jscs-stylish";
+import size from "gulp-size";
+//import debug from "gulp-debug";
 
-gulp.task('check-js-style', 'Enforce JavaScript code style', () =>{
-	return utils.plumbedSrc(// handle errors nicely (i.e., without breaking watch)
-			config.javascript.src
-	)
+class CheckJsStyleTaskLoader extends AbstractTaskLoader {
+	registerTask(gulp){
+		super.registerTask(gulp);
 
-	// Display the files in the stream
-	//.pipe(debug({title: 'Stream contents:', minimal: true}))
+		gulp.task("check-js-style", "Enforce JavaScript code style", () =>{
+			return gulp.plumbedSrc(// handle errors nicely (i.e., without breaking watch)
+				config.javascript.src
+			)
 
-	// Check JS code style (uses .jscsrc)
-	.pipe(
-		jscs({
-			esnext: true, // seems broken: https://github.com/jscs-dev/gulp-jscs/issues/69
-			fix: false
-		})
-	)
+				// Display the files in the stream
+				//.pipe(debug({title: "Stream contents:", minimal: true}))
 
-	.pipe(jscsStylish()) // log style errors
+				// Check JS code style (uses .jscsrc)
+				.pipe(
+				jscs({
+					esnext: true, // seems broken: https://github.com/jscs-dev/gulp-jscs/issues/69
+					fix: false
+				})
+			)
 
-	// Task result
-	.pipe(size({
-		title: 'check-js-style'
-	}));
-});
+				.pipe(jscsStylish()) // log style errors
+
+				// Task result
+				.pipe(size({
+					title: "check-js-style"
+				}));
+		});
+	}
+}
+
+module.exports = new CheckJsStyleTaskLoader();
+

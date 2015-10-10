@@ -1,18 +1,23 @@
-'use strict';
+"use strict";
 
-// Include Gulp & tools we'll use
-import gulp from 'gulp';
-import notify from 'gulp-notify';
-import gutil from 'gulp-util';
-import plumber from 'gulp-plumber';
+import notify from "gulp-notify";
+import gutil from "gulp-util";
+import plumber from "gulp-plumber";
 
-let exitOnError = false; // whether we should make the house explode whenever errors occur (e.g., stop gulp serve)
+/**
+ * Whether we should make the house explode whenever errors occur (e.g., stop gulp serve)
+ * @type {boolean}
+ */
+let exitOnError = false;
 
-// display errors nicely and avoid having errors breaking tasks/watch
-// reference: https://github.com/mikaelbr/gulp-notify/issues/81
+/**
+ * Display errors nicely and avoid having errors breaking tasks/watch
+ * Reference: https://github.com/mikaelbr/gulp-notify/issues/81
+ * @param error the error to report
+ */
 let reportError = function(error){
-	let lineNumber = error.lineNumber ? `LINE ${error.lineNumber} -- ` : '';
-	let report = '';
+	let lineNumber = error.lineNumber ? `LINE ${error.lineNumber} -- ` : "";
+	let report = "";
 	let chalk = gutil.colors.white.bgRed;
 
 	notify({
@@ -24,8 +29,6 @@ let reportError = function(error){
 		//sound: 'Sosumi' // See: https://github.com/mikaelbr/node-notifier#all-notification-options-with-their-defaults
 	}).write(error);
 
-	//gutil.beep(); // Beep 'sosumi' again
-
 	// Inspect the error object
 	//gutil.log(error);
 
@@ -33,15 +36,15 @@ let reportError = function(error){
 	//console.log(error.toString());
 
 	// Pretty error reporting
-	report += chalk('TASK:') + ' [' + error.plugin + ']\n';
-	report += chalk('ISSUE:') + ' ' + error.message + '\n';
+	report += chalk("TASK:") + " [" + error.plugin + "]\n";
+	report += chalk("ISSUE:") + " " + error.message + "\n";
 
 	if(error.lineNumber){
-		report += chalk('LINE:') + ' ' + error.lineNumber + '\n';
+		report += chalk("LINE:") + " " + error.lineNumber + "\n";
 	}
 
 	if(error.fileName){
-		report += chalk('FILE:') + ' ' + error.fileName + '\n';
+		report += chalk("FILE:") + " " + error.fileName + "\n";
 	}
 
 	console.error(report);
@@ -50,28 +53,24 @@ let reportError = function(error){
 		process.exit(1);
 	} else{
 		// Prevent the 'watch' task from stopping
-		this.emit('end');
+		this.emit("end");
 	}
 };
 
-// easily integrate plumber invocation
-// reference: https://gist.github.com/floatdrop/8269868
-let plumbedSrc = function(){
-	return gulp.src.apply(gulp, arguments)
-		.pipe(plumber({
-			errorHandler: reportError
-		}));
-};
+/**
+ * Exclude files from globs
+ * @param providedPath the path that should be excluded
+ * @returns {string} the exclusion string
+ */
+let exclude = providedPath => "!" + providedPath;
 
-// utility function to exclude files from globs
-let not = '!';
-let exclude = function(providedPath){
-	return not + providedPath;
-};
-
-// utility function that filters out empty directories
-// reference: http://stackoverflow.com/questions/23719731/gulp-copying-empty-directories
-let filterEmptyDirectories = function(es){
+/**
+ * Filter out empty directories
+ * reference: http://stackoverflow.com/questions/23719731/gulp-copying-empty-directories
+ * @param es the list to filter
+ * @returns {*} the filtered list
+ */
+let filterEmptyDirectories = es =>{
 	return es.map((file, cb) =>{
 		if(file.stat.isFile()){
 			return cb(null, file);
@@ -81,9 +80,75 @@ let filterEmptyDirectories = function(es){
 	});
 };
 
+/**
+ * Validate that the passed argument is not null or undefined.
+ * If validation fails, an error is thrown.
+ * @param arg the argument to check
+ * @param errorMessage the error message to use if validation fails
+ * @throws Error if validation fails
+ */
+let validateArgument = (arg, errorMessage) =>{
+	errorMessage = errorMessage || "the provided argument cannot be null or undefined!";
+
+	if(arg === null || arg === undefined){
+		throw new Error(errorMessage);
+	}
+};
+
+/**
+ * Validate that the passed argument is a valid gulp object
+ * @param obj the object to validate
+ * @throws Error if validation fails
+ */
+let validateGulpObject = obj =>{
+	validateArgument(obj);
+	validateArgument(obj.tasks, "the provided argument must be a gulp instance!");
+};
+
+/**
+ * Validate that the passed argument is a valid gulp object and is configured as expected.
+ * It should have the help task defined
+ * @param obj the object to validate
+ * @throws Error if validation fails
+ */
+let validateGulpObjectIsConfigured = obj =>{
+	const notCorrectlyConfiguredErrorMessage = "the provided argument is a valid gulp object but it isn't configured properly. You need to invoke the configureGulpObject utility function before passing it to the tasks!";
+	
+	validateGulpObject(obj);
+	validateArgument(obj.tasks.help, notCorrectlyConfiguredErrorMessage);
+	validateArgument(obj.plumbedSrc, notCorrectlyConfiguredErrorMessage);
+};
+
+/**
+ * Configure the passed in gulp object so that it is customized as we need:
+ * - gulp help loaded and enabled
+ * - gulp plumbedSrc function added (integrates plumber)
+ * @param obj the object to validate
+ * @throws Error if validation fails
+ */
+let configureGulpObject = obj =>{
+	validateGulpObject(obj);
+	const help = require("gulp-help");
+
+	let configuredGulpObject = help(obj); // provide help through 'gulp help' -- the help text is the second gulp task argument (https://www.npmjs.com/package/gulp-help/)
+
+	// Easily integrate plumber invocation
+	// Reference: https://gist.github.com/floatdrop/8269868
+	configuredGulpObject.plumbedSrc = function(){
+		return configuredGulpObject.src.apply(configuredGulpObject, arguments)
+			.pipe(plumber({
+				errorHandler: reportError
+			}));
+	};
+
+	return configuredGulpObject;
+};
+
 module.exports = {
 	exclude,
 	reportError,
-	plumbedSrc,
-	filterEmptyDirectories
+	filterEmptyDirectories,
+	validateArgument,
+	validateGulpObjectIsConfigured,
+	configureGulpObject
 };

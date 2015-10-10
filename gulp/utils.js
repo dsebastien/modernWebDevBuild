@@ -1,28 +1,28 @@
-'use strict';
+"use strict";
 
-// Include Gulp & tools we'll use
-import gulp from 'gulp';
-import notify from 'gulp-notify';
-import gutil from 'gulp-util';
-import plumber from 'gulp-plumber';
+// Include Gulp & tools we"ll use
+import gulp from "gulp";
+import notify from "gulp-notify";
+import gutil from "gulp-util";
+import plumber from "gulp-plumber";
 
 let exitOnError = false; // whether we should make the house explode whenever errors occur (e.g., stop gulp serve)
 
 // display errors nicely and avoid having errors breaking tasks/watch
 // reference: https://github.com/mikaelbr/gulp-notify/issues/81
 let reportError = function(error){
-	let lineNumber = error.lineNumber ? 'LINE ' + error.lineNumber + ' -- ' : '';
+	let lineNumber = error.lineNumber ? "LINE " + error.lineNumber + " -- " : "";
 
 	notify({
-		title: 'Task Failed [' + error.plugin + ']',
-		message: lineNumber + 'See console.',
+		title: "Task Failed [" + error.plugin + "]",
+		message: lineNumber + "See console.",
 		sound: true
 
 		// the version below probably works on OSX
-		//sound: 'Sosumi' // See: https://github.com/mikaelbr/node-notifier#all-notification-options-with-their-defaults
+		//sound: "Sosumi" // See: https://github.com/mikaelbr/node-notifier#all-notification-options-with-their-defaults
 	}).write(error);
 
-	//gutil.beep(); // Beep 'sosumi' again
+	//gutil.beep(); // Beep "sosumi" again
 
 	// Inspect the error object
 	//gutil.log(error);
@@ -31,18 +31,18 @@ let reportError = function(error){
 	//console.log(error.toString());
 
 	// Pretty error reporting
-	let report = '';
+	let report = "";
 	let chalk = gutil.colors.white.bgRed;
 
-	report += chalk('TASK:') + ' [' + error.plugin + ']\n';
-	report += chalk('ISSUE:') + ' ' + error.message + '\n';
+	report += chalk("TASK:") + " [" + error.plugin + "]\n";
+	report += chalk("ISSUE:") + " " + error.message + "\n";
 
 	if(error.lineNumber){
-		report += chalk('LINE:') + ' ' + error.lineNumber + '\n';
+		report += chalk("LINE:") + " " + error.lineNumber + "\n";
 	}
 
 	if(error.fileName){
-		report += chalk('FILE:') + ' ' + error.fileName + '\n';
+		report += chalk("FILE:") + " " + error.fileName + "\n";
 	}
 
 	console.error(report);
@@ -50,8 +50,8 @@ let reportError = function(error){
 	if(exitOnError){
 		process.exit(1);
 	} else{
-		// Prevent the 'watch' task from stopping
-		this.emit('end');
+		// Prevent the "watch" task from stopping
+		this.emit("end");
 	}
 };
 
@@ -65,9 +65,8 @@ let plumbedSrc = function(){
 };
 
 // utility function to exclude files from globs
-let not = '!';
 let exclude = function(providedPath){
-	return not + providedPath;
+	return "!" + providedPath;
 };
 
 // utility function that filters out empty directories

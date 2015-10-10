@@ -1,35 +1,41 @@
-'use strict';
+"use strict";
 
-import gulp from 'gulp';
-import help from 'gulp-help';
-help(gulp); // provide help through 'gulp help' -- the help text is the second gulp task argument (https://www.npmjs.com/package/gulp-help/)
-import cache from 'gulp-cache';
-import imageMin from 'gulp-imagemin';
-import size from 'gulp-size';
-//import debug from 'gulp-debug';
+import AbstractTaskLoader from "../abstractTaskLoader";
+import config from "../config";
+//import utils from "../utils";
 
-import config from '../config';
-import utils from'../utils';
+import cache from "gulp-cache";
+import imageMin from "gulp-imagemin";
+import size from "gulp-size";
+//import debug from "gulp-debug";
 
-gulp.task('images', 'Optimize images', () =>{
-	return utils.plumbedSrc(
-			config.images.src
-	)
+class ImagesTaskLoader extends AbstractTaskLoader {
+	registerTask(gulp){
+		super.registerTask(gulp);
 
-	// Display the files in the stream
-	//.pipe(debug({title: 'Stream contents:', minimal: true}))
+		gulp.task("images", "Optimize images", () =>{
+			return gulp.plumbedSrc(
+				config.images.src
+			)
 
-	// Minify and cache
-	.pipe(cache(imageMin({
-		progressive: true,
-		interlaced: true
-	})))
+				// Display the files in the stream
+				//.pipe(debug({title: "Stream contents:", minimal: true}))
 
-	// Output files
-	.pipe(gulp.dest(config.images.dest))
+				// Minify and cache
+				.pipe(cache(imageMin({
+					progressive: true,
+					interlaced: true
+				})))
 
-	// Task result
-	.pipe(size({
-		title: 'images'
-	}));
-});
+				// Output files
+				.pipe(gulp.dest(config.images.dest))
+
+				// Task result
+				.pipe(size({
+					title: "images"
+				}));
+		});
+	}
+}
+
+module.exports = new ImagesTaskLoader();

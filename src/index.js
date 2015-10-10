@@ -8,54 +8,47 @@
  Principle taken from gulp-starter: https://github.com/greypants/gulp-starter
  */
 
-'use strict';
+"use strict";
 
-let help = require('gulp-help');
+import requireDir from "require-dir";
 
-import requireDir from 'require-dir';
-import runSequence from 'run-sequence';
+import utils from "./gulp/utils";
 
-module.exports = {
-	registerTasks: function(gulp){
-		gulp = gulp || require('gulp'); // this module should can be imported without a defined gulp instance
-		help(gulp); // provide help through 'gulp help' -- the help text is the second gulp task argument (https://www.npmjs.com/package/gulp-help/)
+/**
+ * This class takes care of loading gulp tasks.
+ */
+class TasksLoader {
+	constructor(){
+	}
 
-		// Load all tasks in gulp/tasks, including subfolders
-		let	loadedModules = requireDir('./gulp/tasks', {
-			recurse: true
-		});
+	/**
+	 * Looks for and registers all available tasks.
+	 * @param inputGulp the gulp object to use. If not provided, it'll be loaded
+	 */
+	registerTasks(inputGulp){
+		let gulp = inputGulp || require("gulp"); // this module can be imported without a defined gulp instance
 		
-		for(let loadedModule of loadedModules){
-			if(loadedModule.registerTask){
-				console.log('yeah');
-				loadedModule.clean.registerTask(gulp);
+		gulp = utils.configureGulpObject(gulp); // we need to customize the gulp object a bit
+
+		// Load all tasks in gulp/tasks
+		const loadedModules = requireDir("./gulp/tasks", {
+			recurse: false
+		});
+
+		// request each module to register its tasks
+		for(let key in loadedModules){
+			if(loadedModules.hasOwnProperty(key)){
+				let loadedModule = loadedModules[ key ];
+
+				if(loadedModule.registerTask){
+					//console.log(`Registering module: ${key}`);
+					loadedModule.registerTask(gulp);
+				} else{
+					throw new TypeError(`The following module does not expose the expected interface: ${key}`);
+				}
 			}
 		}
-
-		// Default task
-		gulp.task('default', 'Build production files', [ 'prepare-default' ], (callback) =>{
-			return runSequence('validate-package-json', [
-				'copy',
-				'styles-vendor-dist',
-				'styles-dist',
-				'scripts-javascript-dist',
-				'html',
-				'images'
-			], callback);
-		});
-
-		gulp.task('prepare-default', 'Do all the necessary preparatory work for the default task', [
-				'clean',
-				'ts-lint',
-				'gen-ts-refs'
-
-				//'check-js-style',
-				//'check-js-quality'
-			], (callback) =>{
-				return runSequence('scripts-typescript',
-					[ 'scripts-javascript', 'validate-package-json' ],
-					callback);
-			}
-		);
 	}
-};
+}
+
+module.exports = new TasksLoader();
