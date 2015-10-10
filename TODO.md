@@ -35,3 +35,4 @@
   * customize behavior (e.g., logging)
 * refactor own build to mimic the task loading mechanism & reuse code
 * add npm shrinkwrap
+* remove gulp-load-plugins (prefer explicit loading) 
