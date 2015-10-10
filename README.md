@@ -1,5 +1,6 @@
 # Modern Web Dev Build
 
+[![License](https://img.shields.io/cocoapods/l/AFNetworking.svg)](LICENSE.MD)
 [![Build Status](https://secure.travis-ci.org/dsebastien/modernWebDevBuild.png?branch=master)](https://travis-ci.org/dsebastien/modernWebDevBuild)
 [![Coverage Status](https://img.shields.io/coveralls/dsebastien/modernWebDevBuild.svg?style=flat)](https://coveralls.io/r/dsebastien/modernWebDevBuild?branch=master)
 [![Dependency Status](https://david-dm.org/dsebastien/modernWebDevBuild.svg?theme=shields.io&style=flat)](https://david-dm.org/dsebastien/modernWebDevBuild)
@@ -7,50 +8,66 @@
 [![Gitter](https://img.shields.io/badge/gitter-join%20chat-green.svg?style=flat)](https://gitter.im/dsebastien/modernWebDevBuild?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 ## About
-ModernWebDevBuild is a project aiming to provide a modern build for Web development.
+ModernWebDevBuild is a project aiming to provide a modern build for Web development, letting you easily integrate ES2015, TypeScript, SASS, code quality & style checking, testing, minification, bundling and whatnot in your projects.
 
-The goal is to abstract as much of the build process as possible so that Web development projects can reuse this package to quickly get started without having to dive too deep in the boring details of how to setup a proper build that takes care of transpiling, minifying, optimizing images and whatnot.
+The goal is to abstract as much of the build process as possible so that Web development projects can reuse this build to quickly get started without having to dive too deep in the boring details of how to setup a proper build chain that takes care of transpiling, minifying, optimizing images and whatnot.
 
-This project is very opiniated and the goal is not to provide many options for many different needs. Rather, technology choices are embedded and either those are ok for or you're free to use something else that better fits your needs... :)
+This project is very opiniated and the goal is not to provide many options for many different needs. Rather, technology choices are embedded. Although, the build is pretty flexible about code/assets organization (to some extent). Over time, it'll be interesting to see how customizable we can make this thing.
 
-The provided build tasks are based on [Gulp](http://gulpjs.com/).
+The provided build tasks are based on [Gulp](http://gulpjs.com/). Instructions are available below to get you started.
 
-The idea for this project emerged as I was rediscovering the state of the art for Web development and the fact that tooling is now so much more complex than it was in the past (I would argue that it is way too complex nowadays and that isn't good for the accessibility of the platform itself).
+The idea for this project emerged as I was rediscovering the state of the art for Web development. What surprised me is that tooling is now so much more complex than it was in the past (I would argue that it is way too complex nowadays and that isn't good for the accessibility of the platform itself). Unfortunately for now, there aren't many alternatives and the benefits of a good build chain are too important to keep aside.
 
-This project is available as an NPM package: https://www.npmjs.com/package/modern-web-dev-build
+This project is available as an npm package: https://www.npmjs.com/package/modern-web-dev-build
+
+## Features
+* watch source files & assets while serving your application and automatically:
+  * transpile TypeScript > ES2015 > ES5 w/ sourcemaps
+  * transpile SASS > CSS w/ sourcemaps
+  * check JavaScript/TypeScript code quality and report on the console (without breaking the build)
+  * check JavaScript/TypeScript code style and report on the console (without breaking the build)
+  * ...
+* easily create a production build with minification & bundling
+* ...
 
 ## Status & roadmap
 Check out the current [TODO list](TODO.md)
 
-## Features
-* TypeScript > ES2015 > ES5 transpilation w/ sourcemaps
-* SASS > CSS transformation w/ sourcemaps
-* production build creation with minification & bundling
-* ...
-
 ## Usage
-For new projects, the easiest approach to integrate this build is to use our Yeoman Generator available over at https://github.com/dsebastien/modernWebDevGenerator and on NPM: https://www.npmjs.com/package/generator-modern-web-dev.
 
-For existing projects, assuming that you're already using NPM, you first need to add the dependency in your project's package.json file.
+### New projects
+The easiest approach to integrate this build is to use our Yeoman Generator available over at https://github.com/dsebastien/modernWebDevGenerator and on npm: https://www.npmjs.com/package/generator-modern-web-dev.
 
-Once the dependency is installed, edit the gulpfile of your project and add the following code:
+### Existing projects
+First configure the required dependencies in your package.json file:
+* add modern-web-dev-build in your devDependencies section
+* ensure that you also have gulp in your devDependencies section
+* (optional) also add babel/babel-core
+
+Next, create or edit your gulpfile.babel.js file (or gulpfile.js if you're still using ES5). To leverage the Modern Web Dev Build, you only need the following: 
+
 ```
-var gulp = require('gulp');
-...
-require('modern-web-dev-build');
+"use strict";
+
+import gulp from "gulp";
+
+import modernWebDevBuild from "modern-web-dev-build";
+let options = undefined; //TODO define options
+
+modernWebDevBuild.registerTasks(gulp, options);
 ```
+
+## Commands
+Once you have added the Modern Web Dev Build to your project, you can list all the available commands using `gulp help`.
+The command will give you a description of each task. The most important to start discovering are:
+* gulp serve: start serving, watching files, transpiling, generating sourcemaps, etc
+* gulp clean
+* gulp ts-lint: check TypeScript code quality/style
+* gulp check-js-quality: check JavaScript code quality
+* gulp check-js-style: check JavaScript code style
 
 You can run the `gulp -T` command to see the list of available tasks. Check the commands section below for more details about the available tasks.
 
-## Commands
-* ...
-
-## Building from source
-If you want to build from source, you need to:
-* install NodeJS
-* clone this git repository
-* go to the folder where you've cloned the project
-* ...
 
 ## Build dependencies
 * gulp: build system (https://www.npmjs.com/package/gulp)
@@ -103,21 +120,28 @@ If you want to build from source, you need to:
 * event-stream: construct pipes of streams of events: https://www.npmjs.com/package/event-stream
 * connect-history-api-fallback: useful to automatically redirect all non-existent directories to the index file; required for SPAs: https://www.npmjs.com/package/connect-history-api-fallback
 
-## Building from sources
-* clone the project
-* ...
+## Contributing
+* Fork the project
+* Create a feature branch in your fork
+* Rebase if needed to keep the project history clean
+* Commit your changes & push to GitHub
+* create a pull request :)
+
+## Building from source
+If you want to build from source, you need to:
+
+* install NodeJS and npm
+* clone this git repository
+* run `npm run setup`
+* run `npm run build`
+
+To clean, you can run `npm run clean`
 
 ## Project configuration files
 The project includes multiple configuration files. Here's some information about these:
 * gulpfile.babel.js: gulp's configuration file. This is where the build magic happens (more information: http://gulpjs.com/)
 * package.json: NPM's configuration file. This is where all dependencies are defined (more information: https://docs.npmjs.com/files/package.json)
 * npm-shrinkwrap.json: file created using npm shrinkwrap. Blocks dependency versions (including transitive ones), needed for build stability
-
-## Contributing
-* Fork the project
-* Create a feature branch in your fork
-* Commit your changes & push to GitHub
-* create a pull request :)
 
 ## Releasing a version
 * commit all changes to include in the release
