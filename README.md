@@ -45,7 +45,7 @@ As state above, some important technology choices are clearly embedded with this
 * [SystemJS](https://github.com/systemjs/systemjs): ES2015 module loader
 * [JSPM](http://jspm.io/) to manage your application dependencies (through jspm.conf.js)
 
-## Usage
+## Installation
 
 ### New projects
 The easiest approach to integrate this build is to use our Yeoman Generator available over at https://github.com/dsebastien/modernWebDevGenerator and on npm: https://www.npmjs.com/package/generator-modern-web-dev.
@@ -64,28 +64,42 @@ Next, check the minimal require file contents below!
 The build tries to provide a flexible structure, but given the technical choices that are embedded, some rules must be respected and the build expects certain folders and files to be present. In the future we'll see if we can make this more configurable.
 
 ### Mandatory folder structure & files
+Here's an overview of the structure imposed by ModernWebDevBuild.
+Note that if you've generated your project using the Yeoman generator, README files will be there to guide you.
+
+Please make sure to check the file organization section for more background about the organization and usage guidelines.
+
 * <project root>
   * app: folder containing all the files of the application
-    * folders
-      * TODO
-    * files
-      * TODO
+    * components: folder containing components of your application (e.g., login, menu, ...); basically reusable pieces
+    * core: folder containing at least the entrypoint of your application
+      * commons: folder containing common reusable code (e.g., base utilities)
+      * services: folder containing generic services (e.g., for local storage)
+      * core.bootstrap.ts: the entrypoint of your application
+    * fonts: folder containing fonts of your application (if any)
+    * images: folder for image assets
+    * pages: folder for full-blown pages of your application
+    * scripts: folder for scripts
+    * styles: folder for the main stylesheets
+      * main.scss: file used to import all application-specific stylesheets
+      * vendor.scss: file used to import all third-party stylesheets
+      * note that the goal isn't to put ALL your stylesheets in there, basically just the entrypoints and the generic parts (e.g., variables, mixins, responsive styles, ...)
+    * index.html: the entrypoint of your application
   * typings: folder containing all type definitions
-  * files
-    * .jscsrc: JSCS rule set to use while checking JavaScript code style
-      * reference: http://jscs.info/overview
-    * .jshintrc: JSHint rule set to use while checking JavaScript code quality
-      * reference: http://jshint.com/docs/
-      * note that the file is actually optional but indeed recommended!
-    * .jshintignore: files and folders to ignore while checking JavaScript code quality
-    * gulpfile.babel.js: gulp configuration file
-    * jspm.conf.js: JSPM configuration file
-    * package.json: NPM configuration file (also used by JSPM)
-    * tsconfig.json: TypeScript compiler configuration
-    * tsd.json: TypeScript Definitions configuration file (needed by tsd)
-    * tslint.json: TypeScript code quality/style rules
+  * .jscsrc: JSCS rule set to use while checking JavaScript code style
+    * reference: http://jscs.info/overview
+  * .jshintrc: JSHint rule set to use while checking JavaScript code quality
+    * reference: http://jshint.com/docs/
+    * note that the file is actually optional but indeed recommended!
+  * .jshintignore: files and folders to ignore while checking JavaScript code quality
+  * gulpfile.babel.js: gulp configuration file
+  * jspm.conf.js: JSPM configuration file
+  * package.json: NPM configuration file (also used by JSPM)
+  * tsconfig.json: TypeScript compiler configuration
+  * tsd.json: TypeScript Definitions configuration file (needed by tsd)
+  * tslint.json: TypeScript code quality/style rules
 
-### Minimal required file contents
+### Minimal (build-related) required file contents
 Although we want to limit this list as much as possible, for everything to build successfully, some files need specific contents:
 
 #### gulpfile.babel.js
@@ -369,6 +383,8 @@ If you're unfamiliar with TypeScript typings, please refer to the official TypeS
 #### typings folder
 As explained in the previous section, the 'typings' folder is where all the types information will be stored, whether for third-party dependencies or for your own application's code.
 
+For a bit of background, you can check Dan [Walhin's post](http://weblogs.asp.net/dwahlin/creating-a-typescript-workflow-with-gulp) as this part of the built is based on it.
+
 Inside the typings folder, you must have the following files:
 * tsd.d.ts: will contain the list of all third-party dependencies typings currently in your project
 * typescriptApp.d.ts: will contain the list of TypeScript files in your project
@@ -404,7 +420,114 @@ Within your application code, you simply need to add the following lines to get 
 You only need to adapt the path depending on where your file stands in the hierarchy. The example above is what I currently use in 'app/core/core.bootstrap.ts'.
 
 
-#### TODO doc app folder files
+### Minimal (application-specific) required file contents
+Although we want to limit this list as much as possible, for everything to build successfully, some files need specific contents:
+
+#### core/core.bootstrap.ts
+The core.bootstrap.ts file is the entrypoint of your application. Currently, it is mandatory for this file to exist (with that specific name), although that could change or be customizable later.
+
+The contents are actually not important but here's a starting point:
+
+```
+///<reference path="../../typings/tsd.d.ts" />
+///<reference path="../../typings/typescriptApp.d.ts" />
+"format register"; // todo remove when the following issue is fixed: https://github.com/Microsoft/TypeScript/issues/3937
+"use strict";
+
+console.log("Hello world!");
+```
+
+#### styles/main.scss
+The main.scss file is where you should load all the stylesheets scattered around in your application.
+
+Here's an example of a main.scss:
+```
+//
+// Main stylesheet.
+// Should import all the other stylesheets
+//
+
+// Variables, functions, mixins and utils
+@import "base/variables";
+@import "base/functions";
+@import "base/mixins";
+@import "base/utils";
+
+// Base/generic style rules
+@import "base/reset";
+@import "base/responsive";
+@import "base/fonts";
+@import "base/typography";
+@import "base/base";
+
+// Layout
+@import "layout/layout";
+@import "layout/theme";
+@import "layout/print";
+
+// Components
+@import "../components/posts/posts";
+
+// Pages
+@import "../pages/home/home";
+```
+
+In the example above, you can see that in the main.scss file, we import many other stylesheets (sass partials).
+
+Here's another example, this time for vendor.scss:
+```
+//
+// Includes/imports all third-party stylesheets used throughout the application.
+// Should be loaded before the application stylesheets
+//
+
+// Nicolas Gallagher's Normalize.css
+@import '../../jspm_packages/github/necolas/normalize.css@3.0.3/normalize.css'; // the path refers to the file at BUILD time
+```
+
+As you can see above, a third-party stylesheet is imported.
+
+
+### index.html
+The index.html file is the entrypoint of your application. It is not mandatory per se for ModernWebDevBuild, but when you run `npm run serve`, it'll be opened. Also, the `html` build task will try and replace/inject content in it.
+
+Here's the minimal required contents for index.html (required for production builds with minification and bundling):
+
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	...
+	<!-- Stylesheets -->
+	<!-- build:css-vendor -->
+	<link rel="stylesheet" href="styles/vendor.css">
+	<!-- endbuild -->
+	<!-- build:css-bundle -->
+	<link rel="stylesheet" href="styles/main.css">
+	<!-- endbuild -->
+</head>
+<body>
+	
+	<!-- build:js-app -->
+	<!-- for production, this is all replaced by a minified bundle -->
+	<script src="jspm_packages/system.src.js"></script>
+	<script src="jspm.conf.js"></script>
+	<script>
+		System.import('core/core.bootstrap').catch(console.error.bind(console));
+	</script>
+	<!-- endbuild -->
+</body>
+</html>
+```
+
+In the above, the most important parts are:
+* for production, the contents of `<!-- build:css-vendor --> ... <!-- endbuild -->` will be replaced by the vendor bundle created by the build
+* for production, the contents of `<!-- build:css-bundle --> ... <!-- endbuild -->` will be replaced by the application's CSS bundle created by the build
+* for production, the contents of `<!-- build:js-app --> ... <!-- endbuild -->` will be replaced by the application's JS bundle created by the build
+
+Also, note that during development, SystemJS is loaded (system.src.js), the JSPM configuration is loaded (jspm.conf.js) and SystemJS is used to load the entrypoint of the application (core/core.bootstrap). 
+
 
 ## Commands
 Once you have added ModernWebDevBuild to your project, you can list all the available commands using `gulp help`.
@@ -416,6 +539,10 @@ The command will give you a description of each task. The most important to star
 * gulp check-js-style: check JavaScript code style
 
 You can run the `gulp -T` command get an visual idea of the links between the different tasks.
+
+
+## File organization
+TODO
 
 
 ## Build dependencies

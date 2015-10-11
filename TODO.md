@@ -1,4 +1,9 @@
 * switch back to TypeScript 1.7 beta/nightly
+* fill-in File organization section
+  * how to organize app code and components
+  * distinction between components and pages
+  * how to distributes styles around (component-based approach)
+  * sass partials & import
 * review: https://github.com/areusjs/load-common-gulp-tasks
   * eval possibility to reuse
 * remove as much as possible from package.json
@@ -10,22 +15,10 @@
   * examples: npm run scripts in midnightLightV2
   * look at the 'bin' property in package.json: https://docs.npmjs.com/files/package.json
   * these could be added as 'facade' tasks to the gulp tasks
-* what to do/recommend regarding the following files?
-  * test behavior if absent:
-  * tsconfig.json
-  * .jscsrc
-  * .jshintrc
-  * .jshintignore
-  * tslint.json
-  * ...
-* complete the readme
-  * required folder structure
-  * required files & file content
 * add tests
 * refactor build to concat paths using  path.join()
 * add Docker support
 * add Makefile
-* add shields: http://shields.io/
 * add support for passing options
   * override default values
   * customize behavior (e.g., logging)
@@ -33,3 +26,4 @@
 * add npm shrinkwrap
 * make TypeScript optional
 * make SystemJS/JSPM optional (quid bundling)
+* add shields: http://shields.io/
