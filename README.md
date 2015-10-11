@@ -41,9 +41,10 @@ Check out the current [TODO list](TODO.md)
 ## Embedded choices
 As state above, some important technology choices are clearly embedded with this project. Here's a rundown of those choices:
 * [TypeScript](http://www.typescriptlang.org/) and ES2015 (although the final output is ES5 for wider compatibility)
-* [SASS](http://sass-lang.com/): who doesnn't want variables and mixins?
 * [SystemJS](https://github.com/systemjs/systemjs): ES2015 module loader
 * [JSPM](http://jspm.io/) to manage your application dependencies (through jspm.conf.js)
+* [SASS](http://sass-lang.com/): who doesn't want variables and mixins?
+* component based code & assets organization (Angular friendly)
 
 ## Installation
 
