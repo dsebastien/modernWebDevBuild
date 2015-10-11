@@ -1,11 +1,11 @@
 # Modern Web Dev Build
 
-[![License](https://img.shields.io/cocoapods/l/AFNetworking.svg)](LICENSE.MD)
 [![Build Status](https://secure.travis-ci.org/dsebastien/modernWebDevBuild.png?branch=master)](https://travis-ci.org/dsebastien/modernWebDevBuild)
 [![Coverage Status](https://img.shields.io/coveralls/dsebastien/modernWebDevBuild.svg?style=flat)](https://coveralls.io/r/dsebastien/modernWebDevBuild?branch=master)
 [![Dependency Status](https://david-dm.org/dsebastien/modernWebDevBuild.svg?theme=shields.io&style=flat)](https://david-dm.org/dsebastien/modernWebDevBuild)
 [![devDependency Status](https://david-dm.org/dsebastien/modernWebDevBuild/dev-status.svg?theme=shields.io&style=flat)](https://david-dm.org/dsebastien/modernWebDevBuild#info=devDependencies)
 [![Gitter](https://img.shields.io/badge/gitter-join%20chat-green.svg?style=flat)](https://gitter.im/dsebastien/modernWebDevBuild?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![License](https://img.shields.io/cocoapods/l/AFNetworking.svg)](LICENSE.MD)
 
 ## About
 ModernWebDevBuild is a project aiming to provide a modern build for Web development, letting you easily integrate ES2015, TypeScript, SASS, code quality & style checking, testing, minification, bundling and whatnot in your projects.
@@ -28,6 +28,10 @@ This project is available as an npm package: https://www.npmjs.com/package/moder
   * check JavaScript/TypeScript code style and report on the console (without breaking the build)
   * ...
 * easily create a production build with minification & bundling
+  * CSS optimization & minification
+  * JS minification
+  * HTML minification
+  * images optimization
 * ...
 
 ## Status & roadmap
@@ -37,6 +41,7 @@ Check out the current [TODO list](TODO.md)
 
 ### New projects
 The easiest approach to integrate this build is to use our Yeoman Generator available over at https://github.com/dsebastien/modernWebDevGenerator and on npm: https://www.npmjs.com/package/generator-modern-web-dev.
+The generator will set up everything for you.
 
 ### Existing projects
 First configure the required dependencies in your package.json file:
@@ -56,6 +61,15 @@ let options = undefined; //TODO define options
 
 modernWebDevBuild.registerTasks(gulp, options);
 ```
+
+## Required folder structure and files
+The build tries to provide a flexible structure, but given the technical choices that are embedded, some rules must be respected and the build expects certain folders and files to be present. In the future we'll see if we can make this more configurable.
+
+Mandatory folder structure:
+
+. (project root)
+ root
+	
 
 ## Commands
 Once you have added the Modern Web Dev Build to your project, you can list all the available commands using `gulp help`.
@@ -84,7 +98,6 @@ You can run the `gulp -T` command to see the list of available tasks. Check the 
 * gulp-if: conditionally run a task: https://www.npmjs.com/package/gulp-if
 * gulp-imagemin: minify png, jpeg, gif and svg images: https://www.npmjs.com/package/gulp-imagemin
 * gulp-jshint: JavaScript code quality checker plugin for gulp that uses JSHint: https://www.npmjs.com/package/gulp-jshint
-* gulp-load-plugins: automatically load any gulp plugins defined in package.json: https://www.npmjs.com/package/gulp-load-plugins
 * gulp-minify-html: minify html with minimize: https://www.npmjs.com/package/gulp-minify-html
 * gulp-minify-css: minify css with clean-css: https://www.npmjs.com/package/gulp-minify-css
 * gulp-replace: string replace plugin for gulp: https://www.npmjs.com/package/gulp-replace

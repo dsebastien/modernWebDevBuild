@@ -18,6 +18,8 @@
 ** tslint.json
 ** ...
 * complete the readme
+** required folder structure
+** required files & file content
 ** feature list
 ** how to integrate in a project
 ** commands list

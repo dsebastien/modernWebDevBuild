@@ -7,7 +7,7 @@ import changed from "gulp-changed";
 import babel from "gulp-babel";
 //import iff from "gulp-if";
 import size from "gulp-size";
-import debug from "gulp-debug";
+//import debug from "gulp-debug";
 
 import config from "../config";
 import utils from "../utils";
