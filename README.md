@@ -23,6 +23,7 @@ This project is available as an npm package: https://www.npmjs.com/package/moder
 ## Features
 * watch source files & assets while serving your application and automatically:
   * transpile TypeScript > ES2015 > ES5 w/ sourcemaps
+    * the reasoning behind this chain is that (at the moment), Babel is better than TypeScript for ES5 generation (e.g., it supports async/await)
   * transpile SASS > CSS w/ sourcemaps
   * check JavaScript/TypeScript code quality and report on the console (without breaking the build)
   * check JavaScript/TypeScript code style and report on the console (without breaking the build)
@@ -37,6 +38,13 @@ This project is available as an npm package: https://www.npmjs.com/package/moder
 ## Status & roadmap
 Check out the current [TODO list](TODO.md)
 
+## Embedded choices
+As state above, some important technology choices are clearly embedded with this project. Here's a rundown of those choices:
+* [TypeScript](http://www.typescriptlang.org/) and ES2015 (although the final output is ES5 for wider compatibility)
+* [SASS](http://sass-lang.com/): who doesnn't want variables and mixins?
+* [SystemJS](https://github.com/systemjs/systemjs): ES2015 module loader
+* [JSPM](http://jspm.io/) to manage your application dependencies (through jspm.conf.js)
+
 ## Usage
 
 ### New projects
@@ -45,11 +53,45 @@ The generator will set up everything for you.
 
 ### Existing projects
 First configure the required dependencies in your package.json file:
-* add modern-web-dev-build in your devDependencies section
-* ensure that you also have gulp in your devDependencies section
-* (optional) also add babel/babel-core
+* add Modern Web Dev Build to your devDependencies: `npm install modern-web-dev-build --save-dev`
+* ensure that you also have gulp in your devDependencies: `npm install gulp --save-dev`
+* ensure that you also have JSPM in your devDependencies: `npm install jspm --save-dev`
+* (optional) also add babel/babel-core (if not present, you'll just get a warning)
 
-Next, create or edit your gulpfile.babel.js file (or gulpfile.js if you're still using ES5). To leverage the Modern Web Dev Build, you only need the following:
+Next, check the minimal require file contents below!
+
+## Required folder structure and files
+The build tries to provide a flexible structure, but given the technical choices that are embedded, some rules must be respected and the build expects certain folders and files to be present. In the future we'll see if we can make this more configurable.
+
+### Mandatory folder structure & files
+* <project root>
+  * app: folder containing all the files of the application
+    * folders
+      * TODO
+    * files
+      * TODO
+  * typings: folder containing all type definitions
+  * files
+    * .jscsrc: JSCS rule set to use while checking JavaScript code style
+      * reference: http://jscs.info/overview
+    * .jshintrc: JSHint rule set to use while checking JavaScript code quality
+      * reference: http://jshint.com/docs/
+      * note that the file is actually optional but indeed recommended!
+    * .jshintignore: files and folders to ignore while checking JavaScript code quality
+    * gulpfile.babel.js: gulp configuration file
+    * jspm.conf.js: JSPM configuration file
+    * package.json: NPM configuration file (also used by JSPM)
+    * tsconfig.json: TypeScript compiler configuration
+    * tsd.json: TypeScript Definitions configuration file (needed by tsd)
+    * tslint.json: TypeScript code quality/style rules
+
+### Minimal required file contents
+Although we want to limit this list as much as possible, for everything to build successfully, some files need specific contents:
+
+#### gulpfile.babel.js
+In order to use ModernWebDevBuild, your gulpfile must at least contain the following.
+The code below uses ES2015 (via gulpfile.babel.js), but if you're old school you can also simply use a gulpfile.js with ES5.
+Note that the build tasks provided by ModernWebDevBuild are transpiled to ES5 before being published
 
 ```
 "use strict";
@@ -57,22 +99,315 @@ Next, create or edit your gulpfile.babel.js file (or gulpfile.js if you're still
 import gulp from "gulp";
 
 import modernWebDevBuild from "modern-web-dev-build";
-let options = undefined; //TODO define options
+let options = undefined; // no options are supported yet
 
 modernWebDevBuild.registerTasks(gulp, options);
 ```
 
-## Required folder structure and files
-The build tries to provide a flexible structure, but given the technical choices that are embedded, some rules must be respected and the build expects certain folders and files to be present. In the future we'll see if we can make this more configurable.
+With the above, all the gulp tasks provided by ModernWebDevBuild will be available to you.
 
-Mandatory folder structure:
+#### .jscsrc
+Valid configuration
 
-. (project root)
- root
-	
+#### .jshintrc
+At least the following:
+
+```
+node_modules/**/*
+jspm_packages/**/*
+jspm.conf.js
+dist/**/*
+.tmp/**/*
+```
+
+#### jspm.conf.js
+The JSPM configuration file plays a very important role;
+* it is where all your actual application dependencies are to be defined
+* it is where you can define your own 'paths', allowing you to load modules of your application easily
+
+You'll use JSPM to add dependencies to your project, simply with `jspm install`; check the [official JSPM documentation](http://jspm.io/) to know more about how to install packages.
+
+With the help of the JSPM configuration file, SystemJS will be able to load your own application modules and well as third party dependencies.
+In your code, you'll be able to use `import x from "y"`. In order for this to work, you'll also need to load SystemJS and the JSPM configuration file in your index.html (more on this afterwards).
+
+```
+System.config({
+  baseURL: "./",
+  defaultJSExtensions: true,
+  transpiler: "none",
+  paths: {
+    "github:*": "jspm_packages/github/*",
+    "npm:*": "jspm_packages/npm/*",
+    "core/*": "./.tmp/core/*",
+    "components/*": "./.tmp/components/*",
+    "pages/*": "./.tmp/pages/*"
+  }
+});
+```
+
+In the above:
+* baseURL: is mandatory otherwise modules will not be loaded correctly
+* defaultJSExtensions: is mandatory so that extensions don't have to be specified when importing modules
+* transpiler: is set to 'none' because we don't use in-browser transpilation
+* paths
+  * core/*, components/* and pages/* allow you to import modules from different parts of your codebase. This is covered in the folder structure section above.
+  * you can rename those if you really need to, but it might break the build.. :)
+
+#### package.json
+In addition to the dependencies listed previously, you also need to have the following in your package.json file:
+
+```
+  "jspm": {
+    "directories": {},
+    "configFile": "jspm.conf.js",
+    "dependencies": {
+    },
+    "devDependencies: {
+    }
+  }
+```
+
+This is where you let JSPM know where to save the information about dependencies you install. This is also where you can easily add new dependencies; for example: `"angular2": "npm:angular2@^2.0.0-alpha.39",`. Once a dependency is added there, you can invoke `jspm install` to get the files and transitive dependencies installed.
+
+#### tsconfig.json
+Given that TypeScript is one of the (currently) embedded choices of this project, the TypeScript configuration file is mandatory.
+
+The tsconfig.json file contains:
+* the configuration of the TypeScript compiler (e.g., target ES2015)
+* TypeScript code style rules
+* the list of files/folders to include/exclude
+
+Here's is the minimal required contents for ModernWebDevBuild:
+
+```
+{
+  "version": "1.7.0",
+  "compilerOptions": {
+	"target": "es6",
+	"declaration": false,
+	"noImplicitAny": false,
+	"removeComments": true,
+	"noLib": false,
+	"emitDecoratorMetadata": true,
+	"experimentalDecorators": true,
+	"experimentalAsyncFunctions": true,
+	"noResolve": true,
+	"noEmitOnError": false,
+	"preserveConstEnums": true,
+	"inlineSources": false,
+	"sourceMap": false,
+	"outDir": "./app",
+	"project": "./app"
+  },
+  "filesGlob": [
+	"./app/**/*.ts"
+  ],
+  "exclude": [
+	"node_modules",
+	"jspm_packages"
+  ]
+}
+```
+
+Here's a more complete example including code style rules: 
+
+```
+{
+  "version": "1.7.0",
+  "compilerOptions": {
+	"target": "es6",
+	"declaration": false,
+	"noImplicitAny": false,
+	"removeComments": true,
+	"noLib": false,
+	"emitDecoratorMetadata": true,
+	"experimentalDecorators": true,
+	"experimentalAsyncFunctions": true,
+	"noResolve": true,
+	"noEmitOnError": false,
+	"preserveConstEnums": true,
+	"inlineSources": false,
+	"sourceMap": false,
+	"outDir": "./app",
+	"project": "./app"
+  },
+  "formatCodeOptions": {
+	"indentSize": 2,
+	"tabSize": 4,
+	"newLineCharacter": "\r\n",
+	"convertTabsToSpaces": false,
+	"insertSpaceAfterCommaDelimiter": true,
+	"insertSpaceAfterSemicolonInForStatements": true,
+	"insertSpaceBeforeAndAfterBinaryOperators": true,
+	"insertSpaceAfterKeywordsInControlFlowStatements": true,
+	"insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
+	"insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
+	"placeOpenBraceOnNewLineForFunctions": false,
+	"placeOpenBraceOnNewLineForControlBlocks": false
+  },
+  "filesGlob": [
+	"./app/**/*.ts"
+  ],
+  "exclude": [
+	"node_modules",
+	"jspm_packages"
+  ]
+}
+```
+
+#### tsd.json
+The tsd.json file is the TypeScript definition (tsd) configuration file. It contains the list of TypeScript typings to install when invokind tsd, as well as the bundling information.
+This configuration is not used directly as part of the build but necessary when you want to update your typings file and re-generate the third party typings bundle (more on this later).
+
+This goes in tandem with the 'typings' folder and its contents.
+
+Here's the minimal required contents for tsd.json:
+
+```
+{
+	"version": "v4",
+	"repo": "borisyankov/DefinitelyTyped",
+	"ref": "master",
+	"path": "typings",
+	"bundle": "typings/tsd.d.ts",
+	"installed": {
+	}
+}
+```
+
+Basically, the file above:
+* states that all typings should be stored in the 'typings' folder
+* states that all typings should be bundled in 'typings/tsd.d.ts'
+
+If you want to add typings for third-party libraries in your project, you can add entries to the 'installed' object. For example you would add the folllowing for jQuery:
+
+```
+{
+	"version": "v4",
+	"repo": "borisyankov/DefinitelyTyped",
+	"ref": "master",
+	"path": "typings",
+	"bundle": "typings/tsd.d.ts",
+	"installed": {
+		"jquery/jquery.d.ts": {
+			"commit": "40d7a3e0b4f615f16dd557cdfc0d535ddc623057"
+		},
+	}
+}
+```
+
+You can find the typings files path & commit hash [in there](https://github.com/borisyankov/DefinitelyTyped).
+For more information about DefinitelyTyped, check the [official site](http://definitelytyped.org/).
+
+
+#### tslint.json
+tslint.json is the configuration file for [TS Lint](https://www.npmjs.com/package/tslint).
+
+Although not strictly mandatory (the build will work without this file), we heavily recommend you to use it as it is very useful to ensure a minimal code quality level and can help you avoid common mistakes and unnecessary complicated code:
+
+Here's an example:
+```
+{
+  "rules": {
+	"class-name": true,
+	"curly": true,
+	"eofline": true,
+	"forin": true,
+	"indent": [false, "tabs"],
+	"interface-name": false,
+	"label-position": true,
+	"label-undefined": true,
+	"max-line-length": false,
+	"no-any": false,
+	"no-arg": true,
+	"no-bitwise": true,
+	"no-console": [false,
+	  "debug",
+	  "info",
+	  "time",
+	  "timeEnd",
+	  "trace"
+	],
+	"no-construct": true,
+	"no-debugger": true,
+	"no-duplicate-key": true,
+	"no-duplicate-variable": true,
+	"no-empty": true,
+	"no-eval": true,
+	"no-imports": true,
+	"no-string-literal": false,
+	"no-trailing-comma": true,
+	"no-unused-variable": false,
+	"no-unreachable": true,
+	"no-use-before-declare": null,
+	"one-line": [true,
+	  "check-open-brace",
+	  "check-catch",
+	  "check-else",
+	  "check-whitespace"
+	],
+	"quotemark": [true, "double"],
+	"radix": true,
+	"semicolon": true,
+	"triple-equals": [true, "allow-null-check"],
+	"variable-name": false,
+	"no-trailing-whitespace": true,
+	"whitespace": [false,
+	  "check-branch",
+	  "check-decl",
+	  "check-operator",
+	  "check-separator",
+	  "check-type",
+	  "check-typecast"
+	]
+  }
+}
+```
+
+If you're unfamiliar with TypeScript typings, please refer to the official TypeScript documentation but basically, know that Typings provide the magic necessary to let your IDE/editor know about the types.
+
+#### typings folder
+As explained in the previous section, the 'typings' folder is where all the types information will be stored, whether for third-party dependencies or for your own application's code.
+
+Inside the typings folder, you must have the following files:
+* tsd.d.ts: will contain the list of all third-party dependencies typings currently in your project
+* typescriptApp.d.ts: will contain the list of TypeScript files in your project
+
+The contents of these files will be completely managed by tsd and by ModernWebDevBuild.
+
+Nevertheless, you need the following contents in 'typescriptApp.d.ts' to let the build work as expected.
+
+typescriptApp.d.ts:
+```
+//{
+
+//}
+```
+
+With that in place, the build will be able to insert the references as needed. For example if you only have the default entrypoint required by ModernWebDevBuild (app/core/core.bootstrap.ts), then it will look like this: 
+
+```
+//{
+
+/// <reference path="../app/core/core.bootstrap.ts" />
+
+//}
+```
+
+Within your application code, you simply need to add the following lines to get your IDE/editor to know about all the types (third-party & your own):
+
+```
+///<reference path="../../typings/tsd.d.ts" />
+///<reference path="../../typings/typescriptApp.d.ts" />
+```
+
+You only need to adapt the path depending on where your file stands in the hierarchy. The example above is what I currently use in 'app/core/core.bootstrap.ts'.
+
+
+#### TODO doc app folder files
 
 ## Commands
-Once you have added the Modern Web Dev Build to your project, you can list all the available commands using `gulp help`.
+Once you have added ModernWebDevBuild to your project, you can list all the available commands using `gulp help`.
 The command will give you a description of each task. The most important to start discovering are:
 * gulp serve: start serving, watching files, transpiling, generating sourcemaps, etc
 * gulp clean
@@ -80,7 +415,7 @@ The command will give you a description of each task. The most important to star
 * gulp check-js-quality: check JavaScript code quality
 * gulp check-js-style: check JavaScript code style
 
-You can run the `gulp -T` command to see the list of available tasks. Check the commands section below for more details about the available tasks.
+You can run the `gulp -T` command get an visual idea of the links between the different tasks.
 
 
 ## Build dependencies

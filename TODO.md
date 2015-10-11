@@ -1,3 +1,4 @@
+* switch back to TypeScript 1.7 beta/nightly
 * review: https://github.com/areusjs/load-common-gulp-tasks
   * eval possibility to reuse
 * remove as much as possible from package.json
@@ -5,29 +6,21 @@
 * remove devDependencies if not necessary (duplication with dependencies)
 * provide a way for client projects to override some parts of the configuration
 * reusable build scripts
-** implement a solution to make useful scripts reusable
-** examples: npm run scripts in midnightLightV2
-** look at the 'bin' property in package.json: https://docs.npmjs.com/files/package.json
-** these could be added as 'facade' tasks to the gulp tasks
+  * implement a solution to make useful scripts reusable
+  * examples: npm run scripts in midnightLightV2
+  * look at the 'bin' property in package.json: https://docs.npmjs.com/files/package.json
+  * these could be added as 'facade' tasks to the gulp tasks
 * what to do/recommend regarding the following files?
-** test behavior if absent:
-** tsconfig.json
-** .jscsrc
-** .jshintrc
-** .jshintignore
-** tslint.json
-** ...
+  * test behavior if absent:
+  * tsconfig.json
+  * .jscsrc
+  * .jshintrc
+  * .jshintignore
+  * tslint.json
+  * ...
 * complete the readme
-** required folder structure
-** required files & file content
-** feature list
-** how to integrate in a project
-** commands list
-** how to release/deploy a version on npm & git
-*** npm version patch|minor|major -m 'Bumped to %s' (git commit + git tag)
-*** git push / git push --tags
-*** adapt version info (description etc) in GitHub)
-*** npm publish
+  * required folder structure
+  * required files & file content
 * add tests
 * refactor build to concat paths using  path.join()
 * add Docker support
@@ -38,4 +31,5 @@
   * customize behavior (e.g., logging)
 * refactor own build to mimic the task loading mechanism & reuse code
 * add npm shrinkwrap
-* remove gulp-load-plugins (prefer explicit loading)
+* make TypeScript optional
+* make SystemJS/JSPM optional (quid bundling)

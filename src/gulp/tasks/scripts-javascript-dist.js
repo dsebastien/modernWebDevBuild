@@ -36,37 +36,6 @@ class ScriptsJavaScriptDistTaskLoader extends AbstractTaskLoader {
 					//config: {sourceRoot: "."}
 				}
 			);
-
-			// Alternative
-			// Reference: https://www.npmjs.com/package/systemjs-builder
-			//let Builder = require("systemjs-builder");
-			//let builder = new Builder();
-			//
-			//return builder.loadConfig(config.files.jspmConfigFile)
-			//	.then(function() {
-			//		builder.buildSFX(
-			//			config.javascript.srcDist,
-			//			config.javascript.destDist,{
-			//				sourceMaps: false,
-			//				lowResSourceMaps: false, // can speed up generation
-			//				minify: false,
-			//				mangle: false,
-			//				//sfxFormat: "amd", // to output the SFX bundle in the AMD module format
-			//				// runtime: false, // to exclude the Traceur or Babel runtime
-			//				globalDefs: {
-			//					DEBUG: true
-			//				},
-			//				//config: {sourceRoot: "./tmp"}
-			//			}
-			//		)
-			//		.then(function() {
-			//			return cb();
-			//		})
-			//		.catch(function(ex) {
-			//			cb(new Error(ex));
-			//		});
-			//	}
-			//);
 		});
 	}
 }
