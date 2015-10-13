@@ -625,6 +625,8 @@ You can run the `gulp -T` command get an visual idea of the links between the di
 ## Building from source
 If you want to build from source, you need to:
 * install NodeJS and npm
+* install gulp: `npm install --global gulp`
+* install babel: `npm install --global babel`
 * clone this git repository
 * run `npm run setup`
 * run `npm run build`

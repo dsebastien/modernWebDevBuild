@@ -1,4 +1,4 @@
-* add support for ES2015 as alternative to TS
+* add support for ES2015 AND TypeScript
 * fill-in File organization section
   * how to organize app code and components
   * distinction between components and pages
@@ -6,9 +6,6 @@
   * sass partials & import
 * review: https://github.com/areusjs/load-common-gulp-tasks
   * eval possibility to reuse
-* remove as much as possible from package.json
-* ensure correct split between devDependencies and dependencies
-* remove devDependencies if not necessary (duplication with dependencies)
 * provide a way for client projects to override some parts of the configuration
 * reusable build scripts
   * implement a solution to make useful scripts reusable
