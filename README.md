@@ -8,28 +8,47 @@
 [![License](https://img.shields.io/cocoapods/l/AFNetworking.svg)](LICENSE.MD)
 
 ## About
-ModernWebDevBuild is a project aiming to provide a modern build for Web development, letting you easily integrate ES2015, TypeScript, SASS, code quality & style checking, testing, minification, bundling and whatnot in your projects.
+A modern build for Web development.
 
-The goal is to abstract as much of the build process as possible so that Web development projects can reuse this build to quickly get started without having to dive too deep in the boring details of how to setup a proper build chain that takes care of transpiling, minifying, optimizing images and whatnot.
+Get started and use ES2015, TypeScript, SASS, code quality & style checking, testing, minification, bundling and whatnot TODAY! :)
 
-This project is very opiniated and the goal is not to provide many options for many different needs. Rather, technology choices are embedded. Although, the build is pretty flexible about code/assets organization (to some extent). Over time, it'll be interesting to see how customizable we can make this thing.
+ModernWebDevBuild abstracts away all the build pipeline boilerplate. Use it if you're not willing to dive too deep in the boring details of how to setup a proper build chain that takes care of transpiling, minifying, optimizing images and whatnot for production.
+
+This project is very opiniated and technology choices are embedded. Although, the build is pretty flexible about code/assets organization (to some extent). Over time, it'll be interesting to see how customizable we can make this thing.
+
+*WARNING*: For now, only TypeScript can be used in the project code (everything under app). This might change in the future.
 
 The provided build tasks are based on [Gulp](http://gulpjs.com/). Instructions are available below to get you started.
 
-The idea for this project emerged as I was rediscovering the state of the art for Web development. What surprised me is that tooling is now so much more complex than it was in the past (I would argue that it is way too complex nowadays and that isn't good for the accessibility of the platform itself). Unfortunately for now, there aren't many alternatives and the benefits of a good build chain are too important to keep aside.
-
 This project is available as an npm package: https://www.npmjs.com/package/modern-web-dev-build
 
+## Background
+
+The idea for this project emerged as I was rediscovering the state of the art for Web development (early 2015) and from my frustration of not finding everything I needed in a ready-to-use form.
+
+What surprised me at first was that tooling had become so much more complex than it was in the past. I would argue that it is way too complex nowadays and that isn't good for the accessibility of the Web platform. Unfortunately for now, there aren't many alternatives and the benefits of a good build chain are too important to keep aside (who wouldn't want to use all the good stuff ES2015 has brought us?).
+
+Note that this project is heavily inspired from:
+* Google's [Web Starter Kit](https://github.com/google/web-starter-kit)
+* Countless blog articles
+  * [Dan Walhin](https://twitter.com/DanWahlin)'s TypeScript posts & course)
+	* [Introduction to TypeScript](https://www.edx.org/course/introduction-typescript-microsoft-dev201x-0)
+  * A gazillion Gulp articles
+* Many others I'm forgetting :(
+
 ## Features
-* watch source files & assets while serving your application and automatically:
-  * transpile TypeScript > ES2015 > ES5 w/ sourcemaps
-    * the reasoning behind this chain is that (at the moment), Babel is better than TypeScript for ES5 generation (e.g., it supports async/await)
-  * transpile SASS > CSS w/ sourcemaps
-  * check JavaScript/TypeScript code quality and report on the console (without breaking the build)
-  * check JavaScript/TypeScript code style and report on the console (without breaking the build)
+* ES2015 and TypeScript support
+* built-in HTTP server with live reloading & cross-device synchronization
+* awesome developer experience with a change detection mechanism that automagically:
+  * transpiles TypeScript > ES2015 > ES5 w/ sourcemaps
+	* the reasoning behind this chain is that (at the moment), Babel is better than TypeScript for ES5 generation (e.g., it supports async/await)
+  * transpiles SASS > CSS w/ sourcemaps
+  * checks JavaScript/TypeScript code quality/style and report on the console (without breaking the build)
   * ...
-* easily create a production build with minification & bundling
+* production bundle creation support with:
+  * CSS bundle creation
   * CSS optimization & minification
+  * JS bundle creation
   * JS minification
   * HTML minification
   * images optimization
@@ -45,6 +64,10 @@ As state above, some important technology choices are clearly embedded with this
 * [JSPM](http://jspm.io/) to manage your application dependencies (through jspm.conf.js)
 * [SASS](http://sass-lang.com/): who doesn't want variables and mixins?
 * component based code & assets organization (Angular friendly)
+* [JSCS](http://jscs.info/) and included code style rules
+* [JSHint](http://jshint.com/) and included code quality rules
+* [TSLint](https://github.com/palantir/tslint) and included code quality/style rules
+* [BrowserSync](http://www.browsersync.io/) development Web Server
 
 ## Installation
 
@@ -72,26 +95,26 @@ Please make sure to check the file organization section for more background abou
 
 * <project root>
   * app: folder containing all the files of the application
-    * components: folder containing components of your application (e.g., login, menu, ...); basically reusable pieces
-    * core: folder containing at least the entrypoint of your application
-      * commons: folder containing common reusable code (e.g., base utilities)
-      * services: folder containing generic services (e.g., for local storage)
-      * core.bootstrap.ts: the entrypoint of your application
-    * fonts: folder containing fonts of your application (if any)
-    * images: folder for image assets
-    * pages: folder for full-blown pages of your application
-    * scripts: folder for scripts
-    * styles: folder for the main stylesheets
-      * main.scss: file used to import all application-specific stylesheets
-      * vendor.scss: file used to import all third-party stylesheets
-      * note that the goal isn't to put ALL your stylesheets in there, basically just the entrypoints and the generic parts (e.g., variables, mixins, responsive styles, ...)
-    * index.html: the entrypoint of your application
+	* components: folder containing components of your application (e.g., login, menu, ...); basically reusable pieces
+	* core: folder containing at least the entrypoint of your application
+	  * commons: folder containing common reusable code (e.g., base utilities)
+	  * services: folder containing generic services (e.g., for local storage)
+	  * core.bootstrap.ts: the entrypoint of your application
+	* fonts: folder containing fonts of your application (if any)
+	* images: folder for image assets
+	* pages: folder for full-blown pages of your application
+	* scripts: folder for scripts
+	* styles: folder for the main stylesheets
+	  * main.scss: file used to import all application-specific stylesheets
+	  * vendor.scss: file used to import all third-party stylesheets
+	  * note that the goal isn't to put ALL your stylesheets in there, basically just the entrypoints and the generic parts (e.g., variables, mixins, responsive styles, ...)
+	* index.html: the entrypoint of your application
   * typings: folder containing all type definitions
   * .jscsrc: JSCS rule set to use while checking JavaScript code style
-    * reference: http://jscs.info/overview
+	* reference: http://jscs.info/overview
   * .jshintrc: JSHint rule set to use while checking JavaScript code quality
-    * reference: http://jshint.com/docs/
-    * note that the file is actually optional but indeed recommended!
+	* reference: http://jshint.com/docs/
+	* note that the file is actually optional but indeed recommended!
   * .jshintignore: files and folders to ignore while checking JavaScript code quality
   * gulpfile.babel.js: gulp configuration file
   * jspm.conf.js: JSPM configuration file
@@ -151,11 +174,11 @@ System.config({
   defaultJSExtensions: true,
   transpiler: "none",
   paths: {
-    "github:*": "jspm_packages/github/*",
-    "npm:*": "jspm_packages/npm/*",
-    "core/*": "./.tmp/core/*",
-    "components/*": "./.tmp/components/*",
-    "pages/*": "./.tmp/pages/*"
+	"github:*": "jspm_packages/github/*",
+	"npm:*": "jspm_packages/npm/*",
+	"core/*": "./.tmp/core/*",
+	"components/*": "./.tmp/components/*",
+	"pages/*": "./.tmp/pages/*"
   }
 });
 ```
@@ -173,12 +196,12 @@ In addition to the dependencies listed previously, you also need to have the fol
 
 ```
   "jspm": {
-    "directories": {},
-    "configFile": "jspm.conf.js",
-    "dependencies": {
-    },
-    "devDependencies: {
-    }
+	"directories": {},
+	"configFile": "jspm.conf.js",
+	"dependencies": {
+	},
+	"devDependencies: {
+	}
   }
 ```
 
@@ -224,7 +247,7 @@ Here's is the minimal required contents for ModernWebDevBuild:
 }
 ```
 
-Here's a more complete example including code style rules: 
+Here's a more complete example including code style rules:
 
 ```
 {
@@ -316,7 +339,7 @@ For more information about DefinitelyTyped, check the [official site](http://def
 
 
 #### tslint.json
-tslint.json is the configuration file for [TS Lint](https://www.npmjs.com/package/tslint).
+tslint.json is the configuration file for [TSLint](https://github.com/palantir/tslint).
 
 Although not strictly mandatory (the build will work without this file), we heavily recommend you to use it as it is very useful to ensure a minimal code quality level and can help you avoid common mistakes and unnecessary complicated code:
 
@@ -401,7 +424,7 @@ typescriptApp.d.ts:
 //}
 ```
 
-With that in place, the build will be able to insert the references as needed. For example if you only have the default entrypoint required by ModernWebDevBuild (app/core/core.bootstrap.ts), then it will look like this: 
+With that in place, the build will be able to insert the references as needed. For example if you only have the default entrypoint required by ModernWebDevBuild (app/core/core.bootstrap.ts), then it will look like this:
 
 ```
 //{
@@ -509,7 +532,7 @@ Here's the minimal required contents for index.html (required for production bui
 	<!-- endbuild -->
 </head>
 <body>
-	
+
 	<!-- build:js-app -->
 	<!-- for production, this is all replaced by a minified bundle -->
 	<script src="jspm_packages/system.src.js"></script>
@@ -527,24 +550,20 @@ In the above, the most important parts are:
 * for production, the contents of `<!-- build:css-bundle --> ... <!-- endbuild -->` will be replaced by the application's CSS bundle created by the build
 * for production, the contents of `<!-- build:js-app --> ... <!-- endbuild -->` will be replaced by the application's JS bundle created by the build
 
-Also, note that during development, SystemJS is loaded (system.src.js), the JSPM configuration is loaded (jspm.conf.js) and SystemJS is used to load the entrypoint of the application (core/core.bootstrap). 
+Also, note that during development, SystemJS is loaded (system.src.js), the JSPM configuration is loaded (jspm.conf.js) and SystemJS is used to load the entrypoint of the application (core/core.bootstrap).
 
 
 ## Commands
 Once you have added ModernWebDevBuild to your project, you can list all the available commands using `gulp help`.
 The command will give you a description of each task. The most important to start discovering are:
-* gulp serve: start serving, watching files, transpiling, generating sourcemaps, etc
+* gulp serve: start a Web server with live reload, watching files, transpiling, generating sourcemaps, etc
+* gulp serve-dist: same with the production version
 * gulp clean
 * gulp ts-lint: check TypeScript code quality/style
 * gulp check-js-quality: check JavaScript code quality
 * gulp check-js-style: check JavaScript code style
 
 You can run the `gulp -T` command get an visual idea of the links between the different tasks.
-
-
-## File organization
-TODO
-
 
 ## Build dependencies
 * gulp: build system (https://www.npmjs.com/package/gulp)
@@ -601,15 +620,15 @@ TODO
 * Create a feature branch in your fork
 * Rebase if needed to keep the project history clean
 * Commit your changes & push to GitHub
-* create a pull request :)
+* Try and flood me with pull requests :)
 
 ## Building from source
 If you want to build from source, you need to:
-
 * install NodeJS and npm
 * clone this git repository
 * run `npm run setup`
 * run `npm run build`
+* * start hacking :)
 
 To clean, you can run `npm run clean`
 
@@ -632,9 +651,9 @@ The project includes multiple configuration files. Here's some information about
 
 ## Authors
 ### Sebastien Dubois
-* [@Blog](http://www.dsebastien.net)
-* [@Twitter](http://twitter.com/dSebastien)
-* [@GitHub](http://github.com/dSebastien)
+* [@Blog](https://www.dsebastien.net)
+* [@Twitter](https://twitter.com/dSebastien)
+* [@GitHub](https://github.com/dSebastien)
 
 ## License
-This project and all associated source code is licensed under the terms of the [MIT License](http://en.wikipedia.org/wiki/MIT_License).
+This project and all associated source code is licensed under the terms of the [MIT License](https://en.wikipedia.org/wiki/MIT_License).

@@ -1,4 +1,4 @@
-* switch back to TypeScript 1.7 beta/nightly
+* add support for ES2015 as alternative to TS
 * fill-in File organization section
   * how to organize app code and components
   * distinction between components and pages

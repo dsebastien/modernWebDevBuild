@@ -1,3 +1,5 @@
+* 0.0.8
+  * removed unnecessary package.json validation
 * 0.0.7
   * Fixed an npm publish issue (configured files and folders to include and exclude from the page)
 * 0.0.6
