@@ -73,14 +73,15 @@ As state above, some important technology choices are clearly embedded with this
 
 ### New projects
 The easiest approach to integrate this build is to use our Yeoman Generator available over at https://github.com/dsebastien/modernWebDevGenerator and on npm: https://www.npmjs.com/package/generator-modern-web-dev.
-The generator will set up everything for you.
+The generator will set up (almost) everything for you.
 
 ### Existing projects
 First configure the required dependencies in your package.json file:
 * add Modern Web Dev Build to your devDependencies: `npm install modern-web-dev-build --save-dev`
 * ensure that you also have gulp in your devDependencies: `npm install gulp --save-dev`
 * ensure that you also have JSPM in your devDependencies: `npm install jspm --save-dev`
-* (optional) also add babel/babel-core (if not present, you'll just get a warning)
+* ensure that you also havebabel/babel-core (if not present, you'll just get a warning though): `npm install babel babel-core --global
+* finally, you're probably better off installing those packages globally as well
 
 Next, check the minimal require file contents below!
 
