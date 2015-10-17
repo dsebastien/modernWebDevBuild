@@ -52,6 +52,9 @@ class ServeTaskLoader extends AbstractTaskLoader {
 			gulp.watch(config.typescript.srcAppOnly, [
 				"scripts-typescript-to-es5"
 			]); // TypeScript changes will force a reload
+			gulp.watch(config.javascript.src, [
+				"scripts-javascript-to-es5"
+			]); // JavaScript changes will force a reload
 			gulp.watch(config.images.src, browserSync.reload); // image changes will force a reload
 		};
 
@@ -62,12 +65,12 @@ class ServeTaskLoader extends AbstractTaskLoader {
 		gulp.task("prepare-serve", "Do all the necessary preparatory work for the serve task", [
 			"clean",
 			"ts-lint",
-			"gen-ts-refs"
-			
-			//"check-js-style",
-			//"check-js-quality"
+			"gen-ts-refs",
+			"check-js-style",
+			"check-js-quality"
 		], (callback) =>{
-			return runSequence("scripts-typescript", [
+			return runSequence([
+				"scripts-typescript",
 				"scripts-javascript",
 				"styles",
 				"validate-package-json"

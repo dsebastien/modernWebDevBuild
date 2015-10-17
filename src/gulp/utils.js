@@ -91,7 +91,7 @@ let validateArgument = (arg, errorMessage) =>{
 	errorMessage = errorMessage || "the provided argument cannot be null or undefined!";
 
 	if(arg === null || arg === undefined){
-		throw new Error(errorMessage);
+		throw new TypeError(errorMessage);
 	}
 };
 
@@ -144,7 +144,7 @@ let configureGulpObject = obj =>{
 	return configuredGulpObject;
 };
 
-module.exports = {
+export default {
 	exclude,
 	reportError,
 	filterEmptyDirectories,

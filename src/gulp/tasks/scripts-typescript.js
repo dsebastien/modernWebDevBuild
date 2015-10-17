@@ -14,7 +14,7 @@ class ScriptsTypeScriptTaskLoader extends AbstractTaskLoader {
 	registerTask(gulp){
 		super.registerTask(gulp);
 
-		gulp.task("scripts-typescript", "Transpile TypeScript to ES2015, include references to library and app .d.ts files and generate sourcemaps", () =>{
+		gulp.task("scripts-typescript", "Transpile TypeScript to ES5, include references to library and app .d.ts files and generate sourcemaps", () =>{
 			// references:
 			// https://www.npmjs.com/package/gulp-typescript
 			let tsProject = ts.createProject("tsconfig.json", {
@@ -37,11 +37,12 @@ class ScriptsTypeScriptTaskLoader extends AbstractTaskLoader {
 
 			return tsResult.js
 
-				.pipe(sourcemaps.write(".", { // use "." to write the sourcemap to a separate file in the same dir
+				.pipe(sourcemaps.write({ // use "." to write the sourcemap to a separate file in the same dir
 					// sourcemaps need to be written to separate files otherwise Babel freaks out (!)
 					includeContent: false, // alternative: include the contents and remove sourceRoot. Avoids issues but prevents from editing the sources directly in the browser
 					sourceRoot: "/" // use an absolute path because we have scripts in different subpaths
 				}))
+
 				// Output files
 				.pipe(gulp.dest(config.typescript.dest))
 

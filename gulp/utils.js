@@ -81,7 +81,7 @@ let filterEmptyDirectories = function(es){
 	});
 };
 
-module.exports = {
+export default {
 	exclude,
 	reportError,
 	plumbedSrc,

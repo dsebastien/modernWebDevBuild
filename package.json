@@ -1,7 +1,7 @@
 {
   "name": "modern-web-dev-build",
   "description": "Modern Web Development Build.",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "author": {
 	"name": "Sebastien Dubois",
 	"email": "seb@dsebastien.net",
@@ -9,7 +9,7 @@
    },
   "contributors": [
   ],
-  "homepage": "http://www.dsebastien.net",
+  "homepage": "https://www.dsebastien.net",
   "private": false,
   "license": "MIT",
   "bugs": "https://github.com/dsebastien/modernWebDevBuild/issues",

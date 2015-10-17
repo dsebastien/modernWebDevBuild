@@ -51,4 +51,4 @@ class TasksLoader {
 	}
 }
 
-module.exports = new TasksLoader();
+export default new TasksLoader();

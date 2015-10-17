@@ -26,13 +26,14 @@ class DefaultTaskLoader extends AbstractTaskLoader {
 		gulp.task("prepare-default", "Do all the necessary preparatory work for the default task", [
 				"clean",
 				"ts-lint",
-				"gen-ts-refs"
-
-				//"check-js-style",
-				//"check-js-quality"
+				"gen-ts-refs",
+				"check-js-style",
+				"check-js-quality"
 			], (callback) =>{
-				return runSequence("scripts-typescript",
-					[ "scripts-javascript" ],
+				return runSequence([
+						"scripts-typescript",
+						"scripts-javascript"
+					],
 					callback);
 			}
 		);

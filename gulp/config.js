@@ -39,7 +39,7 @@ let javascript = {
 	dest: folders.dist
 };
 
-module.exports = {
+export default {
 	extensions,
 	folders,
 	globs,

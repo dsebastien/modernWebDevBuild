@@ -71,4 +71,4 @@ class ScriptsJavaScriptTaskLoader extends AbstractTaskLoader {
 	}
 }
 
-module.exports = new ScriptsJavaScriptTaskLoader();
+export default new ScriptsJavaScriptTaskLoader();

@@ -4,7 +4,7 @@ import utils from "./utils";
  * Base abstract class for task loaders.
  * Reference: http://stackoverflow.com/questions/29480569/does-ecmascript-6-have-a-convention-for-abstract-classes
  */
-class AbstractTaskLoader {
+export default class AbstractTaskLoader {
 	constructor(){
 		"use strict";
 
@@ -25,5 +25,3 @@ class AbstractTaskLoader {
 		utils.validateGulpObjectIsConfigured(gulp);
 	}
 }
-
-module.exports = AbstractTaskLoader;

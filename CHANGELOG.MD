@@ -1,4 +1,8 @@
 * 0.0.8
+  * added support for both TypeScript and ES2015
+    * changed back the way the build is organized
+      * TS > ES5
+      * ES2015 > ES5
   * removed unnecessary package.json validation
 * 0.0.7
   * Fixed an npm publish issue (configured files and folders to include and exclude from the page)

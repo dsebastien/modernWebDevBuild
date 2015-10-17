@@ -53,7 +53,7 @@ let webServerFolders = {
 	dev: [
 		// the order IS important. Folders above have precedence
 		folders.root, // necessary to have jspm_packages & jspm config file without needing a copy step
-		folders.temp, // before app so that ES5 code emitted by Babel takes precedence over ES2015 code emitted by TS in the app folder
+		folders.temp, // before app so that ES5 code emitted by TypeScript/Babel takes precedence over ES2015 code that might be written in the app folder
 		folders.app
 	],
 	dist: [
@@ -82,7 +82,7 @@ let typescript = {
 	srcAppOnly: [
 		folders.app + globs.scripts.typescript
 	],
-	dest: folders.app // because we now emit ES2015 instead of ES5; Babel then takes that as input and emits ES5 code under the temp folder
+	dest: folders.temp // ES5 code is emitted in the temp folder
 };
 
 let styles = {
@@ -154,7 +154,7 @@ let minifyCss = { // https://www.npmjs.com/package/gulp-minify-g
 	aggressiveMerging: false // necessary because it breaks PureCSS
 };
 
-module.exports = {
+export default {
 	extensions,
 	folders,
 	globs,
