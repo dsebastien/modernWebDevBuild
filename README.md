@@ -16,8 +16,6 @@ ModernWebDevBuild abstracts away all the build pipeline boilerplate. Use it if y
 
 This project is very opiniated and technology choices are embedded. Although, the build is pretty flexible about code/assets organization (to some extent). Over time, it'll be interesting to see how customizable we can make this thing.
 
-*WARNING*: For now, only TypeScript can be used in the project code (everything under app). This might change in the future.
-
 The provided build tasks are based on [Gulp](http://gulpjs.com/). Instructions are available below to get you started.
 
 This project is available as an npm package: https://www.npmjs.com/package/modern-web-dev-build
@@ -40,8 +38,8 @@ Note that this project is heavily inspired from:
 * ES2015 and TypeScript support
 * built-in HTTP server with live reloading & cross-device synchronization
 * awesome developer experience with a change detection mechanism that automagically:
-  * transpiles TypeScript > ES2015 > ES5 w/ sourcemaps
-	* the reasoning behind this chain is that (at the moment), Babel is better than TypeScript for ES5 generation (e.g., it supports async/await)
+  * transpiles TypeScript > ES5 w/ sourcemaps
+  * transpiles ES2015 > ES5 w/ sourcemaps
   * transpiles SASS > CSS w/ sourcemaps
   * checks JavaScript/TypeScript code quality/style and report on the console (without breaking the build)
   * ...
@@ -54,13 +52,15 @@ Note that this project is heavily inspired from:
   * images optimization
 * ...
 
+Check out the [change log](CHANGELOG.MD)
+
 ## Status & roadmap
-Check out the current [TODO list](TODO.md)
+* Check out the current [TODO list](TODO.md)
 
 ## Embedded choices
 As state above, some important technology choices are clearly embedded with this project. Here's a rundown of those choices:
 * [TypeScript](http://www.typescriptlang.org/) and ES2015 (although the final output is ES5 for wider compatibility)
-* [SystemJS](https://github.com/systemjs/systemjs): ES2015 module loader
+* [SystemJS](https://github.com/systemjs/systemjs): module loader
 * [JSPM](http://jspm.io/) to manage your application dependencies (through jspm.conf.js)
 * [SASS](http://sass-lang.com/): who doesn't want variables and mixins?
 * component based code & assets organization (Angular friendly)
@@ -206,7 +206,7 @@ In addition to the dependencies listed previously, you also need to have the fol
   }
 ```
 
-This is where you let JSPM know where to save the information about dependencies you install. This is also where you can easily add new dependencies; for example: `"angular2": "npm:angular2@^2.0.0-alpha.39",`. Once a dependency is added there, you can invoke `jspm install` to get the files and transitive dependencies installed.
+This is where you let JSPM know where to save the information about dependencies you install. This is also where you can easily add new dependencies; for example: `"angular2": "npm:angular2@^2.0.0-alpha.44",`. Once a dependency is added there, you can invoke `jspm install` to get the files and transitive dependencies installed.
 
 #### tsconfig.json
 Given that TypeScript is one of the (currently) embedded choices of this project, the TypeScript configuration file is mandatory.
@@ -222,20 +222,20 @@ Here's is the minimal required contents for ModernWebDevBuild:
 {
   "version": "1.7.0",
   "compilerOptions": {
-	"target": "es6",
+	"target": "es5",
+	"module": "commonjs",
 	"declaration": false,
 	"noImplicitAny": false,
 	"removeComments": true,
 	"noLib": false,
 	"emitDecoratorMetadata": true,
 	"experimentalDecorators": true,
-	"experimentalAsyncFunctions": true,
 	"noResolve": true,
 	"noEmitOnError": false,
 	"preserveConstEnums": true,
 	"inlineSources": false,
 	"sourceMap": false,
-	"outDir": "./app",
+	"outDir": "./.tmp",
 	"project": "./app"
   },
   "filesGlob": [
@@ -254,20 +254,20 @@ Here's a more complete example including code style rules:
 {
   "version": "1.7.0",
   "compilerOptions": {
-	"target": "es6",
+	"target": "es5",
+	"module": "commonjs",
 	"declaration": false,
 	"noImplicitAny": false,
 	"removeComments": true,
 	"noLib": false,
 	"emitDecoratorMetadata": true,
 	"experimentalDecorators": true,
-	"experimentalAsyncFunctions": true,
 	"noResolve": true,
 	"noEmitOnError": false,
 	"preserveConstEnums": true,
 	"inlineSources": false,
 	"sourceMap": false,
-	"outDir": "./app",
+	"outDir": "./.tmp",
 	"project": "./app"
   },
   "formatCodeOptions": {
@@ -456,7 +456,6 @@ The contents are actually not important but here's a starting point:
 ```
 ///<reference path="../../typings/tsd.d.ts" />
 ///<reference path="../../typings/typescriptApp.d.ts" />
-"format register"; // todo remove when the following issue is fixed: https://github.com/Microsoft/TypeScript/issues/3937
 "use strict";
 
 console.log("Hello world!");

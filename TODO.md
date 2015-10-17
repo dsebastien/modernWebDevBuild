@@ -1,5 +1,10 @@
 * remove the gen-ts-refs task once everything needed is available in TS
 * remove the BrowserSync reload in scripts-javascript and scripts-typescript if it does it twice
+* review the README after a44 upgrade
+  * update tsconfig
+  * update jspm config
+  * update tsd (remove?)
+  * update typings (remove?)
 * fill-in File organization section
   * how to organize app code and components
   * distinction between components and pages
