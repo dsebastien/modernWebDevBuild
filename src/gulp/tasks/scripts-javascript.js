@@ -36,7 +36,7 @@ class ScriptsJavaScriptTaskLoader extends AbstractTaskLoader {
 				// Transpile ES2015 to ES5
 				// options: https://babeljs.io/docs/usage/options/
 				.pipe(babel({
-					modules: "system", // use the system module format. Useful since load these with SystemJS
+					modules: "common", // use commonjs (more broadly compatible than System & more performant)
 					stage: 1, // enable experimental features (e.g., decorators, etc): http://babeljs.io/docs/usage/experimental/
 					comments: false, // remove comments
 					optional: [

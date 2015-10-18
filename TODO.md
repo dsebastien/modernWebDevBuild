@@ -1,5 +1,6 @@
 * remove the gen-ts-refs task once everything needed is available in TS
 * remove the BrowserSync reload in scripts-javascript and scripts-typescript if it does it twice
+* fix reloading
 * review the README after a44 upgrade
   * update tsconfig
   * update jspm config
