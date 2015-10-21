@@ -43,4 +43,4 @@ class HtmlTaskLoader extends AbstractTaskLoader {
 	}
 }
 
-module.exports = new HtmlTaskLoader();
+export default new HtmlTaskLoader();

@@ -28,15 +28,12 @@ What surprised me at first was that tooling had become so much more complex than
 
 Note that this project is heavily inspired from:
 * Google's [Web Starter Kit](https://github.com/google/web-starter-kit)
-* Countless blog articles
-  * [Dan Walhin](https://twitter.com/DanWahlin)'s TypeScript posts & course)
-	* [Introduction to TypeScript](https://www.edx.org/course/introduction-typescript-microsoft-dev201x-0)
-  * A gazillion Gulp articles
+* Countless blog articles about Gulp, TypeScript, ...
 * Many others I'm forgetting :(
 
 ## Features
 * ES2015 and TypeScript support
-* built-in HTTP server with live reloading & cross-device synchronization
+* built-in HTTP server with live reloading & cross-device synchronization (BrowserSync)
 * awesome developer experience with a change detection mechanism that automagically:
   * transpiles TypeScript > ES5 w/ sourcemaps
   * transpiles ES2015 > ES5 w/ sourcemaps
@@ -110,7 +107,6 @@ Please make sure to check the file organization section for more background abou
 	  * vendor.scss: file used to import all third-party stylesheets
 	  * note that the goal isn't to put ALL your stylesheets in there, basically just the entrypoints and the generic parts (e.g., variables, mixins, responsive styles, ...)
 	* index.html: the entrypoint of your application
-  * typings: folder containing all type definitions
   * .jscsrc: JSCS rule set to use while checking JavaScript code style
 	* reference: http://jscs.info/overview
   * .jshintrc: JSHint rule set to use while checking JavaScript code quality
@@ -121,7 +117,6 @@ Please make sure to check the file organization section for more background abou
   * jspm.conf.js: JSPM configuration file
   * package.json: NPM configuration file (also used by JSPM)
   * tsconfig.json: TypeScript compiler configuration
-  * tsd.json: TypeScript Definitions configuration file (needed by tsd)
   * tslint.json: TypeScript code quality/style rules
 
 ### Minimal (build-related) required file contents
@@ -226,17 +221,18 @@ Here's is the minimal required contents for ModernWebDevBuild:
 	"module": "commonjs",
 	"declaration": false,
 	"noImplicitAny": false,
-	"removeComments": true,
-	"noLib": false,
+	"suppressImplicitAnyIndexErrors": true,
+	"removeComments": false,
 	"emitDecoratorMetadata": true,
 	"experimentalDecorators": true,
-	"noResolve": true,
 	"noEmitOnError": false,
 	"preserveConstEnums": true,
 	"inlineSources": false,
 	"sourceMap": false,
 	"outDir": "./.tmp",
-	"project": "./app"
+	"project": "./app",
+	"moduleResolution": "node",
+	"listFiles": false
   },
   "filesGlob": [
 	"./app/**/*.ts"
@@ -258,17 +254,18 @@ Here's a more complete example including code style rules:
 	"module": "commonjs",
 	"declaration": false,
 	"noImplicitAny": false,
-	"removeComments": true,
-	"noLib": false,
+	"suppressImplicitAnyIndexErrors": true,
+	"removeComments": false,
 	"emitDecoratorMetadata": true,
 	"experimentalDecorators": true,
-	"noResolve": true,
 	"noEmitOnError": false,
 	"preserveConstEnums": true,
 	"inlineSources": false,
 	"sourceMap": false,
 	"outDir": "./.tmp",
-	"project": "./app"
+	"project": "./app",
+	"moduleResolution": "node",
+	"listFiles": false
   },
   "formatCodeOptions": {
 	"indentSize": 2,
@@ -294,50 +291,7 @@ Here's a more complete example including code style rules:
 }
 ```
 
-#### tsd.json
-The tsd.json file is the TypeScript definition (tsd) configuration file. It contains the list of TypeScript typings to install when invokind tsd, as well as the bundling information.
-This configuration is not used directly as part of the build but necessary when you want to update your typings file and re-generate the third party typings bundle (more on this later).
-
-This goes in tandem with the 'typings' folder and its contents.
-
-Here's the minimal required contents for tsd.json:
-
-```
-{
-	"version": "v4",
-	"repo": "borisyankov/DefinitelyTyped",
-	"ref": "master",
-	"path": "typings",
-	"bundle": "typings/tsd.d.ts",
-	"installed": {
-	}
-}
-```
-
-Basically, the file above:
-* states that all typings should be stored in the 'typings' folder
-* states that all typings should be bundled in 'typings/tsd.d.ts'
-
-If you want to add typings for third-party libraries in your project, you can add entries to the 'installed' object. For example you would add the folllowing for jQuery:
-
-```
-{
-	"version": "v4",
-	"repo": "borisyankov/DefinitelyTyped",
-	"ref": "master",
-	"path": "typings",
-	"bundle": "typings/tsd.d.ts",
-	"installed": {
-		"jquery/jquery.d.ts": {
-			"commit": "40d7a3e0b4f615f16dd557cdfc0d535ddc623057"
-		},
-	}
-}
-```
-
-You can find the typings files path & commit hash [in there](https://github.com/borisyankov/DefinitelyTyped).
-For more information about DefinitelyTyped, check the [official site](http://definitelytyped.org/).
-
+Note that `filesGlob` is not officially supported in TypeScript.
 
 #### tslint.json
 tslint.json is the configuration file for [TSLint](https://github.com/palantir/tslint).
@@ -403,48 +357,6 @@ Here's an example:
 }
 ```
 
-If you're unfamiliar with TypeScript typings, please refer to the official TypeScript documentation but basically, know that Typings provide the magic necessary to let your IDE/editor know about the types.
-
-#### typings folder
-As explained in the previous section, the 'typings' folder is where all the types information will be stored, whether for third-party dependencies or for your own application's code.
-
-For a bit of background, you can check Dan [Walhin's post](http://weblogs.asp.net/dwahlin/creating-a-typescript-workflow-with-gulp) as this part of the built is based on it.
-
-Inside the typings folder, you must have the following files:
-* tsd.d.ts: will contain the list of all third-party dependencies typings currently in your project
-* typescriptApp.d.ts: will contain the list of TypeScript files in your project
-
-The contents of these files will be completely managed by tsd and by ModernWebDevBuild.
-
-Nevertheless, you need the following contents in 'typescriptApp.d.ts' to let the build work as expected.
-
-typescriptApp.d.ts:
-```
-//{
-
-//}
-```
-
-With that in place, the build will be able to insert the references as needed. For example if you only have the default entrypoint required by ModernWebDevBuild (app/core/core.bootstrap.ts), then it will look like this:
-
-```
-//{
-
-/// <reference path="../app/core/core.bootstrap.ts" />
-
-//}
-```
-
-Within your application code, you simply need to add the following lines to get your IDE/editor to know about all the types (third-party & your own):
-
-```
-///<reference path="../../typings/tsd.d.ts" />
-///<reference path="../../typings/typescriptApp.d.ts" />
-```
-
-You only need to adapt the path depending on where your file stands in the hierarchy. The example above is what I currently use in 'app/core/core.bootstrap.ts'.
-
-
 ### Minimal (application-specific) required file contents
 Although we want to limit this list as much as possible, for everything to build successfully, some files need specific contents:
 
@@ -454,8 +366,6 @@ The core.bootstrap.ts file is the entrypoint of your application. Currently, it 
 The contents are actually not important but here's a starting point:
 
 ```
-///<reference path="../../typings/tsd.d.ts" />
-///<reference path="../../typings/typescriptApp.d.ts" />
 "use strict";
 
 console.log("Hello world!");
@@ -551,7 +461,6 @@ In the above, the most important parts are:
 * for production, the contents of `<!-- build:js-app --> ... <!-- endbuild -->` will be replaced by the application's JS bundle created by the build
 
 Also, note that during development, SystemJS is loaded (system.src.js), the JSPM configuration is loaded (jspm.conf.js) and SystemJS is used to load the entrypoint of the application (core/core.bootstrap).
-
 
 ## Commands
 Once you have added ModernWebDevBuild to your project, you can list all the available commands using `gulp help`.

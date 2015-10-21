@@ -40,4 +40,4 @@ class CheckJsQualityTaskLoader extends AbstractTaskLoader {
 	}
 }
 
-module.exports = new CheckJsQualityTaskLoader();
+export default new CheckJsQualityTaskLoader();

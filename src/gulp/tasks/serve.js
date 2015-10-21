@@ -4,8 +4,10 @@ import AbstractTaskLoader from "../abstractTaskLoader";
 import config from "../config";
 //import utils from "../utils";
 
-import browserSync from "browser-sync";
+let browserSync = require("browser-sync").create(config.webServerNames.dev);
+
 import historyApiFallback from "connect-history-api-fallback"; // fix for SPAs w/ BrowserSync & others: https://github.com/BrowserSync/browser-sync/issues/204
+//import debug from "gulp-debug";
 
 class ServeTaskLoader extends AbstractTaskLoader {
 	registerTask(gulp){
@@ -15,8 +17,33 @@ class ServeTaskLoader extends AbstractTaskLoader {
 
 		runSequence = runSequence.use(gulp); // needed to bind to the correct gulp object (alternative is to pass gulp to runSequence as first argument)
 
+		// TypeScript
+		gulp.task("serve-scripts-typescript", "Transpile TypeScript to ES5 and reload the browser (this task should only be called during serve)", [ "prepare-serve-scripts-typescript" ], () =>{
+			return browserSync.reload();
+		});  // reload BrowserSync once everything is ready
+		gulp.task("prepare-serve-scripts-typescript", "Transpile TypeScript to ES5 and generate sourcemaps", [
+			"ts-lint"
+		], (callback) =>{
+			return runSequence(
+				"scripts-typescript",
+				callback);
+		});
+
+		// JavaScript
+		gulp.task("serve-scripts-javascript", "Transpile JavaScript to ES5 and reload the browser (this task should only be called during serve)", [ "prepare-serve-scripts-javascript" ], () =>{
+			return browserSync.reload();
+		}); // reload BrowserSync once everything is ready
+		gulp.task("prepare-serve-scripts-javascript", "Transpile JavaScript to ES5 and generate sourcemaps", [
+			"check-js-style",
+			"check-js-quality"
+		], (callback) =>{
+			return runSequence(
+				"scripts-javascript",
+				callback);
+		});
+		
 		let startBrowserSync = () =>{
-			browserSync({ // http://www.browsersync.io/docs/options/
+			browserSync.init({ // http://www.browsersync.io/docs/options/
 				notify: false,
 				//port: 8000,
 
@@ -27,11 +54,11 @@ class ServeTaskLoader extends AbstractTaskLoader {
 				// Note: this uses an unsigned certificate which on first access
 				//       will present a certificate warning in the browser.
 				// https: true,
-				// ghostMode: { // replicate actions in all clients
-				//  clicks: false,
-				//  forms: false,
-				//  scroll: false
-				// },
+				ghostMode: { // replicate actions in all clients
+					clicks: false,
+					forms: false,
+					scroll: false
+				},
 				server: {
 					baseDir: config.webServerFolders.dev,
 
@@ -44,18 +71,19 @@ class ServeTaskLoader extends AbstractTaskLoader {
 							next();
 						}
 					]
-				}
+				}//,
+				//reloadDebounce: 500 // restrict the frequency in which browser reload events can be emitted to connected clients
 			});
 
-			gulp.watch(config.html.src, browserSync.reload); // html changes will force a reload
-			gulp.watch(config.styles.src, [ "styles" ]); // stylesheet changes will force a reload
+			gulp.watch(config.html.src).on("change", browserSync.reload); // force a reload when html changes
+			gulp.watch(config.styles.src, [ "styles" ]); // stylesheet changes will be streamed if possible or will force a reload
 			gulp.watch(config.typescript.srcAppOnly, [
-				"scripts-typescript-to-es5"
+				"serve-scripts-typescript"
 			]); // TypeScript changes will force a reload
 			gulp.watch(config.javascript.src, [
-				"scripts-javascript-to-es5"
+				"serve-scripts-javascript"
 			]); // JavaScript changes will force a reload
-			gulp.watch(config.images.src, browserSync.reload); // image changes will force a reload
+			gulp.watch(config.images.src).on("change", browserSync.reload); // force a reload when images change
 		};
 
 		gulp.task("serve", "Watch files for changes and rebuild/reload automagically", () =>{
@@ -65,7 +93,6 @@ class ServeTaskLoader extends AbstractTaskLoader {
 		gulp.task("prepare-serve", "Do all the necessary preparatory work for the serve task", [
 			"clean",
 			"ts-lint",
-			"gen-ts-refs",
 			"check-js-style",
 			"check-js-quality"
 		], (callback) =>{
@@ -79,4 +106,4 @@ class ServeTaskLoader extends AbstractTaskLoader {
 	}
 }
 
-module.exports = new ServeTaskLoader();
+export default new ServeTaskLoader();

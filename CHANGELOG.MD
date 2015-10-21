@@ -1,3 +1,7 @@
+* 0.0.9
+  * fixed watch/reload issues with BrowserSync
+  * removed the 'gen-ts-refs' task. No longer needed now that TS can get typings from node modules
+  * updated docs
 * 0.0.8
   * added support for both TypeScript and ES2015
     * changed back the way the build is organized

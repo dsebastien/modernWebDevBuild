@@ -113,7 +113,7 @@ let validateGulpObject = obj =>{
  */
 let validateGulpObjectIsConfigured = obj =>{
 	const notCorrectlyConfiguredErrorMessage = "the provided argument is a valid gulp object but it isn't configured properly. You need to invoke the configureGulpObject utility function before passing it to the tasks!";
-	
+
 	validateGulpObject(obj);
 	validateArgument(obj.tasks.help, notCorrectlyConfiguredErrorMessage);
 	validateArgument(obj.plumbedSrc, notCorrectlyConfiguredErrorMessage);

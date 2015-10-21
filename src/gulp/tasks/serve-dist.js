@@ -4,7 +4,8 @@ import AbstractTaskLoader from "../abstractTaskLoader";
 import config from "../config";
 //import utils from "../utils";
 
-import browserSync from "browser-sync";
+const browserSync = require("browser-sync").create(config.webServerNames.dist);
+
 import historyApiFallback from "connect-history-api-fallback"; // fix for SPAs w/ BrowserSync & others: https://github.com/BrowserSync/browser-sync/issues/204
 
 class ServeDistTaskLoader extends AbstractTaskLoader {
@@ -14,9 +15,9 @@ class ServeDistTaskLoader extends AbstractTaskLoader {
 		let runSequence = require("run-sequence");
 
 		runSequence = runSequence.use(gulp); // needed to bind to the correct gulp object (alternative is to pass gulp to runSequence as first argument)
-		
+
 		const startBrowserSync = () =>{
-			browserSync({
+			browserSync.init({
 				notify: false,
 				//port: 8000,
 
@@ -40,7 +41,9 @@ class ServeDistTaskLoader extends AbstractTaskLoader {
 							next();
 						}
 					]
-				}
+				},
+				reloadDelay: 1000,
+				reloadDebounce: 1000
 			});
 		};
 
@@ -50,4 +53,4 @@ class ServeDistTaskLoader extends AbstractTaskLoader {
 	}
 }
 
-module.exports = new ServeDistTaskLoader();
+export default new ServeDistTaskLoader();

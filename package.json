@@ -1,14 +1,13 @@
 {
   "name": "modern-web-dev-build",
   "description": "Modern Web Development Build.",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "author": {
 	"name": "Sebastien Dubois",
 	"email": "seb@dsebastien.net",
 	"url": "https://www.dsebastien.net/"
-   },
-  "contributors": [
-  ],
+  },
+  "contributors": [],
   "homepage": "https://www.dsebastien.net",
   "private": false,
   "license": "MIT",
@@ -50,16 +49,17 @@
 	"run-sequence": "1.1.x"
   },
   "dependencies": {
+	"apache-server-configs": "2.14.x",
+	"autoprefixer": "6.0.x",
 	"babel": "5.8.x",
 	"babel-core": "5.8.x",
 	"babel-runtime": "5.8.x",
-	"gulp": "3.9.x",
-	"apache-server-configs": "2.14.x",
-	"autoprefixer": "6.0.x",
 	"bower": "1.5.x",
 	"browser-sync": "2.9.x",
+	"connect-history-api-fallback": "1.1.0",
 	"del": "2.0.x",
 	"event-stream": "3.3.x",
+	"gulp": "3.9.x",
 	"gulp-autoprefixer": "3.0.x",
 	"gulp-babel": "5.2.x",
 	"gulp-cache": "0.3.x",
@@ -101,10 +101,9 @@
 	"opn": "3.0.x",
 	"require-dir": "0.3.x",
 	"run-sequence": "1.1.x",
-	"connect-history-api-fallback": "1.1.0",
 	"systemjs-builder": "0.14.x",
-	"typescript": "1.7.0-dev.20151006",
-	"tsd": "0.6.5"
+	"tsd": "0.6.5",
+	"typescript": "1.7.0-dev.20151006"
   },
   "engines": {
 	"node": ">=0.12.0",

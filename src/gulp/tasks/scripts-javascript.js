@@ -7,8 +7,6 @@ import config from "../config";
 import changed from "gulp-changed";
 import sourcemaps from "gulp-sourcemaps";
 import babel from "gulp-babel";
-import browserSync from"browser-sync";
-import iff from "gulp-if";
 import size from "gulp-size";
 //import debug from "gulp-debug";
 
@@ -60,13 +58,7 @@ class ScriptsJavaScriptTaskLoader extends AbstractTaskLoader {
 				// Task result
 				.pipe(size({
 					title: "scripts-javascript"
-				}))
-
-				// Reload Browser if needed
-				.pipe(iff(browserSync.active, browserSync.reload({
-					stream: true,
-					once: true
-				})));
+				}));
 		});
 	}
 }

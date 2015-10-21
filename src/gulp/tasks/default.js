@@ -26,7 +26,6 @@ class DefaultTaskLoader extends AbstractTaskLoader {
 		gulp.task("prepare-default", "Do all the necessary preparatory work for the default task", [
 				"clean",
 				"ts-lint",
-				"gen-ts-refs",
 				"check-js-style",
 				"check-js-quality"
 			], (callback) =>{
@@ -40,4 +39,4 @@ class DefaultTaskLoader extends AbstractTaskLoader {
 	}
 }
 
-module.exports = new DefaultTaskLoader();
+export default new DefaultTaskLoader();

@@ -2,8 +2,9 @@
 
 import AbstractTaskLoader from "../abstractTaskLoader";
 import config from "../config";
-//import utils from "../utils";
+import utils from "../utils";
 
+import eventStream from "event-stream";
 import cache from "gulp-cache";
 import imageMin from "gulp-imagemin";
 import size from "gulp-size";
@@ -16,7 +17,9 @@ class ImagesTaskLoader extends AbstractTaskLoader {
 		gulp.task("images", "Optimize images", () =>{
 			return gulp.plumbedSrc(
 				config.images.src
-			)
+				)
+				// Filter out the empty directories
+				.pipe(utils.filterEmptyDirectories(eventStream))
 
 				// Display the files in the stream
 				//.pipe(debug({title: "Stream contents:", minimal: true}))
@@ -38,4 +41,4 @@ class ImagesTaskLoader extends AbstractTaskLoader {
 	}
 }
 
-module.exports = new ImagesTaskLoader();
+export default new ImagesTaskLoader();

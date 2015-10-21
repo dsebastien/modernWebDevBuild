@@ -8,9 +8,10 @@ import sass from "gulp-sass";
 import sourcemaps from "gulp-sourcemaps";
 import autoprefixer from "gulp-autoprefixer";
 import iff from "gulp-if";
-import browserSync from "browser-sync";
 import size from "gulp-size";
 //import debug from "gulp-debug";
+
+let browserSync = require("browser-sync").get(config.webServerNames.dev);
 
 class StylesTaskLoader extends AbstractTaskLoader {
 	registerTask(gulp){
@@ -19,7 +20,7 @@ class StylesTaskLoader extends AbstractTaskLoader {
 		gulp.task("styles", "Compile, add vendor prefixes and generate sourcemaps", () =>{
 			return gulp.plumbedSrc(// handle errors nicely (i.e., without breaking watch)
 				config.styles.src
-			)
+				)
 
 				// Display the files in the stream
 				//.pipe(debug({title: "Stream contents:", minimal: true}))
@@ -53,9 +54,9 @@ class StylesTaskLoader extends AbstractTaskLoader {
 
 				// Reload Browser if needed
 				// Stream if possible
-				.pipe(iff(browserSync.active, browserSync.reload({
-					stream: true,
-					once: true
+				.pipe(iff(browserSync.active, browserSync.stream({
+					once: true,
+					stream: true
 				})))
 
 				// Task result
@@ -66,5 +67,5 @@ class StylesTaskLoader extends AbstractTaskLoader {
 	}
 }
 
-module.exports = new StylesTaskLoader();
+export default new StylesTaskLoader();
 

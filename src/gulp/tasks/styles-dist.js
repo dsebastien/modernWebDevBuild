@@ -64,4 +64,4 @@ class StylesDistTaskLoader extends AbstractTaskLoader {
 	}
 }
 
-module.exports = new StylesDistTaskLoader();
+export default new StylesDistTaskLoader();

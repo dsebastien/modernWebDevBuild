@@ -8,7 +8,12 @@ let extensions = {
 	css: ".css",
 	sass: ".scss",
 	html: ".html",
-	sourcemap: ".map"
+	sourcemap: ".map",
+	png: ".png",
+	jpg: ".jpg",
+	jpeg: ".jpeg",
+	gif: ".gif",
+	svg: ".svg"
 };
 
 let folders = {
@@ -33,9 +38,9 @@ let globs = {
 	styles: {
 		css: "/**/*" + extensions.css,
 		sass: "/**/*" + extensions.sass,
-		vendor: folders.styles + "/vendor{" + extensions.sass + "," + extensions.css + "}"
+		vendor: folders.styles + "/vendor" + "{" + extensions.sass + "," + extensions.css + "}"
 	},
-	images: folders.images + "/**/*",
+	images: folders.images + "/**/*" + "{" + extensions.png + "," + extensions.jpg + "," + extensions.jpeg + "," + extensions.gif + "," + extensions.svg + "}",
 	html: "/**/*" + extensions.html,
 	sourcemaps: "/**/*" + extensions.sourcemap
 };
@@ -59,6 +64,11 @@ let webServerFolders = {
 	dist: [
 		folders.dist
 	]
+};
+
+let webServerNames = {
+	dev: "MDW_DEV",
+	dist: "MDW_DIST"
 };
 
 let finalJsBundleName = "bundle.min.js";
@@ -99,6 +109,7 @@ let styles = {
 		utils.exclude(folders.app + globs.styles.vendor)
 	],
 	dest: folders.temp, // during DEV
+	destFiles: folders.temp + globs.styles.css, // during DEV
 	destDist: folders.dist + folders.styles, // for PROD
 	finalCssBundleFilename: "bundle.min.css",
 	finalCssBundlePath: folders.styles + "/bundle.min.css",
@@ -167,5 +178,6 @@ export default {
 	copy,
 	autoprefixerBrowsers,
 	minifyCss,
-	webServerFolders
+	webServerFolders,
+	webServerNames
 };

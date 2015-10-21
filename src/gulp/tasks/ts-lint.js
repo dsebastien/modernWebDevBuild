@@ -6,9 +6,10 @@ import config from "../config";
 
 import tslint from "gulp-tslint";
 import iff from "gulp-if";
-import browserSync from "browser-sync";
 import size from "gulp-size";
 //import debug from "gulp-debug";
+
+let browserSync = require("browser-sync").get(config.webServerNames.dev);
 
 class TsLintTaskLoader extends AbstractTaskLoader {
 	registerTask(gulp){
@@ -39,4 +40,4 @@ class TsLintTaskLoader extends AbstractTaskLoader {
 	}
 }
 
-module.exports = new TsLintTaskLoader();
+export default new TsLintTaskLoader();

@@ -6,8 +6,6 @@ import config from "../config";
 
 import sourcemaps from "gulp-sourcemaps";
 import ts from "gulp-typescript";
-import browserSync from "browser-sync";
-import iff from "gulp-if";
 import size from "gulp-size";
 
 class ScriptsTypeScriptTaskLoader extends AbstractTaskLoader {
@@ -49,16 +47,10 @@ class ScriptsTypeScriptTaskLoader extends AbstractTaskLoader {
 				// Task result
 				.pipe(size({
 					title: "scripts-typescript"
-				}))
-
-				// Reload Browser if needed
-				.pipe(iff(browserSync.active, browserSync.reload({
-					stream: true,
-					once: true
-				})));
+				}));
 		});
 	}
 }
 
-module.exports = new ScriptsTypeScriptTaskLoader();
+export default new ScriptsTypeScriptTaskLoader();
 

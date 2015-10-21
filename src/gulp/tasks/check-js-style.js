@@ -39,5 +39,5 @@ class CheckJsStyleTaskLoader extends AbstractTaskLoader {
 	}
 }
 
-module.exports = new CheckJsStyleTaskLoader();
+export default new CheckJsStyleTaskLoader();
 
