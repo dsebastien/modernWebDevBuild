@@ -1,5 +1,7 @@
 # Modern Web Dev Build
 
+[![Join the chat at https://gitter.im/dsebastien/modernWebDevBuild](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/dsebastien/modernWebDevBuild?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Build Status](https://secure.travis-ci.org/dsebastien/modernWebDevBuild.png?branch=master)](https://travis-ci.org/dsebastien/modernWebDevBuild)
 [![Coverage Status](https://img.shields.io/coveralls/dsebastien/modernWebDevBuild.svg?style=flat)](https://coveralls.io/r/dsebastien/modernWebDevBuild?branch=master)
 [![Dependency Status](https://david-dm.org/dsebastien/modernWebDevBuild.svg?theme=shields.io&style=flat)](https://david-dm.org/dsebastien/modernWebDevBuild)
