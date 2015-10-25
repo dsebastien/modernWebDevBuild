@@ -41,7 +41,7 @@ class ServeTaskLoader extends AbstractTaskLoader {
 				"scripts-javascript",
 				callback);
 		});
-		
+
 		let startBrowserSync = () =>{
 			browserSync.init({ // http://www.browsersync.io/docs/options/
 				notify: false,

@@ -6,6 +6,7 @@
   * how to distributes styles around (component-based approach)
   * sass partials & import
 * review: https://github.com/areusjs/load-common-gulp-tasks
+  * https://github.com/areusjs/load-common-gulp-tasks/blob/master/index.js
   * eval possibility to reuse
 * reusable build scripts
   * implement a solution to make useful scripts reusable
@@ -51,13 +52,13 @@
 * add htmlhint
 * prepare build for testing
   * karma, mocha, jasmine, testacular for unit testing
-    * https://www.npmjs.com/package/gulp-karma
-    * https://github.com/gulpjs/gulp/blob/master/docs/recipes/mocha-test-runner-with-gulp.md
-    * http://jasmine.github.io/2.3/introduction.html
-    * https://github.com/jasmine/jasmine
-    * https://www.npmjs.com/package/gulp-jasmine
+	* https://www.npmjs.com/package/gulp-karma
+	* https://github.com/gulpjs/gulp/blob/master/docs/recipes/mocha-test-runner-with-gulp.md
+	* http://jasmine.github.io/2.3/introduction.html
+	* https://github.com/jasmine/jasmine
+	* https://www.npmjs.com/package/gulp-jasmine
   * protractor for functional tests
-    * E2E test framework for angular apps
+	* E2E test framework for angular apps
   * check https://coveralls.io/
   * https://www.npmjs.com/package/gulp-istanbul
 	* https://www.npmjs.com/package/chai
@@ -72,7 +73,7 @@
 * add hthint: https://www.npmjs.com/package/gulp-htmlhint
 * add gulp-bump
   * goal: easily bump the project version
-    * bump.major, bump.minor, bump.patch
+	* bump.major, bump.minor, bump.patch
   * var bump = require('gulp-bump');
 * check gulp-watch for incremental builds
   * https://www.npmjs.com/package/gulp-watch
