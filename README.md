@@ -54,7 +54,8 @@ Note that this project is heavily inspired from:
 Check out the [change log](CHANGELOG.MD)
 
 ## Status & roadmap
-* Check out the current [TODO list](TODO.md)
+Check out the issues & labels to get an idea of what's next.
+For existing features, refer to the previous section.
 
 ## Embedded choices
 As state above, some important technology choices are clearly embedded with this project. Here's a rundown of those choices:
