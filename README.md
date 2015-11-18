@@ -69,6 +69,9 @@ As state above, some important technology choices are clearly embedded with this
 * [TSLint](https://github.com/palantir/tslint) and included code quality/style rules
 * [BrowserSync](http://www.browsersync.io/) development Web Server
 
+## Upgrade
+Check out the [upgrade](UPGRADE.md) page
+
 ## Installation
 
 ### New projects
