@@ -40,4 +40,4 @@ class ScriptsJavaScriptDistTaskLoader extends AbstractTaskLoader {
 	}
 }
 
-export default new ScriptsJavaScriptDistTaskLoader();
+module.exports = new ScriptsJavaScriptDistTaskLoader();

@@ -22,4 +22,4 @@ class CleanTaskLoader extends AbstractTaskLoader {
 	}
 }
 
-export default new CleanTaskLoader();
+module.exports = new CleanTaskLoader();

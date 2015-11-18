@@ -17,4 +17,4 @@ class PackageJSONTaskLoader extends AbstractTaskLoader {
 	}
 }
 
-export default new PackageJSONTaskLoader();
+module.exports = new PackageJSONTaskLoader();

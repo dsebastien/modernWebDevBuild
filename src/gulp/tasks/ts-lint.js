@@ -40,4 +40,4 @@ class TsLintTaskLoader extends AbstractTaskLoader {
 	}
 }
 
-export default new TsLintTaskLoader();
+module.exports = new TsLintTaskLoader();

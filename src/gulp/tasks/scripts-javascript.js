@@ -32,15 +32,8 @@ class ScriptsJavaScriptTaskLoader extends AbstractTaskLoader {
 				}))
 
 				// Transpile ES2015 to ES5
-				// options: https://babeljs.io/docs/usage/options/
-				.pipe(babel({
-					modules: "common", // use commonjs (more broadly compatible than System & more performant)
-					stage: 1, // enable experimental features (e.g., decorators, etc): http://babeljs.io/docs/usage/experimental/
-					comments: false, // remove comments
-					optional: [
-						"runtime" // necessary to load regenerator (generators/async) & core-js (ES2015 static methods) automatically: https://babeljs.io/docs/usage/runtime/
-					]
-				}))
+				// options: see .babelrc file
+				.pipe(babel())
 
 				// Write sourcemaps: https://www.npmjs.com/package/gulp-sourcemaps
 				//.pipe($.sourcemaps.write()) // use "." to write the sourcemap to a separate file in the same dir
@@ -63,4 +56,4 @@ class ScriptsJavaScriptTaskLoader extends AbstractTaskLoader {
 	}
 }
 
-export default new ScriptsJavaScriptTaskLoader();
+module.exports = new ScriptsJavaScriptTaskLoader();

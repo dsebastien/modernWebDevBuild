@@ -38,5 +38,5 @@ class CopyTaskLoader extends AbstractTaskLoader {
 	}
 }
 
-export default new CopyTaskLoader();
+module.exports = new CopyTaskLoader();
 

@@ -41,4 +41,4 @@ class ImagesTaskLoader extends AbstractTaskLoader {
 	}
 }
 
-export default new ImagesTaskLoader();
+module.exports = new ImagesTaskLoader();

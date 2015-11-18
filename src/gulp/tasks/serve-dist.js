@@ -53,4 +53,4 @@ class ServeDistTaskLoader extends AbstractTaskLoader {
 	}
 }
 
-export default new ServeDistTaskLoader();
+module.exports = new ServeDistTaskLoader();

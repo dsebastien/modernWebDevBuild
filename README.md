@@ -80,7 +80,6 @@ First configure the required dependencies in your package.json file:
 * add Modern Web Dev Build to your devDependencies: `npm install modern-web-dev-build --save-dev`
 * ensure that you also have gulp in your devDependencies: `npm install gulp --save-dev`
 * ensure that you also have JSPM in your devDependencies: `npm install jspm --save-dev`
-* ensure that you also havebabel/babel-core (if not present, you'll just get a warning though): `npm install babel babel-core --global
 * finally, you're probably better off installing those packages globally as well
 
 Next, check the minimal require file contents below!
@@ -538,7 +537,6 @@ You can run the `gulp -T` command get an visual idea of the links between the di
 If you want to build from source, you need to:
 * install NodeJS and npm
 * install gulp: `npm install --global gulp`
-* install babel: `npm install --global babel`
 * clone this git repository
 * run `npm run setup`
 * run `npm run build`

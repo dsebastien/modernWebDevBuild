@@ -67,5 +67,5 @@ class StylesTaskLoader extends AbstractTaskLoader {
 	}
 }
 
-export default new StylesTaskLoader();
+module.exports = new StylesTaskLoader();
 

@@ -52,5 +52,5 @@ class ScriptsTypeScriptTaskLoader extends AbstractTaskLoader {
 	}
 }
 
-export default new ScriptsTypeScriptTaskLoader();
+module.exports = new ScriptsTypeScriptTaskLoader();
 

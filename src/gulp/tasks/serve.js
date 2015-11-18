@@ -106,4 +106,4 @@ class ServeTaskLoader extends AbstractTaskLoader {
 	}
 }
 
-export default new ServeTaskLoader();
+module.exports = new ServeTaskLoader();

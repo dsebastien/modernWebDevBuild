@@ -7,7 +7,7 @@ import AbstractTaskLoader from "../abstractTaskLoader";
 class TemplateTaskLoader extends AbstractTaskLoader {
 	registerTask(gulp){
 		super.registerTask(gulp);
-		
+
 		console.log("Hello world!");
 	}
 }

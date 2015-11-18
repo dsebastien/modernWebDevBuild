@@ -25,14 +25,7 @@ gulp.task("scripts-javascript-dist", "Transpile JavaScript (ES2015 to ES5 using 
 
 		// Transpile ES2015 to ES5
 		// options: https://babeljs.io/docs/usage/options/
-		.pipe(babel({
-			modules: "common",
-			stage: 1, // enable experimental features (e.g., decorators, etc): http://babeljs.io/docs/usage/experimental/
-			comments: false, // remove comments
-			optional: [
-				"runtime" // necessary to load regenerator (generators/async) & core-js (ES2015 static methods) automatically: https://babeljs.io/docs/usage/runtime/
-			]
-		}))
+		.pipe(babel())
 
 		// Copy files
 		.pipe(gulp.dest(config.javascript.dest))

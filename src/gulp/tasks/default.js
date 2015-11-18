@@ -39,4 +39,4 @@ class DefaultTaskLoader extends AbstractTaskLoader {
 	}
 }
 
-export default new DefaultTaskLoader();
+module.exports = new DefaultTaskLoader();
