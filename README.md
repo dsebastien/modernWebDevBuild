@@ -24,6 +24,11 @@ The provided build tasks are based on [Gulp](http://gulpjs.com/). Instructions a
 
 This project is available as an npm package: https://www.npmjs.com/package/modern-web-dev-build
 
+## Demo
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=Wc5iTInYOBw
+" target="_blank"><img src="http://img.youtube.com/vi/Wc5iTInYOBw/0.jpg"
+alt="ModernWebDev Build and Generator Demo" width="240" height="180" border="10" /></a>
+
 ## Background
 
 The idea for this project emerged as I was rediscovering the state of the art for Web development (early 2015) and from my frustration of not finding everything I needed in a ready-to-use form.
