@@ -1,11 +1,14 @@
+* 0.1.1
+  * removed gulp-tsd dependency
+  * removed tsd dependency
 * 0.1.0
   * Upgraded to Babel 6
-    * now requires a .babelrc configuration file to be present in the project's main folder
-    * now requires additional Babel 6 dependencies:
-      * "babel-core": "6.1.x",
-      * "babel-plugin-transform-es2015-modules-commonjs": "6.1.x",
-      * "babel-preset-es2015": "6.1.x",
-      * "babel-runtime": "6.1.x",
+	* now requires a .babelrc configuration file to be present in the project's main folder
+	* now requires additional Babel 6 dependencies:
+	  * "babel-core": "6.1.x",
+	  * "babel-plugin-transform-es2015-modules-commonjs": "6.1.x",
+	  * "babel-preset-es2015": "6.1.x",
+	  * "babel-runtime": "6.1.x",
   * Updated dependencies
 * 0.0.9
   * Fixed watch/reload issues with BrowserSync
@@ -13,9 +16,9 @@
   * Updated docs
 * 0.0.8
   * Added support for both TypeScript and ES2015
-    * Changed back the way the build is organized
-      * TS > ES5
-      * ES2015 > ES5
+	* Changed back the way the build is organized
+	  * TS > ES5
+	  * ES2015 > ES5
   * Removed unnecessary package.json validation
 * 0.0.7
   * Fixed an npm publish issue (configured files and folders to include and exclude from the page)
