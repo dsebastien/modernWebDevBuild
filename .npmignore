@@ -1,23 +1,27 @@
 # Reference: https://docs.npmjs.com/misc/developers#keeping-files-out-of-your-package
 
 # Project specific
-gulp/
 src/
+gulp/
+test/
+coverage/
+.coveralls.yml
 .editorconfig
 .jscsrc
 .jshintignore
 .jshintrc
 .travis.yml
+.nvmrc
 gulpfile.babel.js
 gulpfile.js
-TODO.md
 
 # Misc
 *.log
 
 # NPM
-node_modules
+node_modules/
 npm-debug.log
+./.npmignore
 
 # Windows
 Desktop.ini
@@ -30,6 +34,8 @@ Desktop.ini
 # Git
 .git
 .gitattributes
+.gitignore
+.gitmodules
 
 # OSX
 .DS_Store
