@@ -124,14 +124,17 @@ let validateGulpObjectIsConfigured = obj =>{
  * - gulp help loaded and enabled
  * - gulp plumbedSrc function added (integrates plumber)
  * @param obj the object to validate
+ * @param options the build options
  * @throws Error if validation fails
  */
-let configureGulpObject = obj =>{
+let configureGulpObject = (obj, options) =>{
 	validateGulpObject(obj);
 	const help = require("gulp-help");
 
 	let configuredGulpObject = help(obj); // provide help through 'gulp help' -- the help text is the second gulp task argument (https://www.npmjs.com/package/gulp-help/)
 
+	configuredGulpObject.options = options; // keep the options on the gulp object (useful as it'll be passed around and can be manipulated)
+	
 	// Easily integrate plumber invocation
 	// Reference: https://gist.github.com/floatdrop/8269868
 	configuredGulpObject.plumbedSrc = function(){

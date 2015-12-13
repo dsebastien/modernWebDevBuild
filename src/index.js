@@ -24,11 +24,13 @@ class TasksLoader {
 	/**
 	 * Looks for and registers all available tasks.
 	 * @param inputGulp the gulp object to use. If not provided, it'll be loaded
+	 * @param inputOptions the build options to use. If not provided, an empty object is used
 	 */
-	registerTasks(inputGulp){
+	registerTasks(inputGulp, inputOptions){
 		let gulp = inputGulp || require("gulp"); // this module can be imported without a defined gulp instance
+		let options = inputOptions || {};
 		
-		gulp = utils.configureGulpObject(gulp); // we need to customize the gulp object a bit
+		gulp = utils.configureGulpObject(gulp, options); // we need to customize the gulp object a bit
 
 		// Load all tasks in gulp/tasks
 		const loadedModules = requireDir("./gulp/tasks", {

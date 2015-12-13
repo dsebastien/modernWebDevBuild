@@ -1,6 +1,10 @@
 * 0.1.1
+  * added unit testing support with karma & jasmine
   * removed gulp-tsd dependency
   * removed tsd dependency
+  * fix for #33 avoid the need for installing
+  * added support for passing options to the build (for now only used internally)
+  * tagged dependencies that should be in client projects as peerDependencies
 * 0.1.0
   * Upgraded to Babel 6
 	* now requires a .babelrc configuration file to be present in the project's main folder
