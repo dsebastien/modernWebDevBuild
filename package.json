@@ -91,7 +91,7 @@
 	"karma-ie-launcher": "0.2.0",
 	"karma-spec-reporter": "0.0.x",
 	"karma-junit-reporter": "0.3.x",
-	"karma-systemjs": "0.10.x"
+	"karma-jspm": "2.0.x"
   },
   "peerDependencies": {
 	"gulp": "3.9.x",
