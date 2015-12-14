@@ -88,9 +88,20 @@ The generator will set up (almost) everything for you.
 ### Existing projects
 First configure the required dependencies in your package.json file:
 * add Modern Web Dev Build to your devDependencies: `npm install modern-web-dev-build --save-dev`
-* ensure that you also have gulp in your devDependencies: `npm install gulp --save-dev`
-* ensure that you also have JSPM in your devDependencies: `npm install jspm --save-dev`
-* finally, you're probably better off installing those packages globally as well
+* execute `npm install --no-optional`
+
+You should get warnings about missing peer dependencies. Those are dependencies that are required by the build but that you should add to your own project.
+Install these one by one.
+
+For now the required peer dependencies are as follows:
+* babel 6.3.x
+  * babel-core
+  * babel-plugin-transform-es2015-modules-commonjs
+  * babel-preset-es2015
+* gulp 3.9.x
+* jspm
+* nodemon
+* typescript
 
 Next, check the minimal require file contents below!
 
