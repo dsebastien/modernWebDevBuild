@@ -18,7 +18,7 @@ class TestUnitTaskLoader extends AbstractTaskLoader {
 
 		gulp.task("test-unit", "Execute all unit tests", [ "prepare-test-unit" ], (callback) =>{
 			return new KarmaServer({
-				configFile: path.resolve("karma.conf.js"), // necessary otherwise the file is not resolved correctly
+				configFile: path.resolve("karma.conf.js"), // necessary otherwise the file is not resolved correctly by the karma runtime
 				singleRun: true
 			}, callback).start();
 		});
