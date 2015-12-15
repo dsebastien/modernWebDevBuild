@@ -69,6 +69,7 @@ As state above, some important technology choices are clearly embedded with this
 * [TypeScript](http://www.typescriptlang.org/) and ES2015 (although the final output is ES5 for wider compatibility)
 * [SystemJS](https://github.com/systemjs/systemjs): module loader
 * [JSPM](http://jspm.io/) to manage your application dependencies (through jspm.conf.js)
+* [Karma](http://karma-runner.github.io/) to run tests
 * [SASS](http://sass-lang.com/): who doesn't want variables and mixins?
 * component based code & assets organization (Angular friendly)
 * [JSCS](http://jscs.info/) and included code style rules
@@ -80,6 +81,10 @@ As state above, some important technology choices are clearly embedded with this
 Check out the [upgrade](UPGRADE.md) page
 
 ## Installation
+
+### General prereqs
+Before you install the build (whether manually or through the project generator), you need to install some dependencies globally:
+* `npm install --global gulp`
 
 ### New projects
 The easiest approach to integrate this build is to use our Yeoman Generator available over at https://github.com/dsebastien/modernWebDevGenerator and on npm: https://www.npmjs.com/package/generator-modern-web-dev.
@@ -111,7 +116,7 @@ Note that if you've generated your project using the Yeoman generator, README fi
 
 Please make sure to check the file organization section for more background about the organization and usage guidelines.
 
-* <project root>
+* project root
   * app: folder containing all the files of the application
 	* components: folder containing components of your application (e.g., login, menu, ...); basically reusable pieces
 	* core: folder containing at least the entrypoint of your application
@@ -501,12 +506,14 @@ Also, note that during development, SystemJS is loaded (system.src.js), the JSPM
 ## Commands
 Once you have added ModernWebDevBuild to your project, you can list all the available commands using `gulp help`.
 The command will give you a description of each task. The most important to start discovering are:
-* gulp serve: start a Web server with live reload, watching files, transpiling, generating sourcemaps, etc
-* gulp serve-dist: same with the production version
-* gulp clean
-* gulp ts-lint: check TypeScript code quality/style
-* gulp check-js-quality: check JavaScript code quality
-* gulp check-js-style: check JavaScript code style
+* `gulp serve`: start a Web server with live reload, watching files, transpiling, generating sourcemaps, etc
+* `gulp serve-dist`: same with the production version
+* `gulp clean`
+* `gulp ts-lint`: check TypeScript code quality/style
+* `gulp check-js-quality`: check JavaScript code quality
+* `gulp check-js-style`: check JavaScript code style
+* `gulp prepare-test-unit`: clean, compile and check quality/style
+* `gulp test-unit`: run unit tests using Karma (prereq: `gulp prepare-test-unit`
 
 You can run the `gulp -T` command get an visual idea of the links between the different tasks.
 
