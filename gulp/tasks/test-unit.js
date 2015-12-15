@@ -11,10 +11,19 @@ let runSequence = require("run-sequence");
 //import config from "../config";
 //import utils from "../utils";
 
-gulp.task("test-unit", "Execute all unit tests", [ "prepare-test-unit" ], (callback) =>{
+let karmaConfigFilePath = path.resolve("karma.conf.js");
+
+gulp.task("test-unit", "Execute all unit tests", (callback) =>{
 	return new KarmaServer({
-		configFile: path.resolve("karma.conf.js"), // necessary otherwise the file is not resolved correctly
+		configFile: karmaConfigFilePath, // necessary otherwise the file is not resolved correctly
 		singleRun: true
+	}, callback).start();
+});
+
+gulp.task("test-unit-dev", "Execute all unit tests continuously (watches files)", (callback) =>{
+	return new KarmaServer({
+		configFile: karmaConfigFilePath, // necessary otherwise the file is not resolved correctly
+		singleRun: false
 	}, callback).start();
 });
 

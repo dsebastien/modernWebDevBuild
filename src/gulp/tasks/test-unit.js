@@ -16,10 +16,19 @@ class TestUnitTaskLoader extends AbstractTaskLoader {
 
 		runSequence = runSequence.use(gulp); // needed to bind to the correct gulp object (alternative is to pass gulp to runSequence as first argument)
 
-		gulp.task("test-unit", "Execute all unit tests", [ "prepare-test-unit" ], (callback) =>{
+		let karmaConfigFilePath = path.resolve("karma.conf.js");
+
+		gulp.task("test-unit", "Execute all unit tests", (callback) =>{
 			return new KarmaServer({
-				configFile: path.resolve("karma.conf.js"), // necessary otherwise the file is not resolved correctly by the karma runtime
+				configFile: karmaConfigFilePath, // necessary otherwise the file is not resolved correctly by the karma runtime
 				singleRun: true
+			}, callback).start();
+		});
+
+		gulp.task("test-unit-dev", "Execute all unit tests continuously (watches files)", (callback) =>{
+			return new KarmaServer({
+				configFile: karmaConfigFilePath, // necessary otherwise the file is not resolved correctly by the karma runtime
+				singleRun: false
 			}, callback).start();
 		});
 
