@@ -256,7 +256,7 @@ Here's is the minimal required contents for ModernWebDevBuild:
 
 ```
 {
-  "version": "1.7.0",
+  "version": "1.7.3",
   "compilerOptions": {
 	"target": "es5",
 	"module": "commonjs",
@@ -276,6 +276,7 @@ Here's is the minimal required contents for ModernWebDevBuild:
 	"listFiles": false
   },
   "filesGlob": [
+	"./typings/*.d.ts",
 	"./app/**/*.ts"
   ],
   "exclude": [
@@ -289,7 +290,7 @@ Here's a more complete example including code style rules:
 
 ```
 {
-  "version": "1.7.0",
+  "version": "1.7.3",
   "compilerOptions": {
 	"target": "es5",
 	"module": "commonjs",
@@ -323,6 +324,7 @@ Here's a more complete example including code style rules:
 	"placeOpenBraceOnNewLineForControlBlocks": false
   },
   "filesGlob": [
+	"./typings/*.d.ts",
 	"./app/**/*.ts"
   ],
   "exclude": [
