@@ -94,11 +94,8 @@ You should get warnings about missing peer dependencies. Those are dependencies 
 Install these one by one.
 
 For now the required peer dependencies are as follows:
-* babel 6.3.x
-  * babel-core
-  * babel-plugin-transform-es2015-modules-commonjs
-  * babel-preset-es2015
-* gulp 3.9.x
+* babel-core
+* gulp
 * jspm
 * nodemon
 * typescript
@@ -130,6 +127,7 @@ Please make sure to check the file organization section for more background abou
 	  * vendor.scss: file used to import all third-party stylesheets
 	  * note that the goal isn't to put ALL your stylesheets in there, basically just the entrypoints and the generic parts (e.g., variables, mixins, responsive styles, ...)
 	* index.html: the entrypoint of your application
+  * .babelrc: Babel configuration file
   * .jscsrc: JSCS rule set to use while checking JavaScript code style
 	* reference: http://jscs.info/overview
   * .jshintrc: JSHint rule set to use while checking JavaScript code quality
@@ -144,6 +142,23 @@ Please make sure to check the file organization section for more background abou
 
 ### Minimal (build-related) required file contents
 Although we want to limit this list as much as possible, for everything to build successfully, some files need specific contents:
+
+#### .babelrc
+```
+{
+	"presets": ["es2015"],
+	"plugins": ["transform-es2015-modules-commonjs"],
+	"comments": false
+}
+```
+
+With the configuration above, Babel will transpile ES2015 code to ES5 commonjs.
+For that configuration to work, the following devDependencies must also be added to your project:
+
+```
+"babel-plugin-transform-es2015-modules-commonjs": "6.3.x",
+"babel-preset-es2015": "6.3.x",
+```
 
 #### gulpfile.babel.js
 In order to use ModernWebDevBuild, your gulpfile must at least contain the following.
@@ -189,7 +204,6 @@ In your code, you'll be able to use `import x from "y"`. In order for this to wo
 
 ```
 System.config({
-  baseURL: "./",
   defaultJSExtensions: true,
   transpiler: "none",
   paths: {
@@ -203,7 +217,6 @@ System.config({
 ```
 
 In the above:
-* baseURL: is mandatory otherwise modules will not be loaded correctly
 * defaultJSExtensions: is mandatory so that extensions don't have to be specified when importing modules
 * transpiler: is set to 'none' because we don't use in-browser transpilation
 * paths
@@ -546,6 +559,7 @@ You can run the `gulp -T` command get an visual idea of the links between the di
 * run-sequence: run a series of dependent gulp tasks in order: https://www.npmjs.com/package/run-sequence
 * event-stream: construct pipes of streams of events: https://www.npmjs.com/package/event-stream
 * connect-history-api-fallback: useful to automatically redirect all non-existent directories to the index file; required for SPAs: https://www.npmjs.com/package/connect-history-api-fallback
+* karma: unit test runner: https://www.npmjs.com/package/karma
 
 ## Contributing
 * Fork the project
