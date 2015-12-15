@@ -6,7 +6,7 @@ cache:
   - jspm_packages
 branches:
   only:
-	- master
+    - master
 notifications:
   email: true
 node_js:
