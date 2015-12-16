@@ -1,5 +1,9 @@
 # Upgrade guide
 
+## From 0.1.0 to 0.1.1
+To upgrade you can simply increment the dependency version in your project.
+To benefit from the unit testing support, you should add a karma.conf.js file to your project. Check the readme for details about its contents (though you can configure Karma as you wish/need).
+
 ## From 0.0.x to 0.1.0
 First, add a .babelrc file to your project; the minimal contents should be as follows:
 ```
