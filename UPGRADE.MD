@@ -1,5 +1,26 @@
 # Upgrade guide
 
+## From 0.1.1 to 0.2.0
+#61 breaks compatibility with existing projects.
+
+In order to fix this, you need to rename app/core/core.bootstrap.ts to core/boot.ts (and rename the template accordingly) and ensure that you adapt app/index.html as well.
+
+If you're not willing to rename as proposed above, then you can define the `distEntryPoint` option.
+
+Here's an example gulpfile.babel.js:
+
+```
+"use strict";
+
+import gulp from "gulp";
+
+import modernWebDevBuild from "modern-web-dev-build";
+
+let options = {};
+
+options.distEntryPoint = "core/core.bootstrap";
+```
+
 ## From 0.1.0 to 0.1.1
 To upgrade you can simply increment the dependency version in your project.
 To benefit from the unit testing support, you should add a karma.conf.js file to your project. Check the readme for details about its contents (though you can configure Karma as you wish/need).

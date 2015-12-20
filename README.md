@@ -495,7 +495,7 @@ module.exports = function (config) {
 		// doc: https://www.npmjs.com/package/karma-jspm
 		// reference config: https://github.com/gunnarlium/babel-jspm-karma-jasmine-istanbul
 		jspm: {
-			// Path to your SystemJS/JSPM configuration file 
+			// Path to your SystemJS/JSPM configuration file
 			config: "jspm.conf.js",
 
 			// Where to find jspm packages
@@ -513,7 +513,7 @@ module.exports = function (config) {
 				".tmp/**/!(*.spec).js" // make sure that all files are available
 			],
 
-			// SystemJS configuration specifically for tests, added after your config file. 
+			// SystemJS configuration specifically for tests, added after your config file.
 			// Good for adding test libraries and mock modules
 			paths: {}
 		}
@@ -523,8 +523,8 @@ module.exports = function (config) {
 
 Dev dependencies to add for the above Karma configuration:
 ```
-    "jasmine": "2.4.x",
-    "karma-jasmine": "0.3.x",
+	"jasmine": "2.4.x",
+	"karma-jasmine": "0.3.x",
 ```
 
 ### Minimal (application-specific) required file contents
@@ -645,6 +645,25 @@ The command will give you a description of each task. The most important to star
 * `gulp test-unit`: run unit tests using Karma (prereq: `gulp prepare-test-unit`
 
 You can run the `gulp -T` command get an visual idea of the links between the different tasks.
+
+## Options
+The build can be customized by passing options.
+Defining options is done as in the following example gulpfile.babel.js:
+
+```
+"use strict";
+
+import gulp from "gulp";
+
+import modernWebDevBuild from "modern-web-dev-build";
+
+let options = {};
+
+options.distEntryPoint = "core/core.bootstrap";
+```
+
+Available options:
+* distEntryPoint: must be a relative path from .tmp/ to the file to use as entry point for creating the production JS bundle. The extension does not need to be specified (JSPM is used to load the file)
 
 ## Build dependencies
 * gulp: build system (https://www.npmjs.com/package/gulp)

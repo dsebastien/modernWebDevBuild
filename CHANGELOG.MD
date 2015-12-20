@@ -1,3 +1,6 @@
+* 0.2.0
+  * BREAKING CHANGE: scripts-javascript-dist now uses core/boot.js as entry point (vs core/core.bootstrap.js in earlier versions) (fixes #
+    * this new default behavior can be customized by specifying the `distEntryPoint` option (see README or UPGRADE guide)
 * 0.1.1
   * added unit testing support with karma & jasmine
   * removed gulp-tsd dependency

@@ -77,7 +77,7 @@ let javascript = {
 	src: [
 		folders.app + globs.scripts.javascript
 	],
-	srcDist: folders.temp + "/core/core.bootstrap.js",
+	srcDist: folders.temp + "/core/boot.js",
 	dest: folders.temp,
 	destDist: folders.dist + folders.scripts + "/" + finalJsBundleName,
 	finalJsBundlePath: folders.scripts + "/" + finalJsBundleName
