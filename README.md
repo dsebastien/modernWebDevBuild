@@ -665,6 +665,23 @@ options.distEntryPoint = "core/core.bootstrap";
 Available options:
 * distEntryPoint: must be a relative path from .tmp/ to the file to use as entry point for creating the production JS bundle. The extension does not need to be specified (JSPM is used to load the file)
 
+## FAQ
+
+### How can I inline some script in the production version of some HTML page?
+* add `inline <path to the JS file>` right above the script tag that you want to have inlined; this tells the gulp-inline-source plugin where to find the resource that should be inlined
+* add the `inline` attribute to the script tag itself: `<script inline src="..."></script>
+
+Example:
+```
+<!-- inline ../node_modules/angular2/bundles/angular2-polyfills.js -->
+<script inline src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
+```
+
+Note that the path specified in the `<!-- inline ...` comment is relative to the root of your project and NOT to the html file
+
+
+Check out [gulp-inline-source](https://www.npmjs.com/package/gulp-inline-source)'s documentation for more details.
+
 ## Build dependencies
 * gulp: build system (https://www.npmjs.com/package/gulp)
 * babel: ES2015 to ES5 transpiler; used for the gulp build
@@ -679,6 +696,7 @@ Available options:
 * gulp-flatten: remove or replace relative path for files: https://www.npmjs.com/package/gulp-flatten
 * gulp-if: conditionally run a task: https://www.npmjs.com/package/gulp-if
 * gulp-imagemin: minify png, jpeg, gif and svg images: https://www.npmjs.com/package/gulp-imagemin
+* gulp-inline-source: inline scripts & stylesheets: https://www.npmjs.com/package/gulp-inline-source
 * gulp-jshint: JavaScript code quality checker plugin for gulp that uses JSHint: https://www.npmjs.com/package/gulp-jshint
 * gulp-minify-html: minify html with minimize: https://www.npmjs.com/package/gulp-minify-html
 * gulp-minify-css: minify css with clean-css: https://www.npmjs.com/package/gulp-minify-css

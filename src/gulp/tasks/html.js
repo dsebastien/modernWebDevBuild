@@ -4,7 +4,9 @@ import AbstractTaskLoader from "../abstractTaskLoader";
 import config from "../config";
 //import utils from "../utils";
 
+import * as path from "path";
 import htmlReplace from "gulp-html-replace";
+import inlineSource from "gulp-inline-source";
 import iff from "gulp-if";
 import minifyHtml from "gulp-minify-html";
 import size from "gulp-size";
@@ -27,6 +29,12 @@ class HtmlTaskLoader extends AbstractTaskLoader {
 					"css-vendor": config.styles.finalVendorCssBundlePath,
 					"css-bundle": config.styles.finalCssBundlePath,
 					"js-app": config.javascript.finalJsBundlePath
+				}))
+
+				.pipe(inlineSource({
+					// options reference: https://github.com/popeindustries/inline-source#usage
+					compress: true,
+					rootpath: path.resolve(".") // project root --> directory path used for resolving inlineable paths
 				}))
 
 				// Minify HTML
