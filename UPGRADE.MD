@@ -1,7 +1,7 @@
 # Upgrade guide
 
 ## From 0.2.0 to 0.2.1
-The gulp-inline-source plugin has been added but doesn't require any modification in client projects.
+No modification mandatory with this release.
 
 ## From 0.1.1 to 0.2.0
 #61 breaks compatibility with existing projects.

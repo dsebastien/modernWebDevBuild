@@ -3,6 +3,8 @@
   * added the gulp-inline-source plugin (https://www.npmjs.com/package/gulp-inline-source)
     * allows to inline resources (scripts, stylesheets, images) within HTML files
     * for example very useful for cases where some script can't/musn't be loaded through SystemJS (e.g., zone.js, reflect-metadata, Angular 2 polyfills, ...)
+  * added an option to define whether the production JS bundle must be minified or not: minifyProductionJSBundle (true by default)
+  * added an option to define whether the production JS bundle must be mangled or not (true by default)
 * 0.2.0
   * BREAKING CHANGE: scripts-javascript-dist now uses core/boot.js as entry point (vs core/core.bootstrap.js in earlier versions) (fixes #
     * this new default behavior can be customized by specifying the `distEntryPoint` option (see README or UPGRADE guide)

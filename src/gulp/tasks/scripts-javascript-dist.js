@@ -18,12 +18,34 @@ class ScriptsJavaScriptDistTaskLoader extends AbstractTaskLoader {
 			// Assuming that there is a single entrypoint for the application
 			// We only need to create the final bundle
 
+			// Determine if the bundle should be minified or not
+			let minifyProductionJSBundle = true;
+			
+			if(typeof gulp.options.minifyProductionJSBundle !== "undefined"){
+				minifyProductionJSBundle = gulp.options.minifyProductionJSBundle;
+				
+				if(minifyProductionJSBundle === false){
+					gutil.log("The production JS bundle will NOT be minified!");
+				}
+			}
+
+			// Determine if the bundle should be mangled or not
+			let mangleProductionJSBundle = true;
+
+			if(typeof gulp.options.mangleProductionJSBundle !== "undefined"){
+				mangleProductionJSBundle = gulp.options.mangleProductionJSBundle;
+
+				if(mangleProductionJSBundle === false){
+					gutil.log("The production JS bundle will NOT be mangled!");
+				}
+			}
+
 			// Determine the entry point for the bundle creation (i.e., where to start from)
 			let distEntryPoint = config.javascript.srcDist;
 
-			if(gulp.options.distEntryPoint){
+			if(typeof gulp.options.distEntryPoint !== "undefined"){
 				distEntryPoint = path.join(config.folders.temp, gulp.options.distEntryPoint);
-				gutil.log("The production bundle entry point has been customized: ", distEntryPoint);
+				gutil.log("The production JS bundle entry point has been customized: ", distEntryPoint);
 			}
 
 			// Create the bundle
@@ -37,8 +59,8 @@ class ScriptsJavaScriptDistTaskLoader extends AbstractTaskLoader {
 				config.javascript.destDist, {
 					sourceMaps: false, // no need for sourcemaps in prod
 					lowResSourceMaps: false, // can speed up generation
-					minify: true,
-					mangle: false,
+					minify: minifyProductionJSBundle,
+					mangle: mangleProductionJSBundle,
 					//sfxFormat: "amd", // to output the SFX bundle in the AMD module format
 					// runtime: false, // to exclude the Traceur or Babel runtime
 					globalDefs: {

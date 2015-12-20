@@ -10,6 +10,7 @@ import inlineSource from "gulp-inline-source";
 import iff from "gulp-if";
 import minifyHtml from "gulp-minify-html";
 import size from "gulp-size";
+import gutil from "gulp-util";
 //import debug from "gulp-debug";
 
 class HtmlTaskLoader extends AbstractTaskLoader {
@@ -17,6 +18,17 @@ class HtmlTaskLoader extends AbstractTaskLoader {
 		super.registerTask(gulp);
 
 		gulp.task("html", "Optimize HTML", () =>{
+			// Determine if the inlined scripts should be minified or not
+			let minifyInlinedScripts = true;
+
+			if(typeof gulp.options.minifyProductionJSBundle !== "undefined"){
+				minifyInlinedScripts = gulp.options.minifyProductionJSBundle;
+
+				if(minifyInlinedScripts === false){
+					gutil.log("The inlined scripts will NOT be minified!");
+				}
+			}
+			
 			return gulp.plumbedSrc(
 				config.html.src
 			)
@@ -33,7 +45,7 @@ class HtmlTaskLoader extends AbstractTaskLoader {
 
 				.pipe(inlineSource({
 					// options reference: https://github.com/popeindustries/inline-source#usage
-					compress: true,
+					compress: minifyInlinedScripts,
 					rootpath: path.resolve(".") // project root --> directory path used for resolving inlineable paths
 				}))
 

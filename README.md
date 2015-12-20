@@ -664,6 +664,8 @@ options.distEntryPoint = "core/core.bootstrap";
 
 Available options:
 * distEntryPoint: must be a relative path from .tmp/ to the file to use as entry point for creating the production JS bundle. The extension does not need to be specified (JSPM is used to load the file)
+* minifyProductionJSBundle: by default, the production JS bundle is minified, but you can disable it by setting this option to false
+* mangleProductionJSBundle: by default, the production JS bundle is mangled, but you can disable it by setting this option to false
 
 ## FAQ
 
