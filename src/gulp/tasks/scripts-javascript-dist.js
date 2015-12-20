@@ -23,7 +23,7 @@ class ScriptsJavaScriptDistTaskLoader extends AbstractTaskLoader {
 
 			if(gulp.options.distEntryPoint){
 				distEntryPoint = path.join(config.folders.temp, gulp.options.distEntryPoint);
-				gutil.log("Production bundle entry point customized: ", distEntryPoint);
+				gutil.log("The production bundle entry point has been customized: ", distEntryPoint);
 			}
 
 			// Create the bundle
@@ -37,7 +37,7 @@ class ScriptsJavaScriptDistTaskLoader extends AbstractTaskLoader {
 				config.javascript.destDist, {
 					sourceMaps: false, // no need for sourcemaps in prod
 					lowResSourceMaps: false, // can speed up generation
-					minify: false,
+					minify: true,
 					mangle: false,
 					//sfxFormat: "amd", // to output the SFX bundle in the AMD module format
 					// runtime: false, // to exclude the Traceur or Babel runtime
