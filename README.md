@@ -122,7 +122,8 @@ Please make sure to check the file organization section for more background abou
 	* core: folder containing at least the entrypoint of your application
 	  * commons: folder containing common reusable code (e.g., base utilities)
 	  * services: folder containing generic services (e.g., for local storage)
-	  * core.bootstrap.ts: the entrypoint of your application
+	  * boot.ts: the entrypoint of your application
+	  * app.ts: the application root
 	* fonts: folder containing fonts of your application (if any)
 	* images: folder for image assets
 	* pages: folder for full-blown pages of your application
@@ -178,6 +179,9 @@ import gulp from "gulp";
 
 import modernWebDevBuild from "modern-web-dev-build";
 let options = undefined; // no options are supported yet
+
+//options.minifyHTML = false;
+//...
 
 modernWebDevBuild.registerTasks(gulp, options);
 ```
@@ -530,15 +534,30 @@ Dev dependencies to add for the above Karma configuration:
 ### Minimal (application-specific) required file contents
 Although we want to limit this list as much as possible, for everything to build successfully, some files need specific contents:
 
-#### core/core.bootstrap.ts
-The core.bootstrap.ts file is the entrypoint of your application. Currently, it is mandatory for this file to exist (with that specific name), although that could change or be customizable later.
+#### core/app.ts
+This should be the top element of your application. This should be loaded by core/boot.ts (see below).
+
+```
+"use strict";
+
+export class App {
+	...
+	constructor(){
+		console.log("Hello world!");
+	}
+}
+```
+
+#### core/boot.ts
+The boot.ts file is the entrypoint of your application. Currently, it is mandatory for this file to exist (with that specific name), although that could change or be customizable later.
 
 The contents are actually not important but here's a starting point:
 
 ```
 "use strict";
 
-console.log("Hello world!");
+import {App} from "core/app";
+// bootstrap your app
 ```
 
 #### styles/main.scss
@@ -666,6 +685,7 @@ Available options:
 * distEntryPoint: must be a relative path from .tmp/ to the file to use as entry point for creating the production JS bundle. The extension does not need to be specified (JSPM is used to load the file)
 * minifyProductionJSBundle: by default, the production JS bundle is minified, but you can disable it by setting this option to false
 * mangleProductionJSBundle: by default, the production JS bundle is mangled, but you can disable it by setting this option to false
+* minifyProductionHTML: by default, the production HTML is minified, but you can disable it by setting this option to false
 
 ## FAQ
 

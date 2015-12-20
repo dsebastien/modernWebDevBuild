@@ -29,6 +29,17 @@ class HtmlTaskLoader extends AbstractTaskLoader {
 				}
 			}
 			
+			// Determine if HTML should be minified or not
+			let minifyProductionHTML = true;
+			
+			if(typeof gulp.options.minifyProductionHTML !== "undefined"){
+				minifyProductionHTML = gulp.options.minifyProductionHTML;
+				
+				if(minifyProductionHTML === false){
+					gutil.log("The HTML will NOT be minified!");
+				}
+			}
+			
 			return gulp.plumbedSrc(
 				config.html.src
 			)
@@ -50,7 +61,9 @@ class HtmlTaskLoader extends AbstractTaskLoader {
 				}))
 
 				// Minify HTML
-				.pipe(iff(config.files.any + config.extensions.html, minifyHtml()))
+				.pipe(iff(minifyProductionHTML && config.files.any + config.extensions.html, minifyHtml({
+					quotes: true // do not remove quotes (Angular 2 does not like that)
+				})))
 
 				// Output files
 				.pipe(gulp.dest(config.html.dest))
