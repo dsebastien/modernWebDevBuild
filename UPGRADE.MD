@@ -1,5 +1,8 @@
 # Upgrade guide
 
+## From 0.2.2 to 0.2.3
+No modification mandatory with this release.
+
 ## From 0.2.1 to 0.2.2
 If you are using Angular 2, you should set the minifyProductionHTML option to false (see changelog)
 

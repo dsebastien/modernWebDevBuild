@@ -61,7 +61,7 @@ class ServeTaskLoader extends AbstractTaskLoader {
 				},
 				server: {
 					baseDir: config.webServerFolders.dev,
-
+					//routes: alternative way to map content that is above the base dir
 					// fix for SPAs w/ BrowserSync & others: https://github.com/BrowserSync/browser-sync/issues/204
 					// reference: https://github.com/BrowserSync/browser-sync/issues/204
 					middleware: [

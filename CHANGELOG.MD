@@ -1,3 +1,7 @@
+* 0.2.3
+  * fixed sourcemap generation issues (see #69)
+    * sourcemaps sometime require a browser refresh before actually working: this might be due to a related issue (timing issue?)
+  * removed legacy leftovers
 * 0.2.2
   * added an option to define whether the production HTML should be minified or not: minifyProductionHTML (true by default)
     * Angular 2 does not support HTML minification anymore: https://github.com/dsebastien/modernWebDevBuild/issues/67

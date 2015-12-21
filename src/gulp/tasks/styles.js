@@ -37,9 +37,9 @@ class StylesTaskLoader extends AbstractTaskLoader {
 				}))
 
 				// Write sourcemaps: https://www.npmjs.com/package/gulp-sourcemaps
-				.pipe(sourcemaps.write({ // use "." to write the sourcemap to a separate file in the same dir
+				.pipe(sourcemaps.write(".", { // use "." to write the sourcemap to a separate file in the same dir
 					includeContent: false, // alternative: include the contents and remove sourceRoot. Avoids issues but prevents from editing the sources directly in the browser
-					sourceRoot: "./" // use the file's folder as source root
+					sourceRoot: "/" // use an absolute path because we have scripts in different subpaths
 				}))
 
 				// Include vendor prefixes

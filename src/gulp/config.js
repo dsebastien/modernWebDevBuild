@@ -48,10 +48,7 @@ let globs = {
 let files = {
 	any: "*",
 	packageJSON: folders.root + "/package.json",
-	appTypeScriptReferences: folders.typings + "/typescriptApp.d.ts",
-	libraryTypeScriptDefinitions: folders.typings + globs.scripts.typescript,
-	htaccess: folders.nodeModules + "/apache-server-configs/dist/.htaccess",
-	jspmConfigFile: folders.root + "/jspm.conf.js"
+	typeScriptDefinitions: folders.typings + globs.scripts.typescript
 };
 
 let webServerFolders = {
@@ -86,8 +83,7 @@ let javascript = {
 let typescript = {
 	src: [
 		folders.app + globs.scripts.typescript,
-		files.libraryTypeScriptDefinitions, // reference to library .d.ts files
-		files.appTypeScriptReferences // reference to app.d.ts files
+		files.typeScriptDefinitions // reference to .d.ts files
 	],
 	srcAppOnly: [
 		folders.app + globs.scripts.typescript
@@ -134,7 +130,6 @@ let html = {
 let copy = {
 	src: [
 		folders.app + globs.any,
-		files.htaccess,
 
 		// ignore stuff handled by the other tasks
 		utils.exclude(folders.app + globs.html),

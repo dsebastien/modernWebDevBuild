@@ -7,6 +7,7 @@ import config from "../config";
 import sourcemaps from "gulp-sourcemaps";
 import ts from "gulp-typescript";
 import size from "gulp-size";
+//import debug from "gulp-debug";
 
 class ScriptsTypeScriptTaskLoader extends AbstractTaskLoader {
 	registerTask(gulp){
@@ -25,6 +26,8 @@ class ScriptsTypeScriptTaskLoader extends AbstractTaskLoader {
 			});
 
 			let tsResult = gulp.plumbedSrc(config.typescript.src) // handle errors nicely (i.e., without breaking watch)
+				// Display the files in the stream
+				//.pipe(debug({title: "Stream contents:", minimal: true}))
 				.pipe(sourcemaps.init())
 				.pipe(ts(
 					tsProject
@@ -35,8 +38,10 @@ class ScriptsTypeScriptTaskLoader extends AbstractTaskLoader {
 
 			return tsResult.js
 
-				.pipe(sourcemaps.write({ // use "." to write the sourcemap to a separate file in the same dir
-					// sourcemaps need to be written to separate files otherwise Babel freaks out (!)
+				// Display the files in the stream
+				//.pipe(debug({title: "Stream contents:", minimal: true}))
+
+				.pipe(sourcemaps.write(".", { // use "." to write the sourcemap to a separate file in the same dir
 					includeContent: false, // alternative: include the contents and remove sourceRoot. Avoids issues but prevents from editing the sources directly in the browser
 					sourceRoot: "/" // use an absolute path because we have scripts in different subpaths
 				}))
