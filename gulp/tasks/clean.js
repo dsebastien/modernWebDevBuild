@@ -7,11 +7,11 @@ import del from "del";
 
 import config from "../config";
 
-gulp.task("clean", "Clean output directories",
-	del.bind(null, [
+gulp.task("clean", "Clean output directories", callback => {
+	del([
 			config.folders.dist + config.globs.any
 		], {
 			dot: true
-		}
-	)
-);
+		}, callback
+	);
+});
