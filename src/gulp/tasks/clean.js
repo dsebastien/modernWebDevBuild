@@ -10,13 +10,13 @@ class CleanTaskLoader extends AbstractTaskLoader {
 	registerTask(gulp){
 		super.registerTask(gulp);
 
-		gulp.task("clean", "Clean output directories", callback =>{
+		gulp.task("clean", "Clean output directories", () =>{
 			del([
 					config.folders.temp,
 					config.folders.dist + config.globs.any
 				], {
 					dot: true
-				}, callback
+				}
 			);
 		});
 	}
