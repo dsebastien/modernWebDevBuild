@@ -1,20 +1,22 @@
+* 0.2.4
+  * ...
 * 0.2.3
   * fixed sourcemap generation issues (see #69)
-    * sourcemaps sometime require a browser refresh before actually working: this might be due to a related issue (timing issue?)
+	* sourcemaps sometime require a browser refresh before actually working: this might be due to a related issue (timing issue?)
   * removed legacy leftovers
 * 0.2.2
   * added an option to define whether the production HTML should be minified or not: minifyProductionHTML (true by default)
-    * Angular 2 does not support HTML minification anymore: https://github.com/dsebastien/modernWebDevBuild/issues/67
+	* Angular 2 does not support HTML minification anymore: https://github.com/dsebastien/modernWebDevBuild/issues/67
 * 0.2.1
   * minify the production bundle by default
   * added the gulp-inline-source plugin (https://www.npmjs.com/package/gulp-inline-source)
-    * allows to inline resources (scripts, stylesheets, images) within HTML files
-    * for example very useful for cases where some script can't/musn't be loaded through SystemJS (e.g., zone.js, reflect-metadata, Angular 2 polyfills, ...)
+	* allows to inline resources (scripts, stylesheets, images) within HTML files
+	* for example very useful for cases where some script can't/musn't be loaded through SystemJS (e.g., zone.js, reflect-metadata, Angular 2 polyfills, ...)
   * added an option to define whether the production JS bundle must be minified or not: minifyProductionJSBundle (true by default)
   * added an option to define whether the production JS bundle must be mangled or not: mangleProductionJSBundle (true by default)
 * 0.2.0
   * BREAKING CHANGE: scripts-javascript-dist now uses core/boot.js as entry point (vs core/core.bootstrap.js in earlier versions) (fixes #
-    * this new default behavior can be customized by specifying the `distEntryPoint` option (see README or UPGRADE guide)
+	* this new default behavior can be customized by specifying the `distEntryPoint` option (see README or UPGRADE guide)
 * 0.1.1
   * added unit testing support with karma & jasmine
   * removed gulp-tsd dependency
@@ -23,7 +25,7 @@
   * added support for passing options to the build (for now only used internally)
   * tagged dependencies that should be in client projects as peerDependencies
   * removed babel 6 plugins/presets from the peerDependencies
-    * client projects are free to choose what they want to use
+	* client projects are free to choose what they want to use
 * 0.1.0
   * Upgraded to Babel 6
 	* now requires a .babelrc configuration file to be present in the project's main folder
