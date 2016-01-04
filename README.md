@@ -691,7 +691,7 @@ Available options:
 
 ### How can I inline some script in the production version of some HTML page?
 * add `inline <path to the JS file>` right above the script tag that you want to have inlined; this tells the gulp-inline-source plugin where to find the resource that should be inlined
-* add the `inline` attribute to the script tag itself: `<script inline src="..."></script>
+* add the `inline` attribute to the script tag itself: ```<script inline src="..."></script>```
 
 Example:
 ```
@@ -700,7 +700,6 @@ Example:
 ```
 
 Note that the path specified in the `<!-- inline ...` comment is relative to the root of your project and NOT to the html file
-
 
 Check out [gulp-inline-source](https://www.npmjs.com/package/gulp-inline-source)'s documentation for more details.
 
@@ -770,7 +769,7 @@ If you want to build from source, you need to:
 * clone this git repository
 * run `npm run setup`
 * run `npm run build`
-* * start hacking :)
+* start hacking :)
 
 To clean, you can run `npm run clean`
 
