@@ -1,5 +1,7 @@
 # Modern Web Dev Build
 
+[![NPM version](https://img.shields.io/npm/v/modern-web-dev-build.svg)](https://www.npmjs.com/package/modern-web-dev-build)
+[![Downloads](https://img.shields.io/npm/dm/modern-web-dev-build.svg)](https://www.npmjs.com/package/modern-web-dev-build)
 [![Build Status](https://secure.travis-ci.org/dsebastien/modernWebDevBuild.png?branch=master)](https://travis-ci.org/dsebastien/modernWebDevBuild)
 [![Coverage Status](
 https://coveralls.io/repos/dsebastien/modernWebDevBuild/badge.svg?branch=master&service=github
