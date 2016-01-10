@@ -45,9 +45,10 @@ Note that this project is heavily inspired from:
 ## Features
 * ES2015 and TypeScript support
 * built-in HTTP server with live reloading & cross-device synchronization (BrowserSync)
+  * configured to support CORS
 * awesome developer experience with a change detection mechanism that automagically:
-  * transpiles TypeScript > ES5 w/ sourcemaps
-  * transpiles ES2015 > ES5 w/ sourcemaps
+  * transpiles TypeScript > ESx w/ sourcemaps (you choose the target version)
+  * transpiles ES2015 > ESx w/ sourcemaps  (you choose the target version)
   * transpiles SASS > CSS w/ sourcemaps
   * checks JavaScript/TypeScript code quality/style and report on the console (without breaking the build)
   * ...
@@ -259,37 +260,37 @@ The tsconfig.json file contains:
 * TypeScript code style rules
 * the list of files/folders to include/exclude
 
-Here's is the minimal required contents for ModernWebDevBuild:
+Here's is the minimal required contents for ModernWebDevBuild. Note that the outDir value is important as it tells the compiler where to write the generated code! Make sure that you also DO have the rootDir property defined and pointing to "./app", otherwise the build will fail (more precisely, `npm run serve` will fail).
+
+The build depends on the presence of those settings.
 
 ```
 {
-  "version": "1.7.3",
-  "compilerOptions": {
-	"target": "es5",
-	"module": "commonjs",
-	"declaration": false,
-	"noImplicitAny": false,
-	"suppressImplicitAnyIndexErrors": true,
-	"removeComments": false,
-	"emitDecoratorMetadata": true,
-	"experimentalDecorators": true,
-	"noEmitOnError": false,
-	"preserveConstEnums": true,
-	"inlineSources": false,
-	"sourceMap": false,
-	"outDir": "./.tmp",
-	"project": "./app",
-	"moduleResolution": "node",
-	"listFiles": false
-  },
-  "filesGlob": [
-	"./typings/*.d.ts",
-	"./app/**/*.ts"
-  ],
-  "exclude": [
-	"node_modules",
-	"jspm_packages"
-  ]
+	"version": "1.7.3",
+	"compilerOptions": {
+		"target": "es5",
+		"module": "commonjs",
+		"declaration": false,
+		"noImplicitAny": true,
+		"suppressImplicitAnyIndexErrors": true,
+		"removeComments": false,
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"noEmitOnError": false,
+		"preserveConstEnums": true,
+		"inlineSources": false,
+		"sourceMap": false,
+		"outDir": "./.tmp",
+		"rootDir": "./app",
+		"moduleResolution": "node",
+		"listFiles": false
+	},
+	"exclude": [
+		"node_modules",
+		"jspm_packages",
+		"typings/browser",
+		"typings/browser.d.ts"
+	]
 }
 ```
 
@@ -297,51 +298,49 @@ Here's a more complete example including code style rules:
 
 ```
 {
-  "version": "1.7.3",
-  "compilerOptions": {
-	"target": "es5",
-	"module": "commonjs",
-	"declaration": false,
-	"noImplicitAny": false,
-	"suppressImplicitAnyIndexErrors": true,
-	"removeComments": false,
-	"emitDecoratorMetadata": true,
-	"experimentalDecorators": true,
-	"noEmitOnError": false,
-	"preserveConstEnums": true,
-	"inlineSources": false,
-	"sourceMap": false,
-	"outDir": "./.tmp",
-	"project": "./app",
-	"moduleResolution": "node",
-	"listFiles": false
-  },
-  "formatCodeOptions": {
-	"indentSize": 2,
-	"tabSize": 4,
-	"newLineCharacter": "\r\n",
-	"convertTabsToSpaces": false,
-	"insertSpaceAfterCommaDelimiter": true,
-	"insertSpaceAfterSemicolonInForStatements": true,
-	"insertSpaceBeforeAndAfterBinaryOperators": true,
-	"insertSpaceAfterKeywordsInControlFlowStatements": true,
-	"insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
-	"insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
-	"placeOpenBraceOnNewLineForFunctions": false,
-	"placeOpenBraceOnNewLineForControlBlocks": false
-  },
-  "filesGlob": [
-	"./typings/*.d.ts",
-	"./app/**/*.ts"
-  ],
-  "exclude": [
-	"node_modules",
-	"jspm_packages"
-  ]
+	"version": "1.7.3",
+	"compilerOptions": {
+		"target": "es5",
+		"module": "commonjs",
+		"declaration": false,
+		"noImplicitAny": true,
+		"suppressImplicitAnyIndexErrors": true,
+		"removeComments": false,
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"noEmitOnError": false,
+		"preserveConstEnums": true,
+		"inlineSources": false,
+		"sourceMap": false,
+		"outDir": "./.tmp",
+		"rootDir": "./app",
+		"moduleResolution": "node",
+		"listFiles": false
+	},
+	"formatCodeOptions": {
+		"indentSize": 2,
+		"tabSize": 4,
+		"newLineCharacter": "\r\n",
+		"convertTabsToSpaces": false,
+		"insertSpaceAfterCommaDelimiter": true,
+		"insertSpaceAfterSemicolonInForStatements": true,
+		"insertSpaceBeforeAndAfterBinaryOperators": true,
+		"insertSpaceAfterKeywordsInControlFlowStatements": true,
+		"insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
+		"insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
+		"placeOpenBraceOnNewLineForFunctions": false,
+		"placeOpenBraceOnNewLineForControlBlocks": false
+	},
+	"exclude": [
+		"node_modules",
+		"jspm_packages",
+		"typings/browser",
+		"typings/browser.d.ts"
+	]
 }
 ```
 
-Note that `filesGlob` is not officially supported in TypeScript.
+Note the exclusion that we have made, all of which are relevant and there to avoid known issues (e.g., https://github.com/typings/discussions/issues/6 if you are using typings).
 
 #### tslint.json
 tslint.json is the configuration file for [TSLint](https://github.com/palantir/tslint).
@@ -685,6 +684,7 @@ options.distEntryPoint = "core/core.bootstrap";
 
 Available options:
 * distEntryPoint: must be a relative path from .tmp/ to the file to use as entry point for creating the production JS bundle. The extension does not need to be specified (JSPM is used to load the file)
+  * by default, the following file is used: `core/boot.js`
 * minifyProductionJSBundle: by default, the production JS bundle is minified, but you can disable it by setting this option to false
 * mangleProductionJSBundle: by default, the production JS bundle is mangled, but you can disable it by setting this option to false
 * minifyProductionHTML: by default, the production HTML is minified, but you can disable it by setting this option to false
@@ -710,7 +710,7 @@ Check out [gulp-inline-source](https://www.npmjs.com/package/gulp-inline-source)
 * babel: ES2015 to ES5 transpiler; used for the gulp build
 * typescript: the typescript tools (compiler, ...)
 * systemjs-builder: build tool for systemjs allows to create a single-file build of mixed-dependency module trees: https://www.npmjs.com/package/systemjs-builder
-* browser-sync: live CSS reload & browser syncing: https://www.npmjs.com/package/browser-sync
+* browser-sync: live reloading & browser syncing: https://www.npmjs.com/package/browser-sync
 * del: deletes files/folders: https://www.npmjs.com/package/del
 * gulp-autoprefixer: automatically adds vendor prefixes to CSS: https://www.npmjs.com/package/gulp-autoprefixer
 * gulp-cache: temp file based caching proxy task for gulp: https://www.npmjs.com/package/gulp-cache
@@ -742,10 +742,8 @@ Check out [gulp-inline-source](https://www.npmjs.com/package/gulp-inline-source)
 * gulp-cssimport: replace CSS imports by stylesheet contents: https://www.npmjs.com/package/gulp-cssimport
 * gulp-nice-package: validate npm's package.json file: https://www.npmjs.com/package/gulp-nice-package/
 * gulp-inject: JavaScript, stylesheet and webcomponent injection: https://www.npmjs.com/package/gulp-inject
-* gulp-tsd: TSD plugin for gulp: https://www.npmjs.com/package/gulp-tsd
 * gulp-tslint: Linter for TypeScript code: https://www.npmjs.com/package/gulp-tslint
 * gulp-typescript: TypeScript transpiler plugin for gulp: https://www.npmjs.com/package/gulp-typescript
-* tsd: TypeScript Definition manager: https://www.npmjs.com/package/tsd
 * gulp-babel: ES2015 to ES5 transpiler plugin for gulp: https://www.npmjs.com/package/gulp-babel
 * gulp-jscs: JavaScript code style checker plugin for gulp: https://www.npmjs.com/package/gulp-jscs
 * gulp-jscs-stylish: Stylish reporter for gulp-jscs: https://www.npmjs.com/package/gulp-jscs-stylish

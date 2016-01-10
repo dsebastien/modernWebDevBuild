@@ -1,5 +1,22 @@
 # Upgrade guide
 
+## From 0.2.3 to 0.3.0
+The gulp scripts-typescript task has changed. Now, instead of using an hardcoded list of paths to compile, it loads what you have configured in your tsconfig.json configuration file.
+Make sure that you DO have:
+* a tsconfig.json file :)
+* the `rootDir` property defined and pointing to "./app", otherwise the build will fail (more precisely, `npm run serve` will fail).
+* the `outDir` property defined and pointing to "./.tmp", (same issue otherwise)
+
+I've updated the example `tsconfig.json` file in the README, so please do refer to that.
+
+Check out the CHANGELOG list of known issues, there's an important catch with typings.
+
+
+Next, the babel dependency was upgraded to 6.4.x, meaning that it probably would be best for you to also upgrade.
+The following babel dependencies should be upgraded to 6.4.x:
+* babel-core
+* babel-plugin-transform-es2015-modules-commonjs
+
 ## From 0.2.2 to 0.2.3
 No modification mandatory with this release.
 

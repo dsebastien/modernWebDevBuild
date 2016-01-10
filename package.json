@@ -1,7 +1,7 @@
 {
   "name": "modern-web-dev-build",
   "description": "Modern Web Development Build.",
-  "version": "0.2.4",
+  "version": "0.3.0",
   "author": {
     "name": "Sebastien Dubois",
     "email": "seb@dsebastien.net",
@@ -33,12 +33,12 @@
     "karma-jasmine": "0.3.x"
   },
   "dependencies": {
-    "autoprefixer": "6.1.x",
-    "babel-core": "6.3.x",
-    "babel-plugin-transform-es2015-modules-commonjs": "6.3.x",
+    "autoprefixer": "6.2.x",
+    "babel-core": "6.4.x",
+    "babel-plugin-transform-es2015-modules-commonjs": "6.4.x",
     "babel-preset-es2015": "6.3.x",
     "babel-runtime": "6.3.x",
-    "browser-sync": "2.10.x",
+    "browser-sync": "2.11.x",
     "connect-history-api-fallback": "1.1.0",
     "del": "2.2.x",
     "event-stream": "3.3.x",
@@ -97,7 +97,7 @@
     "karma-jspm": "2.0.x"
   },
   "peerDependencies": {
-    "babel-core": "6.3.x",
+    "babel-core": "6.4.x",
     "gulp": "3.9.x",
     "jspm": "0.16.x",
     "nodemon": "1.8.x",

@@ -1,7 +1,7 @@
 "use strict";
 
 import AbstractTaskLoader from "../abstractTaskLoader";
-import config from "../config";
+//import config from "../config";
 //import utils from "../utils";
 
 import sourcemaps from "gulp-sourcemaps";
@@ -13,10 +13,10 @@ class ScriptsTypeScriptTaskLoader extends AbstractTaskLoader {
 	registerTask(gulp){
 		super.registerTask(gulp);
 
-		gulp.task("scripts-typescript", "Transpile TypeScript to ES5, include references to library and app .d.ts files and generate sourcemaps", () =>{
+		gulp.task("scripts-typescript", "Transpile TypeScript to ES, include references to library and app .d.ts files and generate sourcemaps", (callback) =>{
 			// references:
 			// https://www.npmjs.com/package/gulp-typescript
-			let tsProject = ts.createProject("tsconfig.json", {
+			const tsProject = ts.createProject("tsconfig.json", {
 				typescript: require("typescript") // override the typescript version by that defined in package.json
 
 				// configuration defined in tsconfig.json
@@ -24,8 +24,10 @@ class ScriptsTypeScriptTaskLoader extends AbstractTaskLoader {
 				// http://json.schemastore.org/tsconfig
 				// https://github.com/Microsoft/TypeScript/wiki/Compiler%20Options
 			});
+			//console.log(tsProject.config.compilerOptions);
+			const tsConfigOutDir = tsProject.config.compilerOptions.outDir;
 
-			let tsResult = gulp.plumbedSrc(config.typescript.src) // handle errors nicely (i.e., without breaking watch)
+			const tsResult = tsProject.src()
 				// Display the files in the stream
 				//.pipe(debug({title: "Stream contents:", minimal: true}))
 				.pipe(sourcemaps.init())
@@ -33,10 +35,11 @@ class ScriptsTypeScriptTaskLoader extends AbstractTaskLoader {
 					tsProject
 				));
 
-			// Output files
-			tsResult.dts.pipe(gulp.dest(config.typescript.dest));
+			// Output type definition files
+			tsResult.dts.pipe(gulp.dest(tsConfigOutDir));
 
-			return tsResult.js
+			// Output js files
+			tsResult.js
 
 				// Display the files in the stream
 				//.pipe(debug({title: "Stream contents:", minimal: true}))
@@ -47,12 +50,13 @@ class ScriptsTypeScriptTaskLoader extends AbstractTaskLoader {
 				}))
 
 				// Output files
-				.pipe(gulp.dest(config.typescript.dest))
+				.pipe(gulp.dest(tsConfigOutDir))
 
 				// Task result
 				.pipe(size({
 					title: "scripts-typescript"
 				}));
+			callback();
 		});
 	}
 }

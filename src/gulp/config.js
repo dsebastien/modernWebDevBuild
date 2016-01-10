@@ -81,14 +81,10 @@ let javascript = {
 };
 
 let typescript = {
-	src: [
-		folders.app + globs.scripts.typescript,
-		files.typeScriptDefinitions // reference to .d.ts files
-	],
 	srcAppOnly: [
 		folders.app + globs.scripts.typescript
 	],
-	dest: folders.temp // ES5 code is emitted in the temp folder
+	dest: folders.temp // JavaScript code is emitted in the temp folder
 };
 
 let styles = {
@@ -104,8 +100,8 @@ let styles = {
 		folders.app + globs.styles.sass,
 		utils.exclude(folders.app + globs.styles.vendor)
 	],
-	dest: folders.temp, // during DEV
-	destFiles: folders.temp + globs.styles.css, // during DEV
+	dest: folders.temp, // for DEV
+	destFiles: folders.temp + globs.styles.css, // for DEV
 	destDist: folders.dist + folders.styles, // for PROD
 	finalCssBundleFilename: "bundle.min.css",
 	finalCssBundlePath: folders.styles + "/bundle.min.css",
@@ -153,7 +149,7 @@ let autoprefixerBrowsers = [
 	"bb >= 10"
 ];
 
-let minifyCss = { // https://www.npmjs.com/package/gulp-minify-g
+let minifyCss = { // https://www.npmjs.com/package/gulp-minify
 	keepBreaks: false, // no problem here
 	keepSpecialComments: true, // necessary for licensing
 	compatibility: false, // no problem here

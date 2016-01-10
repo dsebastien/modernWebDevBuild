@@ -1,5 +1,22 @@
-* 0.2.4
-  * ...
+* 0.3.0
+  * Breaking change: improved integration with tsconfig.json (see #72)
+    * this might impact existing projects
+    * before, the list of folders to include in TS compilation were hardcoded. Now, the tsconfig.json file is used, thus you have more control (but also more responsibility)
+  * removed mentions of tsd. My current recommendation is to use `typings`, although there's nothing forcing you to with the build
+      * https://github.com/typings/typings
+      * https://angularclass.com/the-state-of-typescript-packages/
+  * upgraded dependencies
+    * Babel dependencies 6.3.x to 6.4.x
+    * autoprefixer 6.1.x to 6.2.x
+  * Known issues
+    * #76: there is an issue with the way that gulp-typescript (the plugin used within the scripts-typescript gulp task) handles the 'rootDir' property, which is inconsistent with tsc.    
+      * to solve this, for now you need to add a reference to the main typings file of your project; Example:
+        ```
+           /// <reference path="../../typings/main.d.ts" />
+        ```
+      * the final solution might come via the following issues and might require a new release of this project
+        * https://github.com/ivogabe/gulp-typescript/issues/190
+        * https://github.com/typings/typings/issues/69
 * 0.2.3
   * fixed sourcemap generation issues (see #69)
 	* sourcemaps sometime require a browser refresh before actually working: this might be due to a related issue (timing issue?)
