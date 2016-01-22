@@ -13,7 +13,7 @@ class ScriptsTypeScriptTaskLoader extends AbstractTaskLoader {
 	registerTask(gulp){
 		super.registerTask(gulp);
 
-		gulp.task("scripts-typescript", "Transpile TypeScript to ES, include references to library and app .d.ts files and generate sourcemaps", (callback) =>{
+		gulp.task("scripts-typescript", "Transpile TypeScript to ES, include references to library and app .d.ts files and generate sourcemaps", () =>{
 			// references:
 			// https://www.npmjs.com/package/gulp-typescript
 			const tsProject = ts.createProject("tsconfig.json", {
@@ -39,7 +39,7 @@ class ScriptsTypeScriptTaskLoader extends AbstractTaskLoader {
 			tsResult.dts.pipe(gulp.dest(tsConfigOutDir));
 
 			// Output js files
-			tsResult.js
+			return tsResult.js
 
 				// Display the files in the stream
 				//.pipe(debug({title: "Stream contents:", minimal: true}))
@@ -56,7 +56,6 @@ class ScriptsTypeScriptTaskLoader extends AbstractTaskLoader {
 				.pipe(size({
 					title: "scripts-typescript"
 				}));
-			callback();
 		});
 	}
 }

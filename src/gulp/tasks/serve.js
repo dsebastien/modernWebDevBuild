@@ -21,6 +21,7 @@ class ServeTaskLoader extends AbstractTaskLoader {
 		gulp.task("serve-scripts-typescript", "Transpile TypeScript to ES5 and reload the browser (this task should only be called during serve)", [ "prepare-serve-scripts-typescript" ], () =>{
 			return browserSync.reload();
 		});  // reload BrowserSync once everything is ready
+		
 		gulp.task("prepare-serve-scripts-typescript", "Transpile TypeScript to ES5 and generate sourcemaps", [
 			"ts-lint"
 		], (callback) =>{
@@ -90,18 +91,18 @@ class ServeTaskLoader extends AbstractTaskLoader {
 			runSequence("prepare-serve", startBrowserSync); // here we need to ensure that all the other tasks are done before we start BrowserSync
 		});
 
-		gulp.task("prepare-serve", "Do all the necessary preparatory work for the serve task", [
-			"clean",
-			"ts-lint",
-			"check-js-style",
-			"check-js-quality"
-		], (callback) =>{
+		gulp.task("prepare-serve", "Do all the necessary preparatory work for the serve task", () =>{
 			return runSequence([
+				"clean",
+				"ts-lint",
+				"check-js-style",
+				"check-js-quality"
+			], [
 				"scripts-typescript",
 				"scripts-javascript",
 				"styles",
 				"validate-package-json"
-			], callback);
+			]);
 		});
 	}
 }
