@@ -72,6 +72,7 @@ As state above, some important technology choices are clearly embedded with this
 * [TypeScript](http://www.typescriptlang.org/) and ES2015 (although the final output is ES5 for wider compatibility)
 * [SystemJS](https://github.com/systemjs/systemjs): module loader
 * [JSPM](http://jspm.io/) to manage your application dependencies (through jspm.conf.js)
+  * JSPM support can be disabled if you wish
 * [Karma](http://karma-runner.github.io/) to run tests
 * [SASS](http://sass-lang.com/): who doesn't want variables and mixins?
 * component based code & assets organization (Angular friendly)
@@ -144,7 +145,8 @@ Please make sure to check the file organization section for more background abou
 	* note that the file is actually optional but indeed recommended!
   * .jshintignore: files and folders to ignore while checking JavaScript code quality
   * gulpfile.babel.js: gulp configuration file
-  * jspm.conf.js: JSPM configuration file
+  * jspm.conf.js: SystemJS/JSPM configuration file
+    * can have another name if you do not use JSPM (see options)
   * karma.conf.js: Karma configuration file (configuration of the test runner)
   * package.json: NPM configuration file (also used by JSPM)
   * tsconfig.json: TypeScript compiler configuration
@@ -206,24 +208,26 @@ dist/**/*
 ```
 
 #### jspm.conf.js
-The JSPM configuration file plays a very important role;
+The SystemJS/JSPM configuration file plays a very important role;
 * it is where all your actual application dependencies are to be defined
-* it is where you can define your own 'paths', allowing you to load modules of your application easily
+* it is where you can define your own 'paths', allowing you to load modules of your application easily without having to specify relative paths (i.e., create aliases for paths).
 
-You'll use JSPM to add dependencies to your project, simply with `jspm install`; check the [official JSPM documentation](http://jspm.io/) to know more about how to install packages.
+If you choose to use the default JSPM support, then you can add dependencies to your project using `jspm install`; check the [official JSPM documentation](http://jspm.io/) to know more about how to install packages.
 
-With the help of the JSPM configuration file, SystemJS will be able to load your own application modules and well as third party dependencies.
-In your code, you'll be able to use `import x from "y"`. In order for this to work, you'll also need to load SystemJS and the JSPM configuration file in your index.html (more on this afterwards).
+With the help of this configuration file, SystemJS will be able to load your own application modules and well as third party dependencies.
+In your code, you'll be able to use ES2015 style (e.g., `import {x} from "y"`). In order for this to work, you'll also need to load SystemJS and the SystemJS/JSPM configuration file in your index.html (more on this afterwards).
 
+If you have disabled the use of JSPM by the build then you can rename that file if you wish and inform the build (see the options), BUT make sure that any reference in the various configuration files is updated (e.g., karma configuration, jshint configuration, etc). Only rename it if it is really really useful to you :)
+
+Here's an example:
 ```
 System.config({
   defaultJSExtensions: true,
-  transpiler: "none",
+  transpiler: false,
   paths: {
 	"github:*": "jspm_packages/github/*",
 	"npm:*": "jspm_packages/npm/*",
 	"core/*": "./.tmp/core/*",
-	"components/*": "./.tmp/components/*",
 	"pages/*": "./.tmp/pages/*"
   }
 });
@@ -231,13 +235,13 @@ System.config({
 
 In the above:
 * defaultJSExtensions: is mandatory so that extensions don't have to be specified when importing modules
-* transpiler: is set to 'none' because we don't use in-browser transpilation
+* transpiler: is set to false because we don't use in-browser transpilation
 * paths
-  * core/*, components/* and pages/* allow you to import modules from different parts of your codebase. This is covered in the folder structure section above.
-  * you can rename those if you really need to, but it might break the build.. :)
+  * core/*, pages/* allow you to import modules from different parts of your codebase without having to specify relative or absolute paths. This is covered in the folder structure section above.
+  * you can rename those if you wish
 
 #### package.json
-In addition to the dependencies listed previously, you also need to have the following in your package.json file:
+In addition to the dependencies listed previously, you also need to have the following in your package.json file, assuming that you want to use JSPM:
 
 ```
   "jspm": {
@@ -250,13 +254,14 @@ In addition to the dependencies listed previously, you also need to have the fol
   }
 ```
 
-This is where you let JSPM know where to save the information about dependencies you install. This is also where you can easily add new dependencies; for example: `"angular2": "npm:angular2@^2.0.0-alpha.44",`. Once a dependency is added there, you can invoke `jspm install` to get the files and transitive dependencies installed.
+This is where you let JSPM know where to save the information about dependencies you install. This is also where you can easily add new dependencies; for example: `"angular2": "npm:angular2@^2.0.0-beta.1",`.
+Once a dependency is added there, you can invoke `jspm install` to get the files and transitive dependencies installed and get an updated jspm.conf.js file.
 
 #### tsconfig.json
 Given that TypeScript is one of the (currently) embedded choices of this project, the TypeScript configuration file is mandatory.
 
 The tsconfig.json file contains:
-* the configuration of the TypeScript compiler (e.g., target ES2015)
+* the configuration of the TypeScript compiler
 * TypeScript code style rules
 * the list of files/folders to include/exclude
 
@@ -345,7 +350,7 @@ Note the exclusion that we have made, all of which are relevant and there to avo
 #### tslint.json
 tslint.json is the configuration file for [TSLint](https://github.com/palantir/tslint).
 
-Although not strictly mandatory (the build will work without this file), we heavily recommend you to use it as it is very useful to ensure a minimal code quality level and can help you avoid common mistakes and unnecessary complicated code:
+Although it is not strictly mandatory (the build will work without this file), we heavily recommend you to use it as it is very useful to ensure a minimal code quality level and can help you avoid common mistakes and unnecessary complicated code:
 
 Here's an example:
 ```
@@ -409,8 +414,10 @@ Here's an example:
 #### karma.conf.js
 Karma loads his configuration from karma.conf.js. That file contains everything that Karma needs to know to execute your unit tests.
 
-Here's an example configuration file that uses Jasmine, karma-systemjs. Note that the main Karma dependencies including PhantomJS are included in the build.
-You only need to add a dependency to jasmine and karma-jasmine for the following to work:
+Here's an example configuration file that uses Jasmine. Note that the main Karma dependencies including PhantomJS are included in the build.
+You only need to add a dependency to jasmine, karma-jasmine and karma-jspm for the following to work.
+
+If you choose not to use JSPM, then you can use karma-systemjs instead: https://www.npmjs.com/package/karma-systemjs
 
 Example:
 ```
@@ -528,8 +535,9 @@ module.exports = function (config) {
 
 Dev dependencies to add for the above Karma configuration:
 ```
-	"jasmine": "2.4.x",
-	"karma-jasmine": "0.3.x",
+	"jasmine": "...",
+	"karma-jasmine": "...",
+	"karma-jspm": "..."
 ```
 
 ### Minimal (application-specific) required file contents
@@ -666,6 +674,13 @@ The command will give you a description of each task. The most important to star
 
 You can run the `gulp -T` command get an visual idea of the links between the different tasks.
 
+## Scripts
+To make your life easier, you can add the following scripts to your package.json file. Note that if you have used the generator to create your project, you normally have these already:
+
+```
+
+```
+
 ## Options
 The build can be customized by passing options.
 Defining options is done as in the following example gulpfile.babel.js:
@@ -683,11 +698,25 @@ options.distEntryPoint = "core/core.bootstrap";
 ```
 
 Available options:
-* distEntryPoint: must be a relative path from .tmp/ to the file to use as entry point for creating the production JS bundle. The extension does not need to be specified (JSPM is used to load the file)
+* distEntryPoint
+  * must be a relative path from .tmp/ to the file to use as entry point for creating the production JS bundle. The extension does not need to be specified (SystemJS is used to load the file)
   * by default, the following file is used: `core/boot.js`
-* minifyProductionJSBundle: by default, the production JS bundle is minified, but you can disable it by setting this option to false
-* mangleProductionJSBundle: by default, the production JS bundle is mangled, but you can disable it by setting this option to false
-* minifyProductionHTML: by default, the production HTML is minified, but you can disable it by setting this option to false
+* minifyProductionJSBundle (default: true)
+  * by default, the production JS bundle is minified
+  * you can disable it by setting this option to false
+* mangleProductionJSBundle (default: true)
+  * by default, the production JS bundle is mangled
+  * you can disable it by setting this option to false
+* useJSPM (default: true)
+  * by default, the production JS bundle is created using the JSPM API, which requires jspm configuration in your package.json
+  * you can disable JSPM by setting this option to false
+    * if you disable the usage of JSPM, then the SystemJS builder API will be used to create the production JS bundle: https://www.npmjs.com/package/systemjs-builder
+* systemjsConfigurationFile (default: jspm.conf.js)
+  * by default, if you disable JSPM usage by the build, it will expect to find 'jspm.conf.js' as your SystemJS configuration file
+  * you can define this option to customize the file name
+* minifyProductionHTML (default: true)
+  * by default, the production HTML is minified
+  * you can disable it by setting this option to false
 
 ## FAQ
 

@@ -1,5 +1,8 @@
 # Upgrade guide
 
+## From 0.3.0 to 0.3.1
+No modification mandatory with this release.
+
 ## From 0.2.3 to 0.3.0
 The gulp scripts-typescript task has changed. Now, instead of using an hardcoded list of paths to compile, it loads what you have configured in your tsconfig.json configuration file.
 Make sure that you DO have:

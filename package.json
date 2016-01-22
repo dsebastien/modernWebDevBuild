@@ -1,7 +1,7 @@
 {
   "name": "modern-web-dev-build",
   "description": "Modern Web Development Build.",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "author": {
     "name": "Sebastien Dubois",
     "email": "seb@dsebastien.net",
@@ -84,7 +84,7 @@
     "opn": "3.0.x",
     "require-dir": "0.3.x",
     "run-sequence": "1.1.x",
-    "systemjs-builder": "0.14.x",
+    "systemjs-builder": "0.15.x",
     "karma": "0.13.x",
     "karma-phantomjs-launcher": "0.2.x",
     "phantomjs": "1.9.x",
@@ -94,12 +94,12 @@
     "karma-ie-launcher": "0.2.0",
     "karma-spec-reporter": "0.0.x",
     "karma-junit-reporter": "0.3.x",
-    "karma-jspm": "2.0.x"
+    "karma-jspm": "2.0.x",
+    "karma-systemjs": "0.10.x"
   },
   "peerDependencies": {
     "babel-core": "6.4.x",
     "gulp": "3.9.x",
-    "jspm": "0.16.x",
     "nodemon": "1.8.x",
     "typescript": "1.7.3"
   },

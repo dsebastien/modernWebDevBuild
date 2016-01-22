@@ -1,3 +1,9 @@
+* 0.3.1
+  * made JSPM optional (closes #77)
+    * JSPM remains used by default but you can now customize the behavior by setting the useJSPM option to false
+    * if you disable JSPM then you can provide a custom name for the configuration file (the build defaults to jspm.conf.js)
+  * fixed an issue with the tasks chaining (callbacks were used needlessly) (closes #89)
+  * upgraded the version of SystemJS-builder (closes #87)
 * 0.3.0
   * Breaking change: improved integration with tsconfig.json (see #72)
     * this might impact existing projects

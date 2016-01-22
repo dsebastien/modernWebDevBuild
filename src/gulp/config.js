@@ -48,7 +48,8 @@ let globs = {
 let files = {
 	any: "*",
 	packageJSON: folders.root + "/package.json",
-	typeScriptDefinitions: folders.typings + globs.scripts.typescript
+	typeScriptDefinitions: folders.typings + globs.scripts.typescript,
+	systemjsConfigDefault: "jspm.conf.js"
 };
 
 let webServerFolders = {
