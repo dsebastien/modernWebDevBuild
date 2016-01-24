@@ -21,9 +21,9 @@ let folders = {
 	dist: "./dist",
 	temp: "./.tmp",
 	app: "./app",
-	styles: "/styles",
-	scripts: "/scripts",
-	images: "/images",
+	styles: "./styles",
+	scripts: "./scripts",
+	images: "./images",
 	typings: "./typings",
 	nodeModules: "./node_modules",
 	jspmPackages: "./jspm_packages"
@@ -77,8 +77,8 @@ let javascript = {
 	],
 	srcDist: folders.temp + "/core/boot.js",
 	dest: folders.temp,
-	destDist: folders.dist + folders.scripts + "/" + finalJsBundleName,
-	finalJsBundlePath: folders.scripts + "/" + finalJsBundleName
+	destDist: folders.dist + "/" + finalJsBundleName,
+	finalJsBundlePath: finalJsBundleName
 };
 
 let typescript = {
@@ -87,6 +87,9 @@ let typescript = {
 	],
 	dest: folders.temp // JavaScript code is emitted in the temp folder
 };
+
+let finalCSSBundleName = "bundle.min.css";
+let finalCSSVendorBundleName = "vendor.min.css";
 
 let styles = {
 	src: [
@@ -103,11 +106,11 @@ let styles = {
 	],
 	dest: folders.temp, // for DEV
 	destFiles: folders.temp + globs.styles.css, // for DEV
-	destDist: folders.dist + folders.styles, // for PROD
-	finalCssBundleFilename: "bundle.min.css",
-	finalCssBundlePath: folders.styles + "/bundle.min.css",
-	finalVendorCssBundleFilename: "vendor.min.css",
-	finalVendorCssBundlePath: folders.styles + "/vendor.min.css"
+	destDist: folders.dist, // for PROD
+	finalCssBundleFilename: finalCSSBundleName,
+	finalCssBundlePath: finalCSSBundleName,
+	finalVendorCssBundleFilename: finalCSSVendorBundleName,
+	finalVendorCssBundlePath: finalCSSVendorBundleName
 };
 
 let images = {
