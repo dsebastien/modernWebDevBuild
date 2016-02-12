@@ -1,3 +1,5 @@
+* 0.3.3
+  * ...
 * 0.3.2
   * Fixed production bundles paths (css, js) (fixes #91)
 * 0.3.1
