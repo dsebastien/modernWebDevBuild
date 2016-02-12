@@ -30,6 +30,7 @@
 	"protractor": false,
 	"module": false,
 	"require": false,
+	"process": false,
 	"someWordYouShouldNotCheck": false
 	}
 }
