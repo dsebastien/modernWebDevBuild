@@ -104,8 +104,8 @@
     "typescript": "1.7.3"
   },
   "engines": {
-    "node": ">=4.2.1",
-    "npm": ">=2.0.0"
+    "node": ">=4.2.6",
+    "npm": ">=3.7.3"
   },
   "main": "dist/index.js",
   "files": [
