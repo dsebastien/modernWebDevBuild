@@ -64,7 +64,7 @@ Note that this project is heavily inspired from:
 Check out the [change log](CHANGELOG.MD)
 
 ## Status & roadmap
-Check out the issues & labels to get an idea of what's next.
+Check out the issues/labels & milestones to get an idea of what's next.
 For existing features, refer to the previous section.
 
 ## Embedded choices
@@ -146,7 +146,7 @@ Please make sure to check the file organization section for more background abou
   * .jshintignore: files and folders to ignore while checking JavaScript code quality
   * gulpfile.babel.js: gulp configuration file
   * jspm.conf.js: SystemJS/JSPM configuration file
-    * can have another name if you do not use JSPM (see options)
+	* can have another name if you do not use JSPM (see options)
   * karma.conf.js: Karma configuration file (configuration of the test runner)
   * package.json: NPM configuration file (also used by JSPM)
   * tsconfig.json: TypeScript compiler configuration
@@ -710,7 +710,7 @@ Available options:
 * useJSPM (default: true)
   * by default, the production JS bundle is created using the JSPM API, which requires jspm configuration in your package.json
   * you can disable JSPM by setting this option to false
-    * if you disable the usage of JSPM, then the SystemJS builder API will be used to create the production JS bundle: https://www.npmjs.com/package/systemjs-builder
+	* if you disable the usage of JSPM, then the SystemJS builder API will be used to create the production JS bundle: https://www.npmjs.com/package/systemjs-builder
 * systemjsConfigurationFile (default: jspm.conf.js)
   * by default, if you disable JSPM usage by the build, it will expect to find 'jspm.conf.js' as your SystemJS configuration file
   * you can define this option to customize the file name
