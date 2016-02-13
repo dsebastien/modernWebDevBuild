@@ -1,6 +1,7 @@
 "use strict";
 
 import utils from "./utils";
+import path from "path";
 
 let extensions = {
 	javascript: ".js",
@@ -38,17 +39,17 @@ let globs = {
 	styles: {
 		css: "/**/*" + extensions.css,
 		sass: "/**/*" + extensions.sass,
-		vendor: folders.styles + "/vendor" + "{" + extensions.sass + "," + extensions.css + "}"
+		vendor: path.join(folders.styles, "/vendor" + "{" + extensions.sass + "," + extensions.css + "}")
 	},
-	images: folders.images + "/**/*" + "{" + extensions.png + "," + extensions.jpg + "," + extensions.jpeg + "," + extensions.gif + "," + extensions.svg + "}",
+	images: path.join(folders.images, "/**/*" + "{" + extensions.png + "," + extensions.jpg + "," + extensions.jpeg + "," + extensions.gif + "," + extensions.svg + "}"),
 	html: "/**/*" + extensions.html,
 	sourcemaps: "/**/*" + extensions.sourcemap
 };
 
 let files = {
 	any: "*",
-	packageJSON: folders.root + "/package.json",
-	typeScriptDefinitions: folders.typings + globs.scripts.typescript,
+	packageJSON: path.join(folders.root, "/package.json"),
+	typeScriptDefinitions: path.join(folders.typings, globs.scripts.typescript),
 	systemjsConfigDefault: "jspm.conf.js"
 };
 
@@ -73,17 +74,17 @@ let finalJsBundleName = "bundle.min.js";
 
 let javascript = {
 	src: [
-		folders.app + globs.scripts.javascript
+		path.join(folders.app, globs.scripts.javascript)
 	],
-	srcDist: folders.temp + "/core/boot.js",
+	srcDist: path.join(folders.temp, "/core/boot.js"),
 	dest: folders.temp,
-	destDist: folders.dist + "/" + finalJsBundleName,
+	destDist: path.join(folders.dist, "/" + finalJsBundleName),
 	finalJsBundlePath: finalJsBundleName
 };
 
 let typescript = {
 	srcAppOnly: [
-		folders.app + globs.scripts.typescript
+		path.join(folders.app, globs.scripts.typescript)
 	],
 	dest: folders.temp // JavaScript code is emitted in the temp folder
 };
@@ -93,19 +94,19 @@ let finalCSSVendorBundleName = "vendor.min.css";
 
 let styles = {
 	src: [
-		folders.app + globs.styles.css,
-		folders.app + globs.styles.sass
+		path.join(folders.app, globs.styles.css),
+		path.join(folders.app, globs.styles.sass)
 	],
 	srcVendorOnly: [
-		folders.app + globs.styles.vendor
+		path.join(folders.app, globs.styles.vendor)
 	],
 	srcWithoutVendor: [
-		folders.app + globs.styles.css,
-		folders.app + globs.styles.sass,
-		utils.exclude(folders.app + globs.styles.vendor)
+		path.join(folders.app, globs.styles.css),
+		path.join(folders.app, globs.styles.sass),
+		utils.exclude(path.join(folders.app, globs.styles.vendor))
 	],
 	dest: folders.temp, // for DEV
-	destFiles: folders.temp + globs.styles.css, // for DEV
+	destFiles: path.join(folders.temp, globs.styles.css), // for DEV
 	destDist: folders.dist, // for PROD
 	finalCssBundleFilename: finalCSSBundleName,
 	finalCssBundlePath: finalCSSBundleName,
@@ -115,28 +116,28 @@ let styles = {
 
 let images = {
 	src: [
-		folders.app + globs.images
+		path.join(folders.app, globs.images)
 	],
-	dest: folders.dist + folders.images
+	dest: path.join(folders.dist, folders.images)
 };
 
 let html = {
 	src: [
-		folders.app + globs.html
+		path.join(folders.app, globs.html)
 	],
 	dest: folders.dist
 };
 
 let copy = {
 	src: [
-		folders.app + globs.any,
+		path.join(folders.app, globs.any),
 
 		// ignore stuff handled by the other tasks
-		utils.exclude(folders.app + globs.html),
-		utils.exclude(folders.app + globs.styles.css),
-		utils.exclude(folders.app + globs.styles.sass),
-		utils.exclude(folders.app + globs.scripts.javascript),
-		utils.exclude(folders.app + globs.scripts.typescript)
+		utils.exclude(path.join(folders.app, globs.html)),
+		utils.exclude(path.join(folders.app, globs.styles.css)),
+		utils.exclude(path.join(folders.app, globs.styles.sass)),
+		utils.exclude(path.join(folders.app, globs.scripts.javascript)),
+		utils.exclude(path.join(folders.app, globs.scripts.typescript))
 	],
 	dest: folders.dist
 };

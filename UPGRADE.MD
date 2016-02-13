@@ -1,5 +1,17 @@
 # Upgrade guide
 
+## From 0.3.2 to 0.4.0
+The way we construct the dist vendor css bundle has changed.
+In your vendor.scss file, if you import third party stylesheets from jspm_packages or from node_modules, then you'll need to change the relative path.
+Assuming that you have the same file structure as described in the [readme](README.md), then the import should look like this:
+
+```
+@import '../../jspm_packages/github/necolas/normalize.css@3.0.3/normalize.css'; // the path refers to the file at BUILD time
+```
+
+## From 0.3.1 to 0.3.2
+No modification mandatory with this release.
+
 ## From 0.3.0 to 0.3.1
 No modification mandatory with this release.
 

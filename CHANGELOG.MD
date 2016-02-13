@@ -1,5 +1,7 @@
-* 0.3.3
-  * ...
+* 0.4.0
+  * fixed an issue with production styles bundle (fixes #96)
+  * upgraded babel dependencies
+  * check the [upgrade](UPGRADE.MD) notes to know what you need to change
 * 0.3.2
   * Fixed production bundles paths (css, js) (fixes #91)
 * 0.3.1
