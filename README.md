@@ -20,7 +20,7 @@ Get started and use ES2015, TypeScript, SASS, code quality & style checking, tes
 
 ModernWebDevBuild abstracts away all the build pipeline boilerplate. Use it if you're not willing to dive too deep in the boring details of how to setup a proper build chain that takes care of transpiling, minifying, optimizing images and whatnot for production.
 
-This project is very opiniated and technology choices are embedded. Although, the build is pretty flexible about code/assets organization (to some extent). Over time, it'll be interesting to see how customizable we can make this thing.
+This project is very opinionated and technology choices are embedded. Although, the build is pretty flexible about code/assets organization (to some extent). Over time, it'll be interesting to see how customizable we can make this thing.
 
 The provided build tasks are based on [Gulp](http://gulpjs.com/). Instructions are available below to get you started.
 
