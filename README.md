@@ -717,6 +717,8 @@ Available options:
 * minifyProductionHTML (default: true)
   * by default, the production HTML is minified
   * you can disable it by setting this option to false
+* browserSync
+	* Pass in browserSync options. See http://www.browsersync.io/docs/options/
 
 ## FAQ
 

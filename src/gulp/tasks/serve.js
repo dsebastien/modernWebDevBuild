@@ -42,39 +42,41 @@ class ServeTaskLoader extends AbstractTaskLoader {
 				"scripts-javascript",
 				callback);
 		});
+		
+		let options = { // http://www.browsersync.io/docs/options/
+			notify: false,
+			//port: 8000,
+
+			// Customize the BrowserSync console logging prefix
+			logPrefix: "MWD", // Modern Web Dev
+
+			// Run w/ https by uncommenting "https: true"
+			// Note: this uses an unsigned certificate which on first access
+			//       will present a certificate warning in the browser.
+			// https: true,
+			ghostMode: { // replicate actions in all clients
+				clicks: false,
+				forms: false,
+				scroll: false
+			},
+			server: {
+				baseDir: config.webServerFolders.dev,
+				//routes: alternative way to map content that is above the base dir
+				// fix for SPAs w/ BrowserSync & others: https://github.com/BrowserSync/browser-sync/issues/204
+				// reference: https://github.com/BrowserSync/browser-sync/issues/204
+				middleware: [
+					historyApiFallback(), // not necessary if the app uses hash based routing
+					function(req, res, next){
+						res.setHeader("Access-Control-Allow-Origin", "*"); // add CORS to the response headers (for resources served by BrowserSync)
+						next();
+					}
+				]
+			}//,
+			//reloadDebounce: 500 // restrict the frequency in which browser reload events can be emitted to connected clients
+		};
 
 		let startBrowserSync = () =>{
-			browserSync.init({ // http://www.browsersync.io/docs/options/
-				notify: false,
-				//port: 8000,
-
-				// Customize the BrowserSync console logging prefix
-				logPrefix: "MWD", // Modern Web Dev
-
-				// Run w/ https by uncommenting "https: true"
-				// Note: this uses an unsigned certificate which on first access
-				//       will present a certificate warning in the browser.
-				// https: true,
-				ghostMode: { // replicate actions in all clients
-					clicks: false,
-					forms: false,
-					scroll: false
-				},
-				server: {
-					baseDir: config.webServerFolders.dev,
-					//routes: alternative way to map content that is above the base dir
-					// fix for SPAs w/ BrowserSync & others: https://github.com/BrowserSync/browser-sync/issues/204
-					// reference: https://github.com/BrowserSync/browser-sync/issues/204
-					middleware: [
-						historyApiFallback(), // not necessary if the app uses hash based routing
-						function(req, res, next){
-							res.setHeader("Access-Control-Allow-Origin", "*"); // add CORS to the response headers (for resources served by BrowserSync)
-							next();
-						}
-					]
-				}//,
-				//reloadDebounce: 500 // restrict the frequency in which browser reload events can be emitted to connected clients
-			});
+			browserSync.init(utils.mergeOptions(options, gulp.options.browserSync));
 
 			gulp.watch(config.html.src).on("change", browserSync.reload); // force a reload when html changes
 			gulp.watch(config.styles.src, [ "styles" ]); // stylesheet changes will be streamed if possible or will force a reload
