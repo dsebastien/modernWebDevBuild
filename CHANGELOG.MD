@@ -1,3 +1,5 @@
+* 0.5.0
+  * upgraded dependencies to support TypeScript 1.8.x
 * 0.4.1
   * added the "browserSync" option, which lets you customize all BrowserSync settings (thanks @aaronroberson)
 * 0.4.0
