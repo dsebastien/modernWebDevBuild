@@ -719,6 +719,7 @@ Available options:
   * you can disable it by setting this option to false
 * browserSync
 	* Pass in browserSync options. See http://www.browsersync.io/docs/options/
+	* this should be defined like this: "browserSync": { // BrowserSync options }
 
 ## FAQ
 

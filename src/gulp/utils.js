@@ -157,13 +157,13 @@ let mergeOptions = (obj1 = {}, obj2 = {}) =>{
 	let obj3 = {};
 	
 	for(let attrname in obj1){
-		if(obj1.hasOwnProperty(attrname)) {
+		if(obj1.hasOwnProperty(attrname)){
 			obj3[attrname] = obj1[attrname];
 		}
 	}
 	
 	for(let attrname in obj2){
-		if(obj2.hasOwnProperty(attrname)) {
+		if(obj2.hasOwnProperty(attrname)){
 			obj3[attrname] = obj2[attrname];
 		}
 	}

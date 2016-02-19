@@ -1,3 +1,5 @@
+* 0.4.1
+  * added the "browserSync" option, which lets you customize all BrowserSync settings (thanks @aaronroberson)
 * 0.4.0
   * fixed an issue with production styles bundle (fixes #96)
   * upgraded babel dependencies
