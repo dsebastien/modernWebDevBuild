@@ -4,10 +4,7 @@
 	"lineBreakAfterOpeningBraces": false,
 	"lineBreakBeforeClosingBraces": false
   },
-  "validateIndentation": {
-	"value": "\t",
-	"includeEmptyLines": false
-  },
+  "validateIndentation": 4,
   "validateNewlineAfterArrayElements": {
 	"maximum": 2
   },

@@ -9,6 +9,6 @@ import config from "../config";
 import utils from "../utils";
 
 gulp.task("validate-package-json", "Validate the package.json file", () =>{
-	return utils.plumbedSrc(config.files.packageJSON)
-		.pipe(packageJsonValidator());
+    return utils.plumbedSrc(config.files.packageJSON)
+        .pipe(packageJsonValidator());
 });

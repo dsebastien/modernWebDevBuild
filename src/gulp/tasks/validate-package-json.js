@@ -7,14 +7,14 @@ import config from "../config";
 import packageJsonValidator from "gulp-nice-package";
 
 class PackageJSONTaskLoader extends AbstractTaskLoader {
-	registerTask(gulp){
-		super.registerTask(gulp);
+    registerTask(gulp){
+        super.registerTask(gulp);
 
-		gulp.task("validate-package-json", "Validate the package.json file", () =>{
-			return gulp.plumbedSrc(config.files.packageJSON)
-				.pipe(packageJsonValidator());
-		});
-	}
+        gulp.task("validate-package-json", "Validate the package.json file", () =>{
+            return gulp.plumbedSrc(config.files.packageJSON)
+                .pipe(packageJsonValidator());
+        });
+    }
 }
 
 module.exports = new PackageJSONTaskLoader();

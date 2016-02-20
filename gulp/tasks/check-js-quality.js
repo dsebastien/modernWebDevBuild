@@ -10,20 +10,20 @@ import config from "../config";
 import utils from "../utils";
 
 gulp.task("check-js-quality", "Check JavaScript code quality using JSHint", () =>{
-	return utils.plumbedSrc(// handle errors nicely (i.e., without breaking watch)
-		config.javascript.srcPkg
-	)
+    return utils.plumbedSrc(// handle errors nicely (i.e., without breaking watch)
+        config.javascript.srcPkg
+        )
 
-		// Display the files in the stream
-		//.pipe(debug({title: "Stream contents:", minimal: true}))
+        // Display the files in the stream
+        //.pipe(debug({title: "Stream contents:", minimal: true}))
 
-		// Run JSHint
-		.pipe(jshint())
+        // Run JSHint
+        .pipe(jshint())
 
-		// Generate a stylish report
-		.pipe(jshint.reporter("jshint-stylish"));
+        // Generate a stylish report
+        .pipe(jshint.reporter("jshint-stylish"));
 
-	// Fail the build only if BrowserSync is not active
-	// Actually, failing the build is counter-productive thus evil
-	//.pipe($.if(!browserSync.active, $.jshint.reporter("fail")));
+    // Fail the build only if BrowserSync is not active
+    // Actually, failing the build is counter-productive thus evil
+    //.pipe($.if(!browserSync.active, $.jshint.reporter("fail")));
 });

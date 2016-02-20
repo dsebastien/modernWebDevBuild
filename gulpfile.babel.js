@@ -20,20 +20,20 @@ import runSequence from "run-sequence";
 
 // Load all tasks in gulp/tasks, including subfolders
 requireDir("./gulp/tasks", {
-	recurse: true
+    recurse: true
 });
 
 // Default task
 gulp.task("default", "Build production files", [ "prepare-default" ], (callback) =>{
-	return runSequence("validate-package-json", [
-		"scripts-javascript-dist"
-	], callback);
+    return runSequence("validate-package-json", [
+        "scripts-javascript-dist"
+    ], callback);
 });
 
 gulp.task("prepare-default", "Do all the necessary preparatory work for the default task", (callback) =>{
-	return runSequence("clean", [
-		"check-js-style",
-		"check-js-quality"
-	], callback);
+    return runSequence("clean", [
+        "check-js-style",
+        "check-js-quality"
+    ], callback);
 });
 

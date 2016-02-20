@@ -12,29 +12,29 @@ import config from "../config";
 import utils from "../utils";
 
 gulp.task("check-js-style", "Enforce JavaScript code style", () =>{
-	// handle errors nicely (i.e., without breaking watch)
-	return utils.plumbedSrc(
-		config.javascript.srcPkg
-	)
+    // handle errors nicely (i.e., without breaking watch)
+    return utils.plumbedSrc(
+        config.javascript.srcPkg
+        )
 
-		// Display the files in the stream
-		//.pipe(debug({title: "Stream contents:", minimal: true}))
+        // Display the files in the stream
+        //.pipe(debug({title: "Stream contents:", minimal: true}))
 
-		// Check JS code style (uses .jscsrc)
-		.pipe(
-		jscs({
-			configPath: config.folders.root + "/.jscsrc", // required otherwise the configuration didn't seem to get loaded
-			esnext: true, // seems broken: https://github.com/jscs-dev/gulp-jscs/issues/69
-			fix: false
-		})
-	)
+        // Check JS code style (uses .jscsrc)
+        .pipe(
+            jscs({
+                configPath: config.folders.root + "/.jscsrc", // required otherwise the configuration didn't seem to get loaded
+                esnext: true, // seems broken: https://github.com/jscs-dev/gulp-jscs/issues/69
+                fix: false
+            })
+        )
 
-		//.pipe(debug({title: "Stream contents:", minimal: true}))
+        //.pipe(debug({title: "Stream contents:", minimal: true}))
 
-		.pipe(jscsStylish()) // log style errors
+        .pipe(jscsStylish()) // log style errors
 
-		// Task result
-		.pipe(size({
-			title: "check-js-style"
-		}));
+        // Task result
+        .pipe(size({
+            title: "check-js-style"
+        }));
 });

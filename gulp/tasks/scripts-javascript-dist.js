@@ -13,28 +13,28 @@ import config from "../config";
 import utils from "../utils";
 
 gulp.task("scripts-javascript-dist", "Transpile JavaScript (ES2015 to ES5 using Babel)", () =>{
-	return utils.plumbedSrc(// handle errors nicely (i.e., without breaking watch)
-		config.javascript.src
-	)
+    return utils.plumbedSrc(// handle errors nicely (i.e., without breaking watch)
+        config.javascript.src
+        )
 
-		// Display the files in the stream
-		//.pipe(debug({title: "Stream contents:", minimal: true}))
+        // Display the files in the stream
+        //.pipe(debug({title: "Stream contents:", minimal: true}))
 
-		// speed things up by ignoring unchanged resources
-		.pipe(changed(config.javascript.dest))
+        // speed things up by ignoring unchanged resources
+        .pipe(changed(config.javascript.dest))
 
-		// Transpile ES2015 to ES5
-		// options: https://babeljs.io/docs/usage/options/
-		.pipe(babel())
+        // Transpile ES2015 to ES5
+        // options: https://babeljs.io/docs/usage/options/
+        .pipe(babel())
 
-		// Copy files
-		.pipe(gulp.dest(config.javascript.dest))
+        // Copy files
+        .pipe(gulp.dest(config.javascript.dest))
 
-		// Display the files in the stream
-		//.pipe(debug({title: "Stream contents:", minimal: true}))
+        // Display the files in the stream
+        //.pipe(debug({title: "Stream contents:", minimal: true}))
 
-		// Task result
-		.pipe(size({
-			title: "scripts-javascript"
-		}));
+        // Task result
+        .pipe(size({
+            title: "scripts-javascript"
+        }));
 });
