@@ -15,7 +15,7 @@ let exitOnError = false;
  * Reference: https://github.com/mikaelbr/gulp-notify/issues/81
  * @param error the error to report
  */
-let reportError = function(error){
+let reportError = (error) =>{
     let lineNumber = error.lineNumber ? `LINE ${error.lineNumber} -- ` : "";
     let report = "";
     let chalk = gutil.colors.white.bgRed;
@@ -137,7 +137,7 @@ let configureGulpObject = (obj, options) =>{
 
     // Easily integrate plumber invocation
     // Reference: https://gist.github.com/floatdrop/8269868
-    configuredGulpObject.plumbedSrc = () =>{
+    configuredGulpObject.plumbedSrc = function(){ // should be a function
         return configuredGulpObject.src.apply(configuredGulpObject, arguments)
             .pipe(plumber({
                 errorHandler: reportError
@@ -154,21 +154,21 @@ let configureGulpObject = (obj, options) =>{
  * @returns obj3 a new object based on obj1 and obj2
  */
 let mergeOptions = (obj1 = {}, obj2 = {}) =>{
-    let obj3 = {};
+    let retVal = {};
 
     for(let attrname in obj1){
         if(obj1.hasOwnProperty(attrname)){
-            obj3[ attrname ] = obj1[ attrname ];
+            retVal[ attrname ] = obj1[ attrname ];
         }
     }
 
     for(let attrname in obj2){
         if(obj2.hasOwnProperty(attrname)){
-            obj3[ attrname ] = obj2[ attrname ];
+            retVal[ attrname ] = obj2[ attrname ];
         }
     }
 
-    return obj3;
+    return retVal;
 };
 
 export default {
