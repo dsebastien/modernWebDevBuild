@@ -1,5 +1,8 @@
 # Upgrade guide
 
+## From 0.4.1 to 0.5.0
+You should upgrade your dependency on TypeScript to 1.8.x
+
 ## From 0.4.0 to 0.4.1
 No modification mandatory with this release.
 
