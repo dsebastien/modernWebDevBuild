@@ -11,8 +11,8 @@
 "use strict";
 
 import requireDir from "require-dir";
-
 import utils from "./gulp/utils";
+import config from "./gulp/config";
 
 /**
  * This class takes care of loading gulp tasks.
@@ -33,20 +33,24 @@ class TasksLoader {
 		gulp = utils.configureGulpObject(gulp, options); // we need to customize the gulp object a bit
 
 		// Load all tasks in gulp/tasks
-		const loadedModules = requireDir("./gulp/tasks", {
-			recurse: false
-		});
+		for(let taskItem in config.taskLoaderFolderList){
+			if(config.taskLoaderFolderList.hasOwnProperty(taskItem)){
+				const loadedModules = requireDir(config.taskLoaderFolderList[taskItem], {
+					recurse: false
+				});
 
-		// request each module to register its tasks
-		for(let key in loadedModules){
-			if(loadedModules.hasOwnProperty(key)){
-				let loadedModule = loadedModules[ key ];
+				// request each module to register its tasks
+				for(let key in loadedModules){
+					if(loadedModules.hasOwnProperty(key)){
+						let loadedModule = loadedModules[ key ];
 
-				if(loadedModule.registerTask){
-					//console.log(`Registering module: ${key}`);
-					loadedModule.registerTask(gulp);
-				} else{
-					throw new TypeError(`The following module does not expose the expected interface: ${key}`);
+						if(loadedModule.registerTask){
+							//console.log(`Registering module: ${key}`);
+							loadedModule.registerTask(gulp);
+						} else{
+							throw new TypeError(`The following module does not expose the expected interface: ${key}`);
+						}
+					}
 				}
 			}
 		}

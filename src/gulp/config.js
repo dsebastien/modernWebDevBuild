@@ -22,14 +22,15 @@ let folders = {
 	dist: "./dist",
 	temp: "./.tmp",
 	app: "./app",
+	skd: "./app/skd",
 	styles: "./styles",
 	scripts: "./scripts",
 	images: "./images",
 	typings: "./typings",
 	nodeModules: "./node_modules",
 	jspmPackages: "./jspm_packages",
-	docs: "./doc"
-	//docsTheme:""
+	docsSkdApi: "./doc/skdApi",
+	docsSkdApiTheme: "./node_modules/typedoc-default-themes/bin"
 };
 
 let globs = {
@@ -53,7 +54,11 @@ let files = {
 	packageJSON: path.join(folders.root, "/package.json"),
 	typeScriptDefinitions: path.join(folders.typings, globs.scripts.typescript),
 	systemjsConfigDefault: "jspm.conf.js",
-	docsTypescriptJson: path.join(folders.docs, "file.json")
+	docsTypescriptJson: path.join(folders.docsSkdApi, "file.json"),
+	tsByModules: {
+		globs: path.join(folders.root, "tsconfig.json"),
+		skdCore: path.join(folders.skd, "tsconfig.json")
+	}
 };
 
 let webServerFolders = {
@@ -165,6 +170,11 @@ let minifyCss = { // https://www.npmjs.com/package/gulp-minify
 	aggressiveMerging: false // necessary because it breaks PureCSS
 };
 
+let taskLoaderFolderList = {
+	default: "./gulp/tasks",
+	customizeTask: "./gulp/skd"
+};
+
 export default {
 	extensions,
 	folders,
@@ -179,5 +189,6 @@ export default {
 	autoprefixerBrowsers,
 	minifyCss,
 	webServerFolders,
-	webServerNames
+	webServerNames,
+	taskLoaderFolderList
 };

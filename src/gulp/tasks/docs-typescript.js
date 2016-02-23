@@ -14,7 +14,7 @@ class TypescriptDocsGenerator extends AbstractTaskLoader {
 		gulp.task("docs-typescript", "Generator TypeScript Docs use typedoc && gulp-typedoc !", () =>{
 			// references:
 			// https://www.npmjs.com/package/gulp-typedoc
-			return gulp.src(config.typescript.src.srcAppOnly)
+			return gulp.src(config.files.tsByModules.skdCore)
 				.pipe(typedoc({
 					//TypeScript options (see typescript docs)
 					module: "commonjs",
@@ -22,13 +22,13 @@ class TypescriptDocsGenerator extends AbstractTaskLoader {
 					includeDeclarations: true,
 					
 					//OutPut options (see typedoc docs)
-					out: config.folders.docs,
+					out: config.folders.docsSkdApi,
 					json: config.files.docsTypescriptJson,
 					
 					//TypeDoc Options (see typedoc docs)
 					Name: config.webServerNames.docs,
 					ignoreCompilerErrors: false,
-					theme: config.folders.docsTheme,
+					theme: config.folders.docsSkdApiTheme,
 					version: true
 				}));
 		});
