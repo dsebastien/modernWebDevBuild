@@ -27,7 +27,9 @@ let folders = {
 	images: "./images",
 	typings: "./typings",
 	nodeModules: "./node_modules",
-	jspmPackages: "./jspm_packages"
+	jspmPackages: "./jspm_packages",
+	docs: "./doc"
+	//docsTheme:""
 };
 
 let globs = {
@@ -50,7 +52,8 @@ let files = {
 	any: "*",
 	packageJSON: path.join(folders.root, "/package.json"),
 	typeScriptDefinitions: path.join(folders.typings, globs.scripts.typescript),
-	systemjsConfigDefault: "jspm.conf.js"
+	systemjsConfigDefault: "jspm.conf.js",
+	docsTypescriptJson: path.join(folders.docs, "file.json")
 };
 
 let webServerFolders = {
@@ -67,7 +70,8 @@ let webServerFolders = {
 
 let webServerNames = {
 	dev: "MDW_DEV",
-	dist: "MDW_DIST"
+	dist: "MDW_DIST",
+	docs: "MDW_DOC"
 };
 
 let finalJsBundleName = "bundle.min.js";
