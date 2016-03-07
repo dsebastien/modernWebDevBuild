@@ -1,5 +1,11 @@
 # Upgrade guide
 
+## From 0.4.1 to 0.5.0
+You should upgrade your dependency on TypeScript to 1.8.x
+
+## From 0.4.0 to 0.4.1
+No modification mandatory with this release.
+
 ## From 0.3.2 to 0.4.0
 The way we construct the dist vendor css bundle has changed.
 In your vendor.scss file, if you import third party stylesheets from jspm_packages or from node_modules, then you'll need to change the relative path.

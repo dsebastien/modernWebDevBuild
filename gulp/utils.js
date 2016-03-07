@@ -11,79 +11,79 @@ let exitOnError = false; // whether we should make the house explode whenever er
 // display errors nicely and avoid having errors breaking tasks/watch
 // reference: https://github.com/mikaelbr/gulp-notify/issues/81
 let reportError = function(error){
-	let lineNumber = error.lineNumber ? "LINE " + error.lineNumber + " -- " : "";
+    let lineNumber = error.lineNumber ? "LINE " + error.lineNumber + " -- " : "";
 
-	notify({
-		title: "Task Failed [" + error.plugin + "]",
-		message: lineNumber + "See console.",
-		sound: true
+    notify({
+        title: "Task Failed [" + error.plugin + "]",
+        message: lineNumber + "See console.",
+        sound: true
 
-		// the version below probably works on OSX
-		//sound: "Sosumi" // See: https://github.com/mikaelbr/node-notifier#all-notification-options-with-their-defaults
-	}).write(error);
+        // the version below probably works on OSX
+        //sound: "Sosumi" // See: https://github.com/mikaelbr/node-notifier#all-notification-options-with-their-defaults
+    }).write(error);
 
-	//gutil.beep(); // Beep "sosumi" again
+    //gutil.beep(); // Beep "sosumi" again
 
-	// Inspect the error object
-	//gutil.log(error);
+    // Inspect the error object
+    //gutil.log(error);
 
-	// Easy error reporting
-	//console.log(error.toString());
+    // Easy error reporting
+    //console.log(error.toString());
 
-	// Pretty error reporting
-	let report = "";
-	let chalk = gutil.colors.white.bgRed;
+    // Pretty error reporting
+    let report = "";
+    let chalk = gutil.colors.white.bgRed;
 
-	report += chalk("TASK:") + " [" + error.plugin + "]\n";
-	report += chalk("ISSUE:") + " " + error.message + "\n";
+    report += chalk("TASK:") + " [" + error.plugin + "]\n";
+    report += chalk("ISSUE:") + " " + error.message + "\n";
 
-	if(error.lineNumber){
-		report += chalk("LINE:") + " " + error.lineNumber + "\n";
-	}
+    if(error.lineNumber){
+        report += chalk("LINE:") + " " + error.lineNumber + "\n";
+    }
 
-	if(error.fileName){
-		report += chalk("FILE:") + " " + error.fileName + "\n";
-	}
+    if(error.fileName){
+        report += chalk("FILE:") + " " + error.fileName + "\n";
+    }
 
-	console.error(report);
+    console.error(report);
 
-	if(exitOnError){
-		process.exit(1);
-	} else{
-		// Prevent the "watch" task from stopping
-		this.emit("end");
-	}
+    if(exitOnError){
+        process.exit(1);
+    } else{
+        // Prevent the "watch" task from stopping
+        this.emit("end");
+    }
 };
 
 // easily integrate plumber invocation
 // reference: https://gist.github.com/floatdrop/8269868
 let plumbedSrc = function(){
-	return gulp.src.apply(gulp, arguments)
-		.pipe(plumber({
-			errorHandler: reportError
-		}));
+    return gulp.src.apply(gulp, arguments)
+        .pipe(plumber({
+            errorHandler: reportError
+        }));
 };
 
 // utility function to exclude files from globs
 let exclude = function(providedPath){
-	return "!" + providedPath;
+    return "!" + providedPath;
 };
 
 // utility function that filters out empty directories
 // reference: http://stackoverflow.com/questions/23719731/gulp-copying-empty-directories
 let filterEmptyDirectories = function(es){
-	return es.map((file, cb) =>{
-		if(file.stat.isFile()){
-			return cb(null, file);
-		} else{
-			return cb();
-		}
-	});
+    return es.map((file, cb) =>{
+        if(file.stat.isFile()){
+            return cb(null, file);
+        } else{
+            return cb();
+        }
+    });
 };
 
 export default {
-	exclude,
-	reportError,
-	plumbedSrc,
-	filterEmptyDirectories
+    exclude,
+    reportError,
+    plumbedSrc,
+    filterEmptyDirectories
 };

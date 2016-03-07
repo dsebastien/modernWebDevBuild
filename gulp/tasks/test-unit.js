@@ -14,25 +14,25 @@ let runSequence = require("run-sequence");
 let karmaConfigFilePath = path.resolve("karma.conf.js");
 
 gulp.task("test-unit", "Execute all unit tests", (callback) =>{
-	return new KarmaServer({
-		configFile: karmaConfigFilePath, // necessary otherwise the file is not resolved correctly
-		singleRun: true
-	}, callback).start();
+    return new KarmaServer({
+        configFile: karmaConfigFilePath, // necessary otherwise the file is not resolved correctly
+        singleRun: true
+    }, callback).start();
 });
 
 gulp.task("test-unit-dev", "Execute all unit tests continuously (watches files)", (callback) =>{
-	return new KarmaServer({
-		configFile: karmaConfigFilePath, // necessary otherwise the file is not resolved correctly
-		singleRun: false
-	}, callback).start();
+    return new KarmaServer({
+        configFile: karmaConfigFilePath, // necessary otherwise the file is not resolved correctly
+        singleRun: false
+    }, callback).start();
 });
 
 gulp.task("prepare-test-unit", "Do all the necessary preparatory work for the test-unit task", [
-	"clean",
-	"check-js-style",
-	"check-js-quality"
+    "clean",
+    "check-js-style",
+    "check-js-quality"
 ], (callback) =>{
-	return runSequence([
-		"scripts-javascript-dist"
-	], callback);
+    return runSequence([
+        "scripts-javascript-dist"
+    ], callback);
 });
