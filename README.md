@@ -786,6 +786,7 @@ Check out [gulp-inline-source](https://www.npmjs.com/package/gulp-inline-source)
 * event-stream: construct pipes of streams of events: https://www.npmjs.com/package/event-stream
 * connect-history-api-fallback: useful to automatically redirect all non-existent directories to the index file; required for SPAs: https://www.npmjs.com/package/connect-history-api-fallback
 * karma: unit test runner: https://www.npmjs.com/package/karma
+* gulp-wait: Wait :): https://www.npmjs.com/package/gulp-wait
 
 ## Contributing
 * Fork the project

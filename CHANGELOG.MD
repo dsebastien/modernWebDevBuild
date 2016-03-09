@@ -1,3 +1,5 @@
+* 0.5.1
+  * fixed issue with the production build (404 at first render)
 * 0.5.0
   * upgraded dependencies to support TypeScript 1.8.x
 * 0.4.1

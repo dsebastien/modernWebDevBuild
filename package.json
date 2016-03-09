@@ -1,7 +1,7 @@
 {
   "name": "modern-web-dev-build",
   "description": "Modern Web Development Build.",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "author": {
     "name": "Sebastien Dubois",
     "email": "seb@dsebastien.net",
@@ -79,6 +79,7 @@
     "gulp-uglify": "1.5.x",
     "gulp-uncss": "1.0.x",
     "gulp-util": "3.0.x",
+    "gulp-wait": "0.0.2",
     "jshint-stylish": "2.1.x",
     "node-sass": "3.4.x",
     "opn": "4.0.x",

@@ -3,6 +3,7 @@
 import AbstractTaskLoader from "../abstractTaskLoader";
 import config from "../config";
 //import utils from "../utils";
+import wait from "gulp-wait";
 
 const browserSync = require("browser-sync").create(config.webServerNames.dist);
 
@@ -46,9 +47,14 @@ class ServeDistTaskLoader extends AbstractTaskLoader {
                 reloadDebounce: 1000
             });
         };
+        
+        gulp.task("wait-a-bit", "Wait a second...", () => {
+            return gulp.src('./package.json').
+                pipe(wait(1500))
+        });
 
         gulp.task("serve-dist", "Build and serve the production version (i.e., 'dist' folder contents", () =>{
-            return runSequence([ "default" ], startBrowserSync); // here we need to ensure that all the other tasks are done before we start BrowserSync
+            return runSequence([ "default" ], ["wait-a-bit"], startBrowserSync); // here we need to ensure that all the other tasks are done before we start BrowserSync
         });
     }
 }
