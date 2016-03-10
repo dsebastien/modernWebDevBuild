@@ -5,7 +5,7 @@ import path from "path";
 
 let extensions = {
     javascript: ".js",
-    typescript: ".ts",
+    typescript: ".{ts,tsx}",
     css: ".css",
     sass: ".scss",
     html: ".html",
