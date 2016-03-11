@@ -1,7 +1,7 @@
 {
   "name": "modern-web-dev-build",
   "description": "Modern Web Development Build.",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "author": {
     "name": "Sebastien Dubois",
     "email": "seb@dsebastien.net",
@@ -28,10 +28,6 @@
     "es2015",
     "sass"
   ],
-  "devDependencies": {
-    "jasmine": "2.4.x",
-    "karma-jasmine": "0.3.x"
-  },
   "dependencies": {
     "autoprefixer": "6.3.x",
     "babel-core": "6.5.x",
@@ -62,7 +58,7 @@
     "gulp-jscs": "3.0.x",
     "gulp-jscs-stylish": "1.3.x",
     "gulp-jshint": "1.12.x",
-    "gulp-minify-css": "1.2.x",
+    "gulp-clean-css": "2.0.x",
     "gulp-minify-html": "1.0.x",
     "gulp-nice-package": "1.1.x",
     "gulp-notify": "2.2.x",
@@ -97,6 +93,12 @@
     "karma-junit-reporter": "0.3.x",
     "karma-jspm": "2.0.x",
     "karma-systemjs": "0.10.x"
+  },
+  "devDependencies": {
+    "jasmine": "2.4.x",
+    "karma-jasmine": "0.3.x",
+    "typescript": "1.8.x",
+    "nodemon": "1.8.x"
   },
   "peerDependencies": {
     "babel-core": "6.5.x",

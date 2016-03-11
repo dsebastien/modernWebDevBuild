@@ -1,3 +1,6 @@
+* 0.5.2
+  * added tsx support for watches (#110)
+  * replaced gulp-minify-css by gulp-clean-css
 * 0.5.1
   * fixed issue with the production build (404 at first render)
 * 0.5.0

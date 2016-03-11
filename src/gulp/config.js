@@ -154,7 +154,7 @@ let autoprefixerBrowsers = [
     "bb >= 10"
 ];
 
-let minifyCss = { // https://www.npmjs.com/package/gulp-minify
+let minifyCss = { // https://github.com/jakubpawlowicz/clean-css#how-to-use-clean-css-api
     keepBreaks: false, // no problem here
     keepSpecialComments: true, // necessary for licensing
     compatibility: false, // no problem here

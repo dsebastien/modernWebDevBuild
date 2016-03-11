@@ -754,7 +754,7 @@ Check out [gulp-inline-source](https://www.npmjs.com/package/gulp-inline-source)
 * gulp-inline-source: inline scripts & stylesheets: https://www.npmjs.com/package/gulp-inline-source
 * gulp-jshint: JavaScript code quality checker plugin for gulp that uses JSHint: https://www.npmjs.com/package/gulp-jshint
 * gulp-minify-html: minify html with minimize: https://www.npmjs.com/package/gulp-minify-html
-* gulp-minify-css: minify css with clean-css: https://www.npmjs.com/package/gulp-minify-css
+* gulp-clean-css: minify css with clean-css: https://www.npmjs.com/package/gulp-clean-css
 * gulp-replace: string replace plugin for gulp: https://www.npmjs.com/package/gulp-replace
 * gulp-sass: sass plugin for gulp: https://www.npmjs.com/package/sass
 * node-sass: used by gulp-sass and normally not needed but added to fix an issue with sourcemaps: https://github.com/sindresorhus/gulp-autoprefixer/issues/10

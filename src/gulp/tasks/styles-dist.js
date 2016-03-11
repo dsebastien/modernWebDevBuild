@@ -8,7 +8,7 @@ import sass from "gulp-sass";
 import cssimport from "gulp-cssimport";
 import concat from "gulp-concat";
 import csso from "gulp-csso";
-import minifyCss from "gulp-minify-css";
+import minifyCss from "gulp-clean-css";
 import size from "gulp-size";
 
 class StylesDistTaskLoader extends AbstractTaskLoader {
