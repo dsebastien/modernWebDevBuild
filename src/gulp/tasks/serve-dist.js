@@ -48,13 +48,13 @@ class ServeDistTaskLoader extends AbstractTaskLoader {
             });
         };
         
-        gulp.task("wait-a-bit", "Wait a second...", () => {
-            return gulp.src('./package.json').
-                pipe(wait(1500))
+        gulp.task("wait-a-bit", "Wait a second...", () =>{
+            return gulp.src("./package.json").
+                pipe(wait(1500));
         });
 
-        gulp.task("serve-dist", "Build and serve the production version (i.e., 'dist' folder contents", () =>{
-            return runSequence([ "default" ], ["wait-a-bit"], startBrowserSync); // here we need to ensure that all the other tasks are done before we start BrowserSync
+        gulp.task("serve-dist", "Build and serve the production version (i.e., dist folder contents", () =>{
+            return runSequence([ "default" ], [ "wait-a-bit" ], startBrowserSync); // here we need to ensure that all the other tasks are done before we start BrowserSync
         });
     }
 }
