@@ -1,7 +1,7 @@
 {
   "name": "modern-web-dev-build",
   "description": "Modern Web Development Build.",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "author": {
     "name": "Sebastien Dubois",
     "email": "seb@dsebastien.net",
@@ -98,9 +98,9 @@
     "karma-systemjs": "0.10.x"
   },
   "peerDependencies": {
-    "babel-core": "6.5.x",
-    "gulp": "3.9.x",
-    "nodemon": "1.8.x",
+    "babel-core": "^6.5.0",
+    "gulp": "^3.9.0",
+    "nodemon": "^1.8.0",
     "typescript": "1.7.3"
   },
   "engines": {
