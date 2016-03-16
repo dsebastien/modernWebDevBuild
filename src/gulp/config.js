@@ -161,6 +161,11 @@ let minifyCss = { // https://github.com/jakubpawlowicz/clean-css#how-to-use-clea
     aggressiveMerging: false // necessary because it breaks PureCSS
 };
 
+let taskLoaderFolderList = {
+	default: "./gulp/tasks",
+	customizeTask: "./gulp/skd"
+};
+
 export default {
     extensions,
     folders,

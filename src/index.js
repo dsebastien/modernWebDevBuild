@@ -11,8 +11,8 @@
 "use strict";
 
 import requireDir from "require-dir";
-
 import utils from "./gulp/utils";
+import config from "./gulp/config";
 
 /**
  * This class takes care of loading gulp tasks.
