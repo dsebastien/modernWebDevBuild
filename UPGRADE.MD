@@ -1,5 +1,8 @@
 # Upgrade guide
 
+## From 0.5.2 to 0.5.3
+Review the versions of your dependencies.
+
 ## From 0.5.1 to 0.5.2
 No modification mandatory with this release.
 

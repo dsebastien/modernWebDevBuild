@@ -1,3 +1,6 @@
+* 0.5.3
+  * now less strict with dependencies (#118)
+  * updated dependencies
 * 0.5.2
   * added tsx support for watches (#110)
   * replaced gulp-minify-css by gulp-clean-css
