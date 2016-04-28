@@ -98,7 +98,7 @@
   "devDependencies": {
     "jasmine": "^2.4.1",
     "karma-jasmine": "^0.3.8",
-    "typescript": "^1.8.9",
+    "typescript": "^1.8.10",
     "nodemon": "^1.9.1"
   },
   "peerDependencies": {
