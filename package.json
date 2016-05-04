@@ -97,7 +97,7 @@
   },
   "devDependencies": {
     "jasmine": "^2.4.1",
-    "karma-jasmine": "^0.3.8",
+    "karma-jasmine": "^1.0.2",
     "typescript": "^1.8.9",
     "nodemon": "^1.9.1"
   },
