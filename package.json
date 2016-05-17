@@ -78,7 +78,7 @@
     "gulp-wait": "^0.0.2",
     "jshint-stylish": "^2.1.0",
     "node-sass": "^3.4.2",
-    "opn": "^4.0.1",
+    "opn": "^4.0.2",
     "require-dir": "^0.3.0",
     "run-sequence": "^1.1.5",
     "systemjs-builder": "^0.15.13",
