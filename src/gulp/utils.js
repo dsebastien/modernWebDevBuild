@@ -15,7 +15,7 @@ let exitOnError = false;
  * Reference: https://github.com/mikaelbr/gulp-notify/issues/81
  * @param error the error to report
  */
-let reportError = (error) =>{
+let reportError = function(error){ // note that we do not use an arrow function to get the expected value of this when this function is called (i.e., context of the caller)
     let lineNumber = error.lineNumber ? `LINE ${error.lineNumber} -- ` : "";
     let report = "";
     let chalk = gutil.colors.white.bgRed;

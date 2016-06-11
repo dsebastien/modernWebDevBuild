@@ -1,3 +1,5 @@
+* 0.5.4
+  * fixed #130 (undefined.emit)
 * 0.5.3
   * now less strict with dependencies (#118)
   * updated dependencies

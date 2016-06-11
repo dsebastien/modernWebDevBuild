@@ -1,7 +1,7 @@
 {
   "name": "modern-web-dev-build",
   "description": "Modern Web Development Build.",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "author": {
     "name": "Sebastien Dubois",
     "email": "seb@dsebastien.net",
@@ -120,13 +120,13 @@
   },
   "scripts": {
     "clean": "gulp clean",
-    "compile": "gulp",
-    "build": "npm run compile && gulp test-unit",
-    "test": "gulp prepare-test-unit && gulp test-unit",
+    "build": "gulp",
+    "pretest": "gulp prepare-test-unit",
+    "test": "gulp test-unit",
     "update": "npm install --no-optional",
     "outdated": "npm outdated",
     "help": "gulp help",
     "setup": "npm install --no-optional",
-    "prepublish": "npm run build"
+    "prepublish": "npm test"
   }
 }
