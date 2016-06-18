@@ -93,7 +93,7 @@
     "karma-spec-reporter": "^0.0.24",
     "karma-junit-reporter": "^0.4.1",
     "karma-jspm": "^2.1.0",
-    "karma-systemjs": "^0.13.0"
+    "karma-systemjs": "^0.14.0"
   },
   "devDependencies": {
     "jasmine": "^2.4.1",
