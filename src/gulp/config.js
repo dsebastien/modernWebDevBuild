@@ -76,7 +76,7 @@ let javascript = {
     src: [
         path.join(folders.app, globs.scripts.javascript)
     ],
-    srcDist: path.join(folders.temp, "/core/boot.js"),
+    srcDist: path.join(folders.temp, folders.app, "/core/boot.js"),
     dest: folders.temp,
     destDist: path.join(folders.dist, "/" + finalJsBundleName),
     finalJsBundlePath: finalJsBundleName
