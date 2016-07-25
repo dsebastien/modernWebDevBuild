@@ -99,7 +99,7 @@
     "jasmine": "^2.4.1",
     "karma-jasmine": "^0.3.8",
     "typescript": "^1.8.9",
-    "nodemon": "^1.9.1"
+    "nodemon": "^1.10.0"
   },
   "peerDependencies": {
     "babel-core": "^6.6.1",
