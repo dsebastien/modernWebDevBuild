@@ -76,7 +76,7 @@
     "gulp-uncss": "^1.0.5",
     "gulp-util": "^3.0.7",
     "gulp-wait": "^0.0.2",
-    "jshint-stylish": "^2.1.0",
+    "jshint-stylish": "^2.2.1",
     "node-sass": "^3.4.2",
     "opn": "^4.0.1",
     "require-dir": "^0.3.0",
