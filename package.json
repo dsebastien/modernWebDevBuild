@@ -102,7 +102,7 @@
     "nodemon": "^1.9.1"
   },
   "peerDependencies": {
-    "babel-core": "^6.6.1",
+    "babel-core": "^6.18.1",
     "gulp": "^3.9.1",
     "nodemon": "^1.9.1",
     "typescript": "^1.8.9"
