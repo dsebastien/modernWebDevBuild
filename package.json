@@ -51,7 +51,7 @@
     "gulp-flatten": "^0.2.0",
     "gulp-help": "^1.6.1",
     "gulp-html-replace": "^1.5.5",
-    "gulp-if": "^2.0.0",
+    "gulp-if": "^2.0.2",
     "gulp-imagemin": "^2.4.0",
     "gulp-inline-source": "^2.1.0",
     "gulp-jscs": "^3.0.2",
