@@ -96,7 +96,7 @@
     "karma-systemjs": "^0.13.0"
   },
   "devDependencies": {
-    "jasmine": "^2.4.1",
+    "jasmine": "^2.5.3",
     "karma-jasmine": "^0.3.8",
     "typescript": "^1.8.9",
     "nodemon": "^1.9.1"
